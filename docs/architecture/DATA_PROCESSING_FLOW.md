@@ -134,9 +134,9 @@ ingests each CSV into a matching table).
 pipeline on its refresh policy:
 
 ```
-0 6 * * *   cd data/pipelines/crypto_bull_cycle && python main.py     # daily 06:00
-0 8 * * 1   cd data/pipelines/thirteen_f_filings && python main.py  # weekly Mon 08:00
-0 9 * * *   cd data/pipelines/congress_trading && python main.py     # daily 09:00
+0 6 * * *   cd CryptoBullCycle && python main.py     # daily 06:00
+0 8 * * 1   cd ThirteenFFilings && python main.py  # weekly Mon 08:00
+0 9 * * *   cd CongressTrading && python main.py     # daily 09:00
 ```
 
 The scheduler writes `pipeline_runs` rows so the dashboard's Overview page

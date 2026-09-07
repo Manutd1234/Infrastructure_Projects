@@ -57,7 +57,7 @@
 ## 3. Dependency boundaries
 
 - Pipelines **must not** import from `backend/` or `frontend/`.
-- Backend **must not** import from `data/pipelines/` (CI import check
+- Backend **must not** import from `` (CI import check
   enforces this). The backend reads CSVs and SQLite only.
 - Frontend **must not** import from `backend/` Python; it consumes JSON.
 - Notebooks **may** import from pipelines (they are exploratory).

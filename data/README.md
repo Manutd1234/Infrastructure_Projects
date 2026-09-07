@@ -1,25 +1,32 @@
 # Data
 
-Raw and processed data for the platform.
+Shared, cross-task data that doesn't belong to a single analysis module.
+
+The three analysis **modules** live at the repo root as PascalCase
+folders (`CryptoBullCycle/`, `ThirteenFFilings/`, `CongressTrading/`),
+each with its own `outputs/` and `cache/`. This `data/` folder is for
+data that is shared across modules or doesn't fit one module — for
+example a shared market-data cache or a reference dataset.
 
 ```
 data/
-├── pipelines/              # three analysis packages (source of truth)
-│   ├── crypto_bull_cycle/
-│   ├── thirteen_f_filings/
-│   └── congress_trading/
-└── run_all.py              # run all three pipelines in sequence
+└── README.md          # this file
 ```
 
-See [`pipelines/README.md`](pipelines/README.md) for how to run the
-pipelines and the conventions they follow.
+## Where things live
 
-## What lives where
+| Artifact | Location |
+|---|---|
+| Module source code | `CryptoBullCycle/`, `ThirteenFFilings/`, `CongressTrading/` (repo root) |
+| Module raw cache (gitignored) | `<Module>/cache/` |
+| Module outputs (committed) | `<Module>/outputs/*.csv` and `*.png` |
+| SQLite database (gitignored) | `database/nussif.db` |
+| Shared cross-task data | `data/` (this folder) |
+| Run-all orchestrator | `run_all.py` (repo root) |
 
-- **Source code:** `data/pipelines/<name>/*.py`
-- **Raw cache (gitignored):** `data/pipelines/<name>/cache/`
-- **Outputs (committed):** `data/pipelines/<name>/outputs/*.csv` and `*.png`
-- **Database (gitignored):** `database/nussif.db`
+## Running everything
 
-The database is not under `data/`; it lives in `database/` so the schema
-and the file are co-located.
+```bash
+python run_all.py                              # runs all three modules
+python -m backend.loaders.ingest               # loads their outputs/*.csv into SQLite
+```

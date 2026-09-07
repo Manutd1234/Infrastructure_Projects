@@ -1,6 +1,8 @@
 # ADR 2026-09-07: Restructure into a layered platform
 
-- **Status:** Accepted
+- **Status:** Superseded (the "move into `data/pipelines/`" part is
+  reversed by `ADR_2026-09-07_MODULES_AT_ROOT.md`; the layered-platform
+  decision stands)
 - **Date:** 2026-09-07
 
 ## Context
@@ -17,7 +19,7 @@ Restructure the repository into a layered platform:
 
 ```
 Infrastructure_Projects/
-├── data/pipelines/      # analytics (source of truth)
+├──       # analytics (source of truth)
 ├── backend/             # FastAPI transport (no analytics)
 ├── frontend/            # React presentation (no analytics)
 ├── database/            # SQLite schema + init
@@ -26,7 +28,7 @@ Infrastructure_Projects/
 └── skills/              # Cursor agent skills
 ```
 
-The three existing analysis projects move into `data/pipelines/` and keep
+The three existing analysis projects move into `` and keep
 their self-contained, runnable shape. The backend serves their CSV outputs
 without recomputing. The frontend renders backend JSON without computing.
 
@@ -57,8 +59,8 @@ without recomputing. The frontend renders backend JSON without computing.
 
 ## Compliance
 
-- `data/pipelines/*/main.py` must write the CSVs listed in
+- `*/main.py` must write the CSVs listed in
   `DATA_PROCESSING_FLOW.md` §3.
-- `backend/` must not import from `data/pipelines/` (enforced by CI import
+- `backend/` must not import from `` (enforced by CI import
   check).
 - `frontend/` must not import from `backend/` Python; it consumes JSON only.

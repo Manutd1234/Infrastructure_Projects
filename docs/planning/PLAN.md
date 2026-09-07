@@ -11,7 +11,8 @@
 - [x] Cached fetches; idempotent re-runs.
 
 ### Phase 1 — Repository restructure (done)
-- [x] Move pipelines into `data/pipelines/`.
+- [x] Move the three analysis modules to the repo root as PascalCase
+      folders (`CryptoBullCycle/`, `ThirteenFFilings/`, `CongressTrading/`).
 - [x] Add `backend/`, `frontend/`, `database/`, `notebooks/`, `docs/`,
       `skills/` folders.
 - [x] Institutional documentation set in `docs/`.
@@ -22,7 +23,7 @@
 - [ ] `database/init_db.py` creates the SQLite file and indexes.
 - [ ] `backend/loaders/ingest.py` reads pipeline `outputs/*.csv` and
       loads into SQLite, writing a `pipeline_runs` row per load.
-- [ ] Schema test: every CSV in `data/pipelines/*/outputs/` matches a
+- [ ] Schema test: every CSV in `*/outputs/` matches a
       table.
 
 ### Phase 3 — Backend (in progress)

@@ -6,9 +6,9 @@
 
 | Component | Status | Notes |
 |---|---|---|
-| `data/pipelines/crypto_bull_cycle` | **Working** | Pulls BTC + SPY from yfinance, identifies cycles, runs +3σ breakout study, computes drawdowns, backtests. Outputs CSV + PNG. |
-| `data/pipelines/thirteen_f_filings` | **Working** | Scrapes Dataroma for 8 funds (2006Q4 → 2026Q2), classifies GICS sectors, plots rotation. ~95% sector coverage. |
-| `data/pipelines/congress_trading` | **Working** | Scrapes Capitol Trades (720 trades, 39 politicians), consensus + committee signals. House.gov feasibility report written. |
+| `CryptoBullCycle` | **Working** | Pulls BTC + SPY from yfinance, identifies cycles, runs +3σ breakout study, computes drawdowns, backtests. Outputs CSV + PNG. |
+| `ThirteenFFilings` | **Working** | Scrapes Dataroma for 8 funds (2006Q4 → 2026Q2), classifies GICS sectors, plots rotation. ~95% sector coverage. |
+| `CongressTrading` | **Working** | Scrapes Capitol Trades (720 trades, 39 politicians), consensus + committee signals. House.gov feasibility report written. |
 | `backend/` | **Scaffold** | FastAPI app with endpoints mirroring pipeline outputs. Runs against SQLite. Not yet wired to a scheduler. |
 | `frontend/` | **Scaffold** | React + TypeScript + Vite dashboard. Reads from backend API. Charts stubbed. |
 | `database/` | **Scaffold** | SQLite schema for trades, holdings, sectors, signals, pipeline_runs. Init script works. |
@@ -20,9 +20,9 @@
 
 1. Run any pipeline standalone:
    ```bash
-   cd data/pipelines/crypto_bull_cycle && python main.py
-   cd data/pipelines/thirteen_f_filings && python main.py
-   cd data/pipelines/congress_trading && python main.py
+   cd CryptoBullCycle && python main.py
+   cd ThirteenFFilings && python main.py
+   cd CongressTrading && python main.py
    ```
    Each writes CSV tables and PNG charts to its own `outputs/` folder.
 
@@ -58,10 +58,16 @@
 
 ## Recent changes
 
-- **2026-09-07:** Restructured repository into `data/`, `backend/`, `frontend/`,
-  `database/`, `notebooks/`, `docs/`, `skills/`. Moved the three analysis
-  projects into `data/pipelines/`. Added institutional documentation set.
-- **2026-09-07:** Initial three pipelines (crypto cycle, 13F, congress
+- **2026-09-07:** Reorganized the three analysis modules to the repo root
+  as PascalCase folders (`CryptoBullCycle/`, `ThirteenFFilings/`,
+  `CongressTrading/`), peers of the shared infrastructure. `data/` now
+  holds only shared cross-task data. Added
+  `ADR_2026-09-07_MODULES_AT_ROOT.md`; the earlier
+  `ADR_2026-09-07_PROJECT_RESTRUCTURE.md` is superseded.
+- **2026-09-07:** Restructured repository into `backend/`, `frontend/`,
+  `database/`, `notebooks/`, `docs/`, `skills/`, `data/`. Added
+  institutional documentation set.
+- **2026-09-07:** Initial three modules (crypto cycle, 13F, congress
   trading) committed and producing outputs.
 
 ## How to update this file

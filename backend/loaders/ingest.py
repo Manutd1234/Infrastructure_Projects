@@ -1,12 +1,14 @@
 """CSV → SQLite loader.
 
-Reads every pipeline's outputs/*.csv and ingests it into the matching
+Reads every module's outputs/*.csv and ingests it into the matching
 table defined in database/schema.sql. Also writes a pipeline_runs row
-per pipeline.
+per module.
+
+The three analysis modules live at the repo root as PascalCase folders.
 
 Usage:
     python -m backend.loaders.ingest            # ingest all
-    python -m backend.loaders.ingest --pipeline crypto_bull_cycle
+    python -m backend.loaders.ingest --pipeline CryptoBullCycle
 """
 
 from __future__ import annotations
@@ -19,22 +21,22 @@ from pathlib import Path
 
 from backend.app.core.config import settings
 
-PIPELINES = ["crypto_bull_cycle", "thirteen_f_filings", "congress_trading"]
+PIPELINES = ["CryptoBullCycle", "ThirteenFFilings", "CongressTrading"]
 
-# Map (pipeline, csv_filename) -> table
+# Map (module, csv_filename) -> table
 CSV_TO_TABLE = {
-    "crypto_bull_cycle": {
+    "CryptoBullCycle": {
         "cycles.csv": "crypto_cycles",
         "breakout_study.csv": "crypto_breakout",
         "breakout_dates.csv": "crypto_breakout_dates",
         "drawdowns.csv": "crypto_drawdowns",
         "performance.csv": "crypto_performance",
     },
-    "thirteen_f_filings": {
+    "ThirteenFFilings": {
         "holdings_with_sectors.csv": "fund_holdings",
         "sector_weights.csv": "sector_weights",
     },
-    "congress_trading": {
+    "CongressTrading": {
         "trades_with_sectors.csv": "congress_trades",
         "ticker_consensus.csv": "ticker_consensus",
         "monthly_consensus.csv": "monthly_consensus",

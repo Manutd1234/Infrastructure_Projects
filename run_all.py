@@ -1,7 +1,10 @@
-"""Run all three data pipelines in sequence.
+"""Run all three task modules in sequence.
+
+The three analysis modules live at the repo root as PascalCase folders:
+CryptoBullCycle, ThirteenFFilings, CongressTrading.
 
 Usage:
-    python data/run_all.py
+    python run_all.py
 """
 
 from __future__ import annotations
@@ -10,7 +13,7 @@ import subprocess
 import sys
 from pathlib import Path
 
-PIPELINES = ["crypto_bull_cycle", "thirteen_f_filings", "congress_trading"]
+PIPELINES = ["CryptoBullCycle", "ThirteenFFilings", "CongressTrading"]
 
 
 def run_pipeline(name: str) -> int:
@@ -20,7 +23,7 @@ def run_pipeline(name: str) -> int:
 
 
 def main() -> int:
-    base = Path(__file__).parent / "pipelines"
+    base = Path(__file__).parent
     failures = []
     for p in PIPELINES:
         rc = run_pipeline(str(base / p))

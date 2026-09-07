@@ -9,7 +9,8 @@ from backend.app.services import ops_service
 
 router = APIRouter(prefix="/ops", tags=["ops"])
 
-ALLOWED_PIPELINES = {"crypto_bull_cycle", "thirteen_f_filings", "congress_trading"}
+# The three analysis modules at the repo root.
+ALLOWED_PIPELINES = {"CryptoBullCycle", "ThirteenFFilings", "CongressTrading"}
 
 
 @router.get("/runs")

@@ -114,7 +114,7 @@ via `pydantic-settings`:
 ```python
 class Settings(BaseSettings):
     database_url: str = "sqlite:///database/nussif.db"
-    pipelines_dir: Path = Path("data/pipelines")
+    pipelines_dir: Path = REPO_ROOT   # the three modules live at the repo root
     enable_run_endpoint: bool = False   # disabled by default; requires auth
     cors_origins: list[str] = ["http://localhost:5173"]
     log_level: str = "INFO"

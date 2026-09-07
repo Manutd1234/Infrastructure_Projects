@@ -10,14 +10,15 @@ Run one pipeline by name and report the result.
 ## Steps
 
 1. Confirm the pipeline name is one of:
-   - `crypto_bull_cycle`
-   - `thirteen_f_filings`
-   - `congress_trading`
-   If the user gave a fuzzy name (e.g. "crypto", "13f", "congress"),
-   map it to the canonical name and confirm with the user before running.
-2. Run the pipeline:
+   - `CryptoBullCycle`
+   - `ThirteenFFilings`
+   - `CongressTrading`
+   If the user gave a fuzzy name (e.g. "crypto", "13f", "congress", "task 1",
+   "task 3", "task 4"), map it to the canonical name and confirm with the
+   user before running.
+2. Run the module:
    ```bash
-   cd data/pipelines/<pipeline> && python main.py
+   cd <pipeline> && python main.py
    ```
 3. Ingest its CSV outputs into the database:
    ```bash
@@ -29,6 +30,6 @@ Run one pipeline by name and report the result.
 ## When to force a cache invalidation
 
 Only if the user explicitly says "fresh pull", "ignore cache", or
-"re-download". In that case, delete `data/pipelines/<pipeline>/cache/`
-before running, and warn the user that this is impolite to the upstream
-source.
+"re-download". In that case, delete `<pipeline>/cache/` (e.g.
+`CryptoBullCycle/cache/`) before running, and warn the user that this is
+impolite to the upstream source.

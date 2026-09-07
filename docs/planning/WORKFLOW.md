@@ -45,7 +45,7 @@ Every PR and every `main` push runs:
 | `test-ts` | `vitest run` |
 | `smoke-pipelines` | Run each pipeline with `--smoke` (uses fixture cache, no network) |
 | `schema-check` | Verify every `outputs/*.csv` matches `database/schema.sql` |
-| `import-boundary` | Fail if `backend/` imports from `data/pipelines/` or `frontend/` imports from `backend/` |
+| `import-boundary` | Fail if `backend/` imports from `` or `frontend/` imports from `backend/` |
 | `build-frontend` | `npm run build` (catches type and bundle errors) |
 
 CI must be green to merge. `main` is deployable at every commit.
@@ -63,7 +63,7 @@ CI must be green to merge. `main` is deployable at every commit.
 # one-time
 python -m venv .venv && source .venv/bin/activate
 pip install -r backend/requirements.txt
-pip install -r data/pipelines/*/requirements.txt
+pip install -r CryptoBullCycle/requirements.txt -r ThirteenFFilings/requirements.txt -r CongressTrading/requirements.txt
 cd frontend && npm install && cd ..
 
 # database
@@ -76,7 +76,7 @@ uvicorn backend.app.main:app --reload
 cd frontend && npm run dev
 
 # run a pipeline (terminal 3)
-cd data/pipelines/crypto_bull_cycle && python main.py
+cd CryptoBullCycle && python main.py
 ```
 
 `.env` is loaded by the backend via `pydantic-settings`; copy

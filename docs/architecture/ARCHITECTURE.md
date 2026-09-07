@@ -33,28 +33,29 @@ inspect signals, and replay analyses without writing code.
 
 ## 2. Components
 
-### 2.1 Data pipelines (`data/pipelines/`)
+### 2.1 Analysis modules (repo root)
 
-Three self-contained Python packages, each with the same shape:
+Three self-contained Python packages at the repo root, each with the
+same shape:
 
 ```
-<pipeline>/
+<Module>/                 # CryptoBullCycle | ThirteenFFilings | CongressTrading
 ├── README.md          # methodology + results
 ├── requirements.txt
 ├── main.py            # entry point
-├── *.py               # pipeline-specific modules
+├── *.py               # module-specific modules
 ├── cache/             # raw HTML / price cache (gitignored)
 └── outputs/           # generated CSV + PNG (committed)
 ```
 
-| Pipeline | Source | Output |
+| Module | Source | Output |
 |---|---|---|
-| `crypto_bull_cycle` | yfinance (BTC-USD, SPY) | cycles, bear_markets, drawdowns, breakout_study, performance, equity_curve, correlation |
-| `thirteen_f_filings` | Dataroma (8 funds) | holdings, sector_weights, rotation charts, heatmap |
-| `congress_trading` | Capitol Trades | trades, ticker_consensus, monthly_consensus, committee_summary, rotation charts |
+| `CryptoBullCycle` | yfinance (BTC-USD, SPY) | cycles, bear_markets, drawdowns, breakout_study, performance, equity_curve, correlation |
+| `ThirteenFFilings` | Dataroma (8 funds) | holdings, sector_weights, rotation charts, heatmap |
+| `CongressTrading` | Capitol Trades | trades, ticker_consensus, monthly_consensus, committee_summary, rotation charts |
 
-Each pipeline is **idempotent**: re-running with the cache present only
-re-processes; deleting `cache/` forces a fresh pull. Pipelines write
+Each module is **idempotent**: re-running with the cache present only
+re-processes; deleting `cache/` forces a fresh pull. Modules write
 structured CSVs (consumed by the backend) and PNGs (consumed by the
 dashboard and the whitepaper).
 
@@ -63,7 +64,7 @@ dashboard and the whitepaper).
 A FastAPI application that exposes the pipeline outputs as a typed JSON API.
 See `DATA_OPS_BACKEND.md` for the full design.
 
-- **Reads** from `data/pipelines/*/outputs/*.csv` and from the SQLite
+- **Reads** from `*/outputs/*.csv` and from the SQLite
   database.
 - **Writes** run metadata to `pipeline_runs` (start, end, status, row counts).
 - **Routes:** `/crypto/*`, `/filings/*`, `/congress/*`, `/ops/*`, `/db/*`,

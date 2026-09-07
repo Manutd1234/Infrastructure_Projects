@@ -6,6 +6,8 @@ from pathlib import Path
 
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
+REPO_ROOT = Path(__file__).resolve().parents[3]
+
 
 class Settings(BaseSettings):
     model_config = SettingsConfigDict(
@@ -13,10 +15,13 @@ class Settings(BaseSettings):
     )
 
     # Database
-    database_url: str = f"sqlite:///{Path(__file__).resolve().parents[2] / 'database' / 'nussif.db'}"
+    database_url: str = f"sqlite:///{(REPO_ROOT / 'database' / 'nussif.db')}"
 
-    # Pipelines
-    pipelines_dir: Path = Path(__file__).resolve().parents[2] / "data" / "pipelines"
+    # Pipelines — the three analysis modules live at the repo root as
+    # PascalCase folders (CryptoBullCycle, ThirteenFFilings, CongressTrading).
+    # pipelines_dir is the repo root; the ops runner joins it with the
+    # module name.
+    pipelines_dir: Path = REPO_ROOT
 
     # Ops
     enable_run_endpoint: bool = False

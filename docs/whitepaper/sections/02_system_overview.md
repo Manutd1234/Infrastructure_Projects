@@ -2,7 +2,7 @@
 
 The platform is organised in four layers:
 
-1. **Data pipelines** (`data/pipelines/`) — three self-contained Python
+1. **Data pipelines** (``) — three self-contained Python
    packages that fetch, parse, enrich, and analyse data from yfinance,
    Dataroma, and Capitol Trades. Each writes structured CSVs and PNG
    charts to its own `outputs/` folder.

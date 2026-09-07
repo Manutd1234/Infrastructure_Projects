@@ -10,11 +10,11 @@ pipeline is self-contained and idempotent — re-running is safe.
 
 ## Steps
 
-1. Run each pipeline from its folder:
+1. Run each module from its folder:
    ```bash
-   cd data/pipelines/crypto_bull_cycle && python main.py
-   cd data/pipelines/thirteen_f_filings && python main.py
-   cd data/pipelines/congress_trading && python main.py
+   cd CryptoBullCycle && python main.py
+   cd ThirteenFFilings && python main.py
+   cd CongressTrading && python main.py
    ```
 2. After all three finish, ingest their CSV outputs into the database:
    ```bash

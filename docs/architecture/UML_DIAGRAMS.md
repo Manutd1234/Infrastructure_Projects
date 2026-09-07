@@ -13,10 +13,10 @@ flowchart LR
         CT[Capitol Trades]
     end
 
-    subgraph Data["data/pipelines"]
-        CBC[crypto_bull_cycle]
-        TFF[thirteen_f_filings]
-        CTR[congress_trading]
+    subgraph Data["analysis modules"]
+        CBC[CryptoBullCycle]
+        TFF[ThirteenFFilings]
+        CTR[CongressTrading]
     end
 
     subgraph Backend["backend (FastAPI)"]
@@ -58,7 +58,7 @@ flowchart TB
     Nginx -->|/api| UV[uvicorn :8000]
     Nginx -->|/| Vite[Vite dev/build :5173]
     UV --> SQLite[(SQLite file)]
-    UV -->|subprocess| Pipelines[data/pipelines]
+    UV -->|subprocess| Pipelines[repo-root modules]
     Pipelines -->|write CSV| Out[outputs/]
     Out -->|ingest| SQLite
 ```

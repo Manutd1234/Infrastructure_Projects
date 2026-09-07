@@ -36,7 +36,7 @@ set of end-to-end smoke tests for the dashboard.
   CSVs match golden snapshots. No network.
 - **Backend + DB:** stand up a fixture SQLite, hit each endpoint, assert
   shape and a few key values. Run the loader, assert rows appear.
-- **Schema check:** every CSV in `data/pipelines/*/outputs/` is read and
+- **Schema check:** every CSV in `*/outputs/` is read and
   its header compared to `database/schema.sql`. Catches contract drift.
 
 ### 2.3 E2E smoke tests
@@ -106,10 +106,10 @@ cd frontend && npm test                   # frontend
 npm run test:e2e                           # playwright (nightly)
 
 # with coverage
-pytest --cov=backend --cov=data/pipelines --cov-report=html
+pytest --cov=backend --cov=CryptoBullCycle --cov=ThirteenFFilings --cov=CongressTrading --cov-report=html
 
 # smoke a single pipeline offline
-cd data/pipelines/crypto_bull_cycle && python main.py --smoke
+cd CryptoBullCycle && python main.py --smoke
 ```
 
 ## 8. Reviewing tests

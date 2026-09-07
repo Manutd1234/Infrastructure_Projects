@@ -9,9 +9,9 @@ and a React "Trading Desk Operations" dashboard.
 
 | Surface | What it gives you |
 |---|---|
-| **Data pipelines** (`data/pipelines/`) | BTC cycle + breakout study, 13F filings sector rotation, congress trading consensus + committee signals |
-| **Backend** (`backend/`) | FastAPI serving pipeline outputs as typed JSON |
-| **Database** (`database/`) | SQLite store mirroring the pipeline CSV contracts |
+| **Analysis modules** (`CryptoBullCycle/`, `ThirteenFFilings/`, `CongressTrading/`) | BTC cycle + breakout study, 13F filings sector rotation, congress trading consensus + committee signals |
+| **Backend** (`backend/`) | FastAPI serving module outputs as typed JSON |
+| **Database** (`database/`) | SQLite store mirroring the module CSV contracts |
 | **Frontend** (`frontend/`) | React dashboard for a Trading Desk Operations Engineer |
 | **Notebooks** (`notebooks/`) | Exploratory analysis |
 | **Docs** (`docs/`) | Institutional documentation set |
@@ -28,8 +28,8 @@ pip install -r data/pipelines/*/requirements.txt
 # 2. Database
 python database/init_db.py
 
-# 3. Run pipelines and load their outputs into the DB
-python data/run_all.py
+# 3. Run modules and load their outputs into the DB
+python run_all.py
 python -m backend.loaders.ingest
 
 # 4. Backend (terminal 1)
@@ -45,30 +45,29 @@ OpenAPI docs at `http://localhost:8000/docs`.
 
 ```
 Infrastructure_Projects/
-├── data/
-│   ├── pipelines/
-│   │   ├── crypto_bull_cycle/      # BTC cycles, +3σ breakout study, drawdowns, backtest
-│   │   ├── thirteen_f_filings/     # Dataroma 13F scraper, GICS sectors, rotation charts
-│   │   └── congress_trading/      # Capitol Trades scraper, consensus, committee signals
-│   └── run_all.py
-├── backend/                        # FastAPI transport (no analytics)
+├── CryptoBullCycle/              # task 1 — BTC cycles, +3σ breakout study, drawdowns, backtest
+├── ThirteenFFilings/             # task 3 — Dataroma 13F scraper, GICS sectors, rotation charts
+├── CongressTrading/              # task 4 — Capitol Trades scraper, consensus, committee signals
+├── backend/                      # shared FastAPI transport (no analytics)
 │   ├── app/
-│   ├── loaders/                    # CSV → SQLite
+│   ├── loaders/                  # CSV → SQLite
 │   └── requirements.txt
-├── frontend/                       # React + TS + Vite dashboard
+├── frontend/                     # shared React + TS + Vite dashboard
 │   ├── src/
 │   └── package.json
-├── database/                       # SQLite schema + init
+├── database/                     # shared SQLite schema + init
 │   ├── schema.sql
 │   └── init_db.py
-├── notebooks/                      # exploratory analysis
-├── docs/                           # institutional documentation
+├── data/                         # shared cross-task data (not module-specific)
+├── notebooks/                    # exploratory analysis
+├── docs/                         # institutional documentation
 │   ├── architecture/
 │   ├── engineering/
 │   ├── planning/
 │   ├── product/
 │   └── whitepaper/
-├── skills/                         # Cursor agent skills
+├── skills/                       # Cursor agent skills
+├── run_all.py                    # run all three modules
 ├── .env.example
 ├── README.md
 ├── LICENSE
@@ -87,12 +86,12 @@ Start in [`docs/`](docs/):
 
 ## Shared conventions
 
-- **Pipelines are the source of truth.** All analytics live in
-  `data/pipelines/`; the backend and frontend are transport and
-  presentation only.
-- **Idempotent and cacheable.** Every pipeline can be re-run safely.
-  Network fetches are cached to `cache/` (gitignored); deleting the cache
-  forces a fresh pull.
+- **Modules are the source of truth.** All analytics live in
+  `CryptoBullCycle/`, `ThirteenFFilings/`, and `CongressTrading/`; the
+  backend and frontend are transport and presentation only.
+- **Idempotent and cacheable.** Every module can be re-run safely.
+  Network fetches are cached to `<Module>/cache/` (gitignored); deleting
+  the cache forces a fresh pull.
 - **GICS sectors** throughout (Technology, Financials, Healthcare,
   Consumer Discretionary, Consumer Staples, Communication Services,
   Industrials, Energy, Materials, Real Estate, Utilities).
@@ -101,12 +100,12 @@ Start in [`docs/`](docs/):
 - **Python 3.10+** for pipelines and backend; **Node 18+** for frontend.
 - **No author attributions** in code or docs; history is in `git log`.
 
-## The three pipelines
+## The three modules
 
-| Pipeline | Source | Question |
+| Module | Source | Question |
 |---|---|---|
-| `crypto_bull_cycle` | yfinance (BTC-USD, SPY) | Does BTC drift up after +3σ weekly breakouts? How long do cycles last and what are the drawdowns? |
-| `thirteen_f_filings` | Dataroma (8 funds) | How do superinvestors rotate sectors across quarters, and where are they concentrated today? |
-| `congress_trading` | Capitol Trades | Do politicians trade sectors their committees oversee? What is the per-ticker consensus? |
+| `CryptoBullCycle` | yfinance (BTC-USD, SPY) | Does BTC drift up after +3σ weekly breakouts? How long do cycles last and what are the drawdowns? |
+| `ThirteenFFilings` | Dataroma (8 funds) | How do superinvestors rotate sectors across quarters, and where are they concentrated today? |
+| `CongressTrading` | Capitol Trades | Do politicians trade sectors their committees oversee? What is the per-ticker consensus? |
 
-See each pipeline's `README.md` for methodology and headline results.
+See each module's `README.md` for methodology and headline results.
