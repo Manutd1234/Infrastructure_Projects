@@ -377,7 +377,7 @@ psc,2015Q1,2015   Q1,$15 B,4,ZTS,Zoetis Inc.,0.1293,Healthcare
 psc,2015Q1,2015   Q1,$15 B,5,QSR,Restaurant Brands International,0.0975,Consumer Discretionary
 psc,2015Q1,2015   Q1,$15 B,6,PAH,Platform Specialty Products Corp.,0.0733,Materials
 psc,2015Q1,2015   Q1,$15 B,7,HHH,Howard Hughes Holdings Inc.,0.0369,Real Estate
-psc,2015Q1,2015   Q1,$15 B,8,ACT-OLD,Actavis plc,0.0268,Unknown
+psc,2015Q1,2015   Q1,$15 B,8,ACT-OLD,Actavis plc,0.0268,Financials
 psc,2014Q4,2014   Q4,$16 B,1,AGN,Allergan Plc,0.353,Healthcare
 psc,2014Q4,2014   Q4,$16 B,2,APD,Air Products & Chemicals,0.18469999999999998,Materials
 psc,2014Q4,2014   Q4,$16 B,3,CP,Canadian Pacific Kansas City,0.1674,Industrials
@@ -1435,7 +1435,7 @@ AM,2020Q1,2020   Q1,$3.27 B,12,CRM,Salesforce.com,0.020499999999999997,Technolog
 AM,2020Q1,2020   Q1,$3.27 B,13,TMUS,T-Mobile US Inc.,0.019799999999999998,Communication Services
 AM,2020Q1,2020   Q1,$3.27 B,14,UNH,United Health Group Inc.,0.0191,Healthcare
 AM,2020Q1,2020   Q1,$3.27 B,15,AVGO,Broadcom Inc.,0.0169,Technology
-AM,2020Q1,2020   Q1,$3.27 B,16,S-OLD,Sprint Corp.,0.0168,Unknown
+AM,2020Q1,2020   Q1,$3.27 B,16,S-OLD,Sprint Corp.,0.0168,Technology
 AM,2020Q1,2020   Q1,$3.27 B,17,QCOM,QUALCOMM Inc.,0.0115,Technology
 AM,2020Q1,2020   Q1,$3.27 B,18,HCA,HCA Healthcare Inc.,0.0078000000000000005,Healthcare
 AM,2020Q1,2020   Q1,$3.27 B,19,TSLA,Tesla Inc.,0.0067,Consumer Discretionary
@@ -2235,7 +2235,7 @@ AM,2010Q1,2010   Q1,$2.65 B,14,UAUA,UAL Corp.,0.0166,Unknown
 AM,2010Q1,2010   Q1,$2.65 B,15,WTW,Willis Towers Watson plc,0.016399999999999998,Financials
 AM,2010Q1,2010   Q1,$2.65 B,16,NAV,Navistar International Corp.,0.0129,Unknown
 AM,2010Q1,2010   Q1,$2.65 B,17,GT,Goodyear Tire & Rubber,0.0126,Consumer Discretionary
-AM,2010Q1,2010   Q1,$2.65 B,18,AMR-OLD,AMR Corp.,0.0115,Unknown
+AM,2010Q1,2010   Q1,$2.65 B,18,AMR-OLD,AMR Corp.,0.0115,Energy
 AM,2010Q1,2010   Q1,$2.65 B,19,DAL,Delta Air Lines Inc.,0.0105,Industrials
 AM,2010Q1,2010   Q1,$2.65 B,20,BC,Brunswick Corp.,0.0102,Consumer Discretionary
 AM,2009Q4,2009   Q4,$2.38 B,1,BAC,Bank of America Corp.,0.20379999999999998,Financials
@@ -2246,14 +2246,14 @@ AM,2009Q4,2009   Q4,$2.38 B,5,STI,SunTrust Banks,0.0727,Industrials
 AM,2009Q4,2009   Q4,$2.38 B,6,HIG,Hartford Financial Svc.Gp.,0.061,Financials
 AM,2009Q4,2009   Q4,$2.38 B,7,COF,Capital One Financial,0.0483,Financials
 AM,2009Q4,2009   Q4,$2.38 B,8,MSFT,Microsoft Corp.,0.0384,Technology
-AM,2009Q4,2009   Q4,$2.38 B,9,AMR-OLD,AMR Corp.,0.0194,Unknown
+AM,2009Q4,2009   Q4,$2.38 B,9,AMR-OLD,AMR Corp.,0.0194,Energy
 AM,2009Q4,2009   Q4,$2.38 B,10,UAUA,UAL Corp.,0.0165,Unknown
 AM,2009Q4,2009   Q4,$2.38 B,11,DAL,Delta Air Lines Inc.,0.014499999999999999,Industrials
 AM,2009Q4,2009   Q4,$2.38 B,12,WTW,Willis Towers Watson plc,0.0132,Financials
 AM,2009Q4,2009   Q4,$2.38 B,13,GT,Goodyear Tire & Rubber,0.0118,Consumer Discretionary
 AM,2009Q4,2009   Q4,$2.38 B,14,BC,Brunswick Corp.,0.011399999999999999,Consumer Discretionary
 AM,2009Q4,2009   Q4,$2.38 B,15,VCI,Valassis Communication,0.0109,Unknown
-AM,2009Q4,2009   Q4,$2.38 B,16,BBT-OLD,BB&T Corp.,0.0102,Unknown
+AM,2009Q4,2009   Q4,$2.38 B,16,BBT-OLD,BB&T Corp.,0.0102,Financials
 AM,2009Q4,2009   Q4,$2.38 B,17,XL-OLD,XL Group Ltd.,0.0075,Unknown
 AM,2009Q4,2009   Q4,$2.38 B,18,ETFC,E*Trade Financial Corp.,0.0058,Unknown
 AM,2009Q4,2009   Q4,$2.38 B,19,LCC,US Airways Group Inc.,0.0053,Industrials
@@ -2265,7 +2265,7 @@ AM,2009Q3,2009   Q3,$1.95 B,4,STI,SunTrust Banks,0.099,Industrials
 AM,2009Q3,2009   Q3,$1.95 B,5,HIG,Hartford Financial Svc.Gp.,0.0661,Financials
 AM,2009Q3,2009   Q3,$1.95 B,6,COF,Capital One Financial,0.055099999999999996,Financials
 AM,2009Q3,2009   Q3,$1.95 B,7,MSFT,Microsoft Corp.,0.0397,Technology
-AM,2009Q3,2009   Q3,$1.95 B,8,BBT-OLD,BB&T Corp.,0.027999999999999997,Unknown
+AM,2009Q3,2009   Q3,$1.95 B,8,BBT-OLD,BB&T Corp.,0.027999999999999997,Financials
 AM,2009Q3,2009   Q3,$1.95 B,9,VCI,Valassis Communication,0.017,Unknown
 AM,2009Q3,2009   Q3,$1.95 B,10,BC,Brunswick Corp.,0.0165,Consumer Discretionary
 AM,2009Q3,2009   Q3,$1.95 B,11,GT,Goodyear Tire & Rubber,0.0139,Consumer Discretionary
@@ -2319,7 +2319,7 @@ AM,2008Q4,2008   Q4,$376 M,2,WB-OLD,Wachovia Corp.,0.1848,Unknown
 AM,2008Q4,2008   Q4,$376 M,3,GT,Goodyear Tire & Rubber,0.051500000000000004,Consumer Discretionary
 AM,2008Q4,2008   Q4,$376 M,4,XL-OLD,XL Group Ltd.,0.037599999999999995,Unknown
 AM,2008Q4,2008   Q4,$376 M,5,ORCL,Oracle Corp.,0.0311,Technology
-AM,2008Q4,2008   Q4,$376 M,6,S-OLD,Sprint Corp.,0.025099999999999997,Unknown
+AM,2008Q4,2008   Q4,$376 M,6,S-OLD,Sprint Corp.,0.025099999999999997,Technology
 AM,2008Q4,2008   Q4,$376 M,7,CNO,CNO Financial Group Inc.,0.024300000000000002,Financials
 AM,2008Q4,2008   Q4,$376 M,8,CVX,Chevron Corp.,0.02,Energy
 AM,2008Q4,2008   Q4,$376 M,9,BYAH-OLD,PHH Corp.,0.0196,Unknown
@@ -3587,7 +3587,7 @@ AC,2011Q2,2011   Q2,$539 M,13,BRK.A,Berkshire Hathaway CL A,0.0146,Financials
 AC,2011Q2,2011   Q2,$539 M,14,AMTD,AMTD IDEA Group,0.014499999999999999,Financials
 AC,2011Q2,2011   Q2,$539 M,15,ARO,Aeropostale Inc.,0.0138,Unknown
 AC,2011Q2,2011   Q2,$539 M,16,BRK.B,Berkshire Hathaway CL B,0.0132,Financials
-AC,2011Q2,2011   Q2,$539 M,17,WMS-OLD,WMS Industries,0.011399999999999999,Unknown
+AC,2011Q2,2011   Q2,$539 M,17,WMS-OLD,WMS Industries,0.011399999999999999,Materials
 AC,2011Q2,2011   Q2,$539 M,18,TROW,T. Rowe Price Group,0.0113,Financials
 AC,2011Q2,2011   Q2,$539 M,19,BDX,Becton Dickinson,0.008,Healthcare
 AC,2011Q2,2011   Q2,$539 M,20,TECH,Bio-Techne Corp.,0.0077,Healthcare
@@ -3607,7 +3607,7 @@ AC,2011Q1,2011   Q1,$495 M,13,PENN,Penn National Gaming Inc.,0.0216,Consumer Dis
 AC,2011Q1,2011   Q1,$495 M,14,BRK.A,Berkshire Hathaway CL A,0.0177,Financials
 AC,2011Q1,2011   Q1,$495 M,15,AMTD,AMTD IDEA Group,0.0169,Financials
 AC,2011Q1,2011   Q1,$495 M,16,BRK.B,Berkshire Hathaway CL B,0.0151,Financials
-AC,2011Q1,2011   Q1,$495 M,17,WMS-OLD,WMS Industries,0.0143,Unknown
+AC,2011Q1,2011   Q1,$495 M,17,WMS-OLD,WMS Industries,0.0143,Materials
 AC,2011Q1,2011   Q1,$495 M,18,TROW,T. Rowe Price Group,0.0118,Financials
 AC,2011Q1,2011   Q1,$495 M,19,BDX,Becton Dickinson,0.008,Healthcare
 AC,2011Q1,2011   Q1,$495 M,20,NLY,Annaly Capital Management Inc.,0.0073,Real Estate
@@ -3624,7 +3624,7 @@ AC,2010Q4,2010   Q4,$458 M,10,FDS,FactSet Research Systems,0.0336,Financials
 AC,2010Q4,2010   Q4,$458 M,11,TJX,TJX Companies Inc.,0.023399999999999997,Consumer Discretionary
 AC,2010Q4,2010   Q4,$458 M,12,PENN,Penn National Gaming Inc.,0.0223,Consumer Discretionary
 AC,2010Q4,2010   Q4,$458 M,13,BRK.A,Berkshire Hathaway CL A,0.021099999999999997,Financials
-AC,2010Q4,2010   Q4,$458 M,14,WMS-OLD,WMS Industries,0.019799999999999998,Unknown
+AC,2010Q4,2010   Q4,$458 M,14,WMS-OLD,WMS Industries,0.019799999999999998,Materials
 AC,2010Q4,2010   Q4,$458 M,15,AMTD,AMTD IDEA Group,0.0166,Financials
 AC,2010Q4,2010   Q4,$458 M,16,BRK.B,Berkshire Hathaway CL B,0.0147,Financials
 AC,2010Q4,2010   Q4,$458 M,17,OXPS,optionsXpress Holdings Inc.,0.0137,Unknown
@@ -3644,7 +3644,7 @@ AC,2010Q3,2010   Q3,$377 M,10,FDS,FactSet Research Systems,0.0353,Financials
 AC,2010Q3,2010   Q3,$377 M,11,TJX,TJX Companies Inc.,0.0276,Consumer Discretionary
 AC,2010Q3,2010   Q3,$377 M,12,BRK.A,Berkshire Hathaway CL A,0.0254,Financials
 AC,2010Q3,2010   Q3,$377 M,13,PENN,Penn National Gaming Inc.,0.0227,Consumer Discretionary
-AC,2010Q3,2010   Q3,$377 M,14,WMS-OLD,WMS Industries,0.0202,Unknown
+AC,2010Q3,2010   Q3,$377 M,14,WMS-OLD,WMS Industries,0.0202,Materials
 AC,2010Q3,2010   Q3,$377 M,15,BRK.B,Berkshire Hathaway CL B,0.0184,Financials
 AC,2010Q3,2010   Q3,$377 M,16,AMTD,AMTD IDEA Group,0.0171,Financials
 AC,2010Q3,2010   Q3,$377 M,17,OXPS,optionsXpress Holdings Inc.,0.0163,Unknown
@@ -3663,7 +3663,7 @@ AC,2010Q2,2010   Q2,$333 M,9,TJX,TJX Companies Inc.,0.0294,Consumer Discretionar
 AC,2010Q2,2010   Q2,$333 M,10,BRK.A,Berkshire Hathaway CL A,0.0277,Financials
 AC,2010Q2,2010   Q2,$333 M,11,KMX,CarMax Inc.,0.0273,Consumer Discretionary
 AC,2010Q2,2010   Q2,$333 M,12,PENN,Penn National Gaming Inc.,0.025699999999999997,Consumer Discretionary
-AC,2010Q2,2010   Q2,$333 M,13,WMS-OLD,WMS Industries,0.0236,Unknown
+AC,2010Q2,2010   Q2,$333 M,13,WMS-OLD,WMS Industries,0.0236,Materials
 AC,2010Q2,2010   Q2,$333 M,14,TRH,Transatlantic Holdings Inc.,0.0216,Unknown
 AC,2010Q2,2010   Q2,$333 M,15,BRK.B,Berkshire Hathaway CL B,0.0203,Financials
 AC,2010Q2,2010   Q2,$333 M,16,OXPS,optionsXpress Holdings Inc.,0.0189,Unknown
@@ -3685,7 +3685,7 @@ AC,2010Q1,2010   Q1,$326 M,11,TJX,TJX Companies Inc.,0.0304,Consumer Discretiona
 AC,2010Q1,2010   Q1,$326 M,12,BRK.A,Berkshire Hathaway CL A,0.029500000000000002,Financials
 AC,2010Q1,2010   Q1,$326 M,13,DLTR,Dollar Tree Inc.,0.027200000000000002,Consumer Staples
 AC,2010Q1,2010   Q1,$326 M,14,TROW,T. Rowe Price Group,0.0268,Financials
-AC,2010Q1,2010   Q1,$326 M,15,WMS-OLD,WMS Industries,0.025699999999999997,Unknown
+AC,2010Q1,2010   Q1,$326 M,15,WMS-OLD,WMS Industries,0.025699999999999997,Materials
 AC,2010Q1,2010   Q1,$326 M,16,BRK.B,Berkshire Hathaway CL B,0.022000000000000002,Financials
 AC,2010Q1,2010   Q1,$326 M,17,OXPS,optionsXpress Holdings Inc.,0.02,Unknown
 AC,2010Q1,2010   Q1,$326 M,18,HIG,Hartford Financial Svc.Gp.,0.0196,Financials
@@ -3706,7 +3706,7 @@ AC,2009Q4,2009   Q4,$298 M,12,BRK.A,Berkshire Hathaway CL A,0.027999999999999997
 AC,2009Q4,2009   Q4,$298 M,13,BRK.B,Berkshire Hathaway CL B,0.023,Financials
 AC,2009Q4,2009   Q4,$298 M,14,AMTD,AMTD IDEA Group,0.0195,Financials
 AC,2009Q4,2009   Q4,$298 M,15,MSCI,MSCI Inc.,0.016,Financials
-AC,2009Q4,2009   Q4,$298 M,16,WMS-OLD,WMS Industries,0.013600000000000001,Unknown
+AC,2009Q4,2009   Q4,$298 M,16,WMS-OLD,WMS Industries,0.013600000000000001,Materials
 AC,2009Q4,2009   Q4,$298 M,17,OXPS,optionsXpress Holdings Inc.,0.013000000000000001,Unknown
 AC,2009Q4,2009   Q4,$298 M,18,MBRG,Middleburg Financial Corp.,0.0060999999999999995,Unknown
 AC,2009Q4,2009   Q4,$298 M,19,RVR,White River Capital Inc.,0.0034999999999999996,Unknown
