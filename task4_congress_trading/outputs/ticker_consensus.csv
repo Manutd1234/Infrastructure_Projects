@@ -1,0 +1,266 @@
+ticker,n_trades,n_buy,n_sell,net_signed_usd,n_politicians,issuer,sector,buy_pct,consensus
+BE:US,4,4,0,7500000.0,1,Bloom Energy Corp,Industrials,1.0,BUY
+GS:US,16,16,0,3100000.0,1,The Goldman Sachs Group Inc,Financials,1.0,BUY
+INTC:US,2,2,0,1125000.0,1,Intel Corp,Technology,1.0,BUY
+TD:US,2,2,0,250000.0,1,The Toronto-Dominion Bank,Financials,1.0,BUY
+JPM:US,2,1,1,167000.0,2,JPMorgan Chase & Co,Financials,0.5,BUY
+GEHC:US,13,13,0,104000.0,1,GE HEALTHCARE TECHNOLOGI INC,Healthcare,1.0,BUY
+CHWY:US,9,9,0,72000.0,1,Chewy Inc,Consumer Discretionary,1.0,BUY
+UBER:US,8,8,0,64000.0,1,Uber Technologies Inc,Consumer Discretionary,1.0,BUY
+MRVL:US,3,3,0,48500.0,1,Marvell Technology Inc,Technology,1.0,BUY
+HCA:US,2,2,0,40500.0,2,HCA Healthcare Inc,Healthcare,1.0,BUY
+TXN:US,2,2,0,40500.0,1,Texas Instruments Inc,Technology,1.0,BUY
+B:US,2,2,0,40500.0,2,Berkshire Hathaway Inc,Materials,1.0,BUY
+AXAHY:US,1,1,0,32500.0,1,"Axa, Paris",Financials,1.0,BUY
+SPTI:US,1,1,0,32500.0,1,SPDR Bloomberg Barclays Intermediate Term Treasury ETF,Financials,1.0,BUY
+UPST:US,1,1,0,32500.0,1,UPSTART HOLDINGS INC,Financials,1.0,BUY
+MFG:US,1,1,0,32500.0,1,Mizuho Financial Group Inc,Financials,1.0,BUY
+V:US,3,2,1,32500.0,2,Visa Inc,Financials,0.6666666666666666,BUY
+EWJ:US,1,1,0,32500.0,1,iShares International Equity- ETFs  iShares MSCI Japan ETF,Unknown,1.0,BUY
+BAC:US,1,1,0,32500.0,1,Bank of America Corp,Financials,1.0,BUY
+NOW:US,1,1,0,32500.0,1,ServiceNow Inc,Technology,1.0,BUY
+INTU:US,3,3,0,24000.0,1,Intuit Inc,Technology,1.0,BUY
+AVGO:US,3,3,0,24000.0,3,Broadcom Inc,Technology,1.0,BUY
+ICE:US,3,1,2,16500.0,2,Intercontinental Exchange Inc,Financials,0.3333333333333333,BUY
+PTC:US,2,2,0,16000.0,1,PTC Inc,Technology,1.0,BUY
+SPYM:US,2,2,0,16000.0,1,TRADR 2X LONG SPY MNTHLY ETF,Financials,1.0,BUY
+MOS:US,2,2,0,16000.0,1,The Mosaic Company,Materials,1.0,BUY
+META:US,4,3,1,16000.0,3,Meta Platforms Inc,Communication Services,0.75,BUY
+PYPL:US,2,2,0,16000.0,2,PayPal Holdings Inc,Financials,1.0,BUY
+PLTR:US,2,2,0,16000.0,1,Palantir Technologies Inc,Technology,1.0,BUY
+FTV:US,2,2,0,16000.0,1,Fortive Corp,Technology,1.0,BUY
+AMAT:US,2,2,0,16000.0,2,Applied Materials Inc,Technology,1.0,BUY
+DLR:US,2,2,0,16000.0,1,Digital Realty Trust Inc,Real Estate,1.0,BUY
+NKE:US,3,2,1,8000.0,2,Nike Inc,Consumer Discretionary,0.6666666666666666,BUY
+DLTR:US,1,1,0,8000.0,1,Dollar Tree Inc,Consumer Staples,1.0,BUY
+NICE:US,1,1,0,8000.0,1,NICE Ltd,Technology,1.0,BUY
+IBP:US,1,1,0,8000.0,1,Installed Building Products Inc,Consumer Discretionary,1.0,BUY
+CVNA:US,1,1,0,8000.0,1,Carvana Co,Consumer Discretionary,1.0,BUY
+DG:US,1,1,0,8000.0,1,Dollar General Corporation,Consumer Staples,1.0,BUY
+ORLY:US,1,1,0,8000.0,1,O'Reilly Automotive Inc,Consumer Discretionary,1.0,BUY
+GRMN:US,1,1,0,8000.0,1,Garmin Ltd,Technology,1.0,BUY
+CRWD:US,1,1,0,8000.0,1,CrowdStrike Holdings Inc,Technology,1.0,BUY
+PCAR:US,1,1,0,8000.0,1,PACCAR Inc,Industrials,1.0,BUY
+MRK:US,1,1,0,8000.0,1,Merck & Co Inc,Healthcare,1.0,BUY
+IR:US,1,1,0,8000.0,1,Ingersoll Rand Inc,Industrials,1.0,BUY
+MPWR:US,1,1,0,8000.0,1,Monolithic Power Systems Inc,Technology,1.0,BUY
+MNST:US,1,1,0,8000.0,1,Monster Beverage Corp,Consumer Staples,1.0,BUY
+EME:US,1,1,0,8000.0,1,EMCOR Group Inc,Industrials,1.0,BUY
+IEUR:US,1,1,0,8000.0,1,iShares Core MSCI Europe ETF,Financials,1.0,BUY
+LIN:US,1,1,0,8000.0,1,Linde PLC,Materials,1.0,BUY
+EQIX:US,1,1,0,8000.0,1,Equinix Inc,Real Estate,1.0,BUY
+EQT:US,1,1,0,8000.0,1,EQT Corp,Energy,1.0,BUY
+ETN:US,1,1,0,8000.0,1,Eaton Corp PLC,Industrials,1.0,BUY
+LDOS:US,1,1,0,8000.0,1,Leidos Holdings Inc,Technology,1.0,BUY
+KO:US,1,1,0,8000.0,1,The Coca-Cola Co,Consumer Staples,1.0,BUY
+JNJ:US,3,2,1,8000.0,2,Johnson & Johnson,Healthcare,0.6666666666666666,BUY
+JCI:US,1,1,0,8000.0,1,Johnson Controls International PLC,Industrials,1.0,BUY
+JBL:US,1,1,0,8000.0,1,Jabil Inc,Technology,1.0,BUY
+FTNT:US,1,1,0,8000.0,1,Fortinet Inc,Technology,1.0,BUY
+MCK:US,1,1,0,8000.0,1,McKesson Corp,Healthcare,1.0,BUY
+CMCSA:US,3,2,1,8000.0,2,Comcast Corp,Communication Services,0.6666666666666666,BUY
+RCL:US,1,1,0,8000.0,1,Royal Caribbean Group,Consumer Discretionary,1.0,BUY
+BKNG:US,1,1,0,8000.0,1,Booking Holdings Inc,Consumer Discretionary,1.0,BUY
+AZO:US,1,1,0,8000.0,1,AutoZone Inc,Consumer Discretionary,1.0,BUY
+TGOPY:US,1,1,0,8000.0,1,3I GROUP PLC,Financials,1.0,BUY
+ARM:US,1,1,0,8000.0,1,ARM HOLDINGS PLC,Technology,1.0,BUY
+ARES:US,1,1,0,8000.0,1,Ares Management Corp,Financials,1.0,BUY
+APTV:US,1,1,0,8000.0,1,Aptiv PLC,Consumer Discretionary,1.0,BUY
+TMUS:US,1,1,0,8000.0,1,T-Mobile US Inc,Communication Services,1.0,BUY
+TOST:US,1,1,0,8000.0,1,TOAST INC,Technology,1.0,BUY
+ANET:US,1,1,0,8000.0,1,Arista Networks Inc,Technology,1.0,BUY
+AMZN:US,1,1,0,8000.0,1,Amazon.com Inc,Consumer Discretionary,1.0,BUY
+TSLA:US,1,1,0,8000.0,1,Tesla Inc,Consumer Discretionary,1.0,BUY
+TTWO:US,1,1,0,8000.0,1,Take-Two Interactive Software Inc,Communication Services,1.0,BUY
+UBS:US,1,1,0,8000.0,1,UBS Group AG,Financials,1.0,BUY
+ULTA:US,1,1,0,8000.0,1,Ulta Beauty Inc,Consumer Discretionary,1.0,BUY
+VPL:US,1,1,0,8000.0,1,VANGUARD FTSE PACIFIC ETF,Unknown,1.0,BUY
+WDAY:US,1,1,0,8000.0,1,Workday Inc,Technology,1.0,BUY
+WY:US,1,1,0,8000.0,1,Weyerhaeuser Co,Real Estate,1.0,BUY
+XAR:US,1,1,0,8000.0,1,SPDR S&P Aerospace & Defense ETF,Industrials,1.0,BUY
+XSHQ:US,1,1,0,8000.0,1,INVESCO S&P SMALLCAP QUALITY ETF,Financials,1.0,BUY
+XYL:US,1,1,0,8000.0,1,Xylem Inc,Industrials,1.0,BUY
+COF:US,1,1,0,8000.0,1,Capital One Financial Corp,Financials,1.0,BUY
+TEL:US,1,1,0,8000.0,1,TE Connectivity Ltd,Technology,1.0,BUY
+BLDR:US,1,1,0,8000.0,1,Builders FirstSource Inc,Industrials,1.0,BUY
+CCL:US,1,1,0,8000.0,1,Carnival Corporation & PLC,Consumer Discretionary,1.0,BUY
+CME:US,1,1,0,8000.0,1,CME Group Inc,Financials,1.0,BUY
+REGL:US,1,1,0,8000.0,1,Proshares Trust - ProShares S&P MidCap 400 Dividend Aristocrats ETF,Financials,1.0,BUY
+REGN:US,1,1,0,8000.0,1,Regeneron Pharmaceuticals Inc,Healthcare,1.0,BUY
+RIO:US,1,1,0,8000.0,1,Rio Tinto Group,Materials,1.0,BUY
+SBAC:US,1,1,0,8000.0,1,SBA Communications Corp,Real Estate,1.0,BUY
+CEG:US,1,1,0,8000.0,1,CONSTELLATION ENE CORP,Utilities,1.0,BUY
+TAP:US,1,1,0,8000.0,1,Molson Coors Beverage Company,Consumer Staples,1.0,BUY
+CDNS:US,1,1,0,8000.0,1,Cadence Design Systems Inc,Technology,1.0,BUY
+HYG:US,1,1,0,8000.0,1,iShares iBoxx High Yield Corporate Bond ETF,Financials,1.0,BUY
+SCHW:US,1,1,0,8000.0,1,Schwab (Charles) Corp,Financials,1.0,BUY
+CCEP:US,1,1,0,8000.0,1,Coca-Cola Europacific Partners PLC,Consumer Staples,1.0,BUY
+CBRE:US,1,1,0,8000.0,1,CBRE Group Inc,Real Estate,1.0,BUY
+SMCI:US,1,1,0,8000.0,1,SUPER MICRO COMPUTER INC,Technology,1.0,BUY
+STZ:US,1,1,0,8000.0,1,Constellation Brands Inc,Consumer Staples,1.0,BUY
+SWKS:US,1,1,0,8000.0,1,Skyworks Solutions Inc,Technology,1.0,BUY
+SYY:US,1,1,0,8000.0,1,Sysco Corporation,Consumer Staples,1.0,BUY
+KR:US,2,1,1,0.0,1,The Kroger Co,Consumer Staples,0.5,NEUTRAL
+UNH:US,2,1,1,0.0,2,Unitedhealth Group Inc,Healthcare,0.5,NEUTRAL
+ON:US,2,1,1,0.0,1,ON Semiconductor Corp,Technology,0.5,NEUTRAL
+ORCL:US,2,1,1,0.0,2,Oracle Corp,Technology,0.5,NEUTRAL
+IBM:US,4,2,2,0.0,2,International Business Machines Corp,Technology,0.5,NEUTRAL
+PANW:US,2,1,1,0.0,2,Palo Alto Networks Inc,Technology,0.5,NEUTRAL
+NEE:US,2,1,1,0.0,2,NextEra Energy Inc,Utilities,0.5,NEUTRAL
+ZTS:US,2,1,1,0.0,1,Zoetis Inc,Healthcare,0.5,NEUTRAL
+EL:US,2,1,1,0.0,2,The Estee Lauder Cos Inc,Consumer Staples,0.5,NEUTRAL
+CSCO:US,2,1,1,0.0,2,Cisco Systems Inc,Technology,0.5,NEUTRAL
+FCX:US,2,1,1,0.0,2,Freeport-McMoRan Inc,Materials,0.5,NEUTRAL
+CL:US,2,1,1,0.0,2,Colgate-Palmolive Co,Consumer Staples,0.5,NEUTRAL
+BSX:US,2,1,1,0.0,1,Boston Scientific Corp,Healthcare,0.5,NEUTRAL
+APD:US,2,1,1,0.0,2,Air Products and Chemicals Inc,Materials,0.5,NEUTRAL
+GILD:US,2,1,1,0.0,1,Gilead Sciences Inc,Healthcare,0.5,NEUTRAL
+CBOE:US,2,1,1,0.0,1,Cboe Global Markets Inc,Financials,0.5,NEUTRAL
+AMD:US,2,1,1,0.0,2,Advanced Micro Devices Inc,Technology,0.5,NEUTRAL
+CVX:US,2,1,1,0.0,2,Chevron Corp,Energy,0.5,NEUTRAL
+O:US,1,0,1,-8000.0,1,Realty Income Corp,Real Estate,0.0,SELL
+VSAT:US,1,0,1,-8000.0,1,ViaSat Inc,Technology,0.0,SELL
+SDZNY:US,1,0,1,-8000.0,1,SANDOZ GROUP AG,Healthcare,0.0,SELL
+CGEMY:US,1,0,1,-8000.0,1,Capgemini SE,Technology,0.0,SELL
+RNWGX:US,1,0,1,-8000.0,1,NEW WORLD FUND INC,Financials,0.0,SELL
+CI:US,1,0,1,-8000.0,1,Cigna Corp,Healthcare,0.0,SELL
+NRG:US,1,0,1,-8000.0,1,NRG Energy Inc,Utilities,0.0,SELL
+COHR:US,1,0,1,-8000.0,1,Coherent Corp,Technology,0.0,SELL
+COIN:US,1,0,1,-8000.0,1,Coinbase Global Inc,Financials,0.0,SELL
+NTRS:US,1,0,1,-8000.0,1,Northern Trust Corp,Financials,0.0,SELL
+PSKY:US,1,0,1,-8000.0,1,Paramount Global Inc,Communication Services,0.0,SELL
+CSGP:US,1,0,1,-8000.0,1,CoStar Group Inc,Real Estate,0.0,SELL
+CPRT:US,1,0,1,-8000.0,1,Copart Inc,Industrials,0.0,SELL
+WAB:US,1,0,1,-8000.0,1,Westinghouse Air Brake Technologies Corp,Industrials,0.0,SELL
+WAT:US,1,0,1,-8000.0,1,Waters Corp,Healthcare,0.0,SELL
+SHLD:US,1,0,1,-8000.0,1,GLOBAL X DEFENSE TECH ETF,Consumer Discretionary,0.0,SELL
+NVT:US,1,0,1,-8000.0,1,nVent Electric PLC,Industrials,0.0,SELL
+CRH:US,1,0,1,-8000.0,1,CRH PLC,Materials,0.0,SELL
+WMT:US,3,1,2,-8000.0,2,Walmart Inc,Consumer Staples,0.3333333333333333,SELL
+NXPI:US,1,0,1,-8000.0,1,NXP Semiconductors NV,Technology,0.0,SELL
+GWW:US,1,0,1,-8000.0,1,Grainger (W.W.) Inc,Industrials,0.0,SELL
+SPYG:US,1,0,1,-8000.0,1,SPDR Portfolio S&P 500 Growth ETF,Financials,0.0,SELL
+CAT:US,1,0,1,-8000.0,1,Caterpillar Inc,Industrials,0.0,SELL
+DEO:US,1,0,1,-8000.0,1,Diageo PLC,Consumer Staples,0.0,SELL
+ALB:US,1,0,1,-8000.0,1,Albemarle Corp,Materials,0.0,SELL
+ALC:US,1,0,1,-8000.0,1,Alcon Inc,Healthcare,0.0,SELL
+ALL:US,1,0,1,-8000.0,1,The Allstate Corporation,Financials,0.0,SELL
+TYL:US,1,0,1,-8000.0,1,Tyler Technologies Inc,Technology,0.0,SELL
+AMGN:US,3,1,2,-8000.0,2,Amgen Inc,Healthcare,0.3333333333333333,SELL
+TTD:US,1,0,1,-8000.0,1,The Trade Desk Inc,Communication Services,0.0,SELL
+AMT:US,1,0,1,-8000.0,1,American Tower Corp,Real Estate,0.0,SELL
+TSCO:US,1,0,1,-8000.0,1,Tractor Supply Co,Consumer Discretionary,0.0,SELL
+TRV:US,1,0,1,-8000.0,1,The Travelers Companies Inc,Financials,0.0,SELL
+TPYP:US,1,0,1,-8000.0,1,Managed Portfolio Series Tortoise North American Pipeline Fund,Financials,0.0,SELL
+ADI:US,1,0,1,-8000.0,1,Analog Devices Inc,Technology,0.0,SELL
+VEA:US,1,0,1,-8000.0,1,Vanguard FTSE Developed Markets ETF,Financials,0.0,SELL
+AWK:US,1,0,1,-8000.0,1,American Water Works Company Inc,Utilities,0.0,SELL
+VNQI:US,1,0,1,-8000.0,1,Vanguard Global ex-U.S. Real Estate ETF,Real Estate,0.0,SELL
+BIIB:US,1,0,1,-8000.0,1,Biogen Inc,Healthcare,0.0,SELL
+VRT:US,1,0,1,-8000.0,1,Vertiv Holdings Co,Industrials,0.0,SELL
+SYK:US,1,0,1,-8000.0,1,Stryker Corp,Healthcare,0.0,SELL
+BUD:US,1,0,1,-8000.0,1,Anheuser-Busch InBev SA/NV,Consumer Staples,0.0,SELL
+CARR:US,1,0,1,-8000.0,1,Carrier Global Corp,Industrials,0.0,SELL
+STLD:US,1,0,1,-8000.0,1,Steel Dynamics Inc,Materials,0.0,SELL
+STE:US,1,0,1,-8000.0,1,Steris PLC,Healthcare,0.0,SELL
+DD:US,1,0,1,-8000.0,1,DuPont  De Nemours Inc,Materials,0.0,SELL
+OGN:US,1,0,1,-8000.0,1,Organon & Co,Healthcare,0.0,SELL
+LHX:US,1,0,1,-8000.0,1,L3Harris Technologies Inc,Industrials,0.0,SELL
+IVV:US,1,0,1,-8000.0,1,iShares Core S&P 500 ETF,Financials,0.0,SELL
+LRCX:US,1,0,1,-8000.0,1,Lam Research Corp,Technology,0.0,SELL
+LLY:US,1,0,1,-8000.0,1,Eli Lilly and Co,Healthcare,0.0,SELL
+FAST:US,1,0,1,-8000.0,1,Fastenal Co,Industrials,0.0,SELL
+KVUE:US,1,0,1,-8000.0,1,KENVUE INC,Consumer Staples,0.0,SELL
+FDX:US,1,0,1,-8000.0,1,FedEx Corp,Industrials,0.0,SELL
+KMB:US,1,0,1,-8000.0,1,Kimberly-Clark Corp,Consumer Staples,0.0,SELL
+AAXJ:US,1,0,1,-8000.0,1,iShares MSCI All Country Asia ex Japan ETF,Financials,0.0,SELL
+FISV:US,1,0,1,-8000.0,1,Fiserv Inc,Technology,0.0,SELL
+FN:US,1,0,1,-8000.0,1,FABRINET,Technology,0.0,SELL
+FTGC:US,1,0,1,-8000.0,1,FIRST TR GLOBAL TACTICAL CMD,Materials,0.0,SELL
+IWM:US,1,0,1,-8000.0,1,iShares Trust - iShares Russell 2000 ETF,Financials,0.0,SELL
+IT:US,1,0,1,-8000.0,1,Gartner Inc,Technology,0.0,SELL
+ABB:US,1,0,1,-8000.0,1,ABB Ltd,Unknown,0.0,SELL
+ISRG:US,1,0,1,-8000.0,1,Intuitive Surgical Inc,Healthcare,0.0,SELL
+GDX:US,1,0,1,-8000.0,1,VanEck Vectors ETF Trust VanEck Vectors Gold Miners ETF,Unknown,0.0,SELL
+GEM:US,1,0,1,-8000.0,1,Goldman Sachs ActiveBeta Emerging Markets Equity ETF,Financials,0.0,SELL
+GEVO:US,1,0,1,-8000.0,1,GEVO INC,Materials,0.0,SELL
+GLDM:US,1,0,1,-8000.0,1,SPDR GOLD MINISHARES TR,Unknown,0.0,SELL
+GPS:US,1,0,1,-8000.0,1,Gap Inc,Consumer Discretionary,0.0,SELL
+GTLS:US,1,0,1,-8000.0,1,Chart Industries Inc,Industrials,0.0,SELL
+HUBB:US,1,0,1,-8000.0,1,Hubbell Inc,Industrials,0.0,SELL
+HRL:US,1,0,1,-8000.0,1,Hormel Foods Corp,Consumer Staples,0.0,SELL
+YUM:US,1,0,1,-8000.0,1,YUM BRANDS  Inc,Consumer Discretionary,0.0,SELL
+HON:US,1,0,1,-8000.0,1,Honeywell International Inc,Industrials,0.0,SELL
+LULU:US,1,0,1,-8000.0,1,Lululemon Athletica Inc,Consumer Discretionary,0.0,SELL
+ADP:US,1,0,1,-8000.0,1,Automatic Data Processing Inc,Technology,0.0,SELL
+MSI:US,1,0,1,-8000.0,1,Motorola Solutions Inc,Technology,0.0,SELL
+EIPI:US,1,0,1,-8000.0,1,FT EGY  PARTNER ENHANCED ETF,Financials,0.0,SELL
+ELF:US,1,0,1,-8000.0,1,e.l.f. Beauty Inc,Consumer Staples,0.0,SELL
+MSCI:US,1,0,1,-8000.0,1,MSCI Inc,Financials,0.0,SELL
+MRSH:US,1,0,1,-8000.0,1,Marsh & McLennan Companies Inc,Financials,0.0,SELL
+ELV:US,1,0,1,-8000.0,1,Elevance Health Inc,Healthcare,0.0,SELL
+ABNB:US,1,0,1,-8000.0,1,Airbnb Inc,Consumer Discretionary,0.0,SELL
+EFA:US,1,0,1,-8000.0,1,iShares MSCI EAFE ETF,Financials,0.0,SELL
+MDLZ:US,1,0,1,-8000.0,1,Mondelez International Inc,Consumer Staples,0.0,SELL
+ECL:US,1,0,1,-8000.0,1,Ecolab Inc,Materials,0.0,SELL
+SOLS:US,2,0,2,-16000.0,2,SOLSTICE ADVANCED MTRILS INC,Materials,0.0,SELL
+MDB:US,2,0,2,-16000.0,1,MongoDB Inc,Technology,0.0,SELL
+ITW:US,2,0,2,-16000.0,2,Illinois Tool Works Inc,Industrials,0.0,SELL
+CART:US,2,0,2,-16000.0,1,MAPLEBEAR INC,Consumer Discretionary,0.0,SELL
+OTIS:US,2,0,2,-16000.0,2,Otis Worldwide Corp,Industrials,0.0,SELL
+LEN:US,2,0,2,-16000.0,1,Lennar Corp,Consumer Discretionary,0.0,SELL
+XOM:US,2,0,0,-16000.0,1,Exxon Mobil Corp,Energy,,SELL
+APO:US,2,0,2,-16000.0,1,Apollo Global Management Inc,Financials,0.0,SELL
+CTSH:US,2,0,2,-16000.0,1,Cognizant Technology Solutions Corp,Technology,0.0,SELL
+EMR:US,2,0,2,-16000.0,2,Emerson Electric Co,Industrials,0.0,SELL
+ROL:US,2,0,2,-16000.0,1,ROLLINS Inc,Consumer Discretionary,0.0,SELL
+CVRX:US,2,0,2,-16000.0,1,CVRX INC,Healthcare,0.0,SELL
+CHTR:US,2,0,2,-16000.0,1,Charter Communications Inc,Communication Services,0.0,SELL
+VLTO:US,3,0,3,-24000.0,1,VERALTO CORP,Industrials,0.0,SELL
+MBGL:US,3,0,3,-24000.0,1,MOBILITY GLOBAL INC,Technology,0.0,SELL
+MU:US,3,0,3,-24000.0,1,Micron Technology Inc,Technology,0.0,SELL
+CCI:US,3,0,3,-24000.0,2,Crown Castle International Corp,Real Estate,0.0,SELL
+PENN:US,3,0,3,-24000.0,1,Penn National Gaming Inc,Consumer Discretionary,0.0,SELL
+QCOM:US,2,1,1,-24500.0,1,QUALCOMM Inc,Technology,0.5,SELL
+PFE:US,2,1,1,-24500.0,2,Pfizer Inc,Healthcare,0.5,SELL
+TGT:US,2,1,1,-24500.0,2,Target Corp,Consumer Staples,0.5,SELL
+SMFG:US,2,1,1,-24500.0,1,Sumitomo Mitsui Financial Group Inc,Financials,0.5,SELL
+XSP:US,4,0,4,-32000.0,1,CBOE MINI SPX INDEX,Financials,0.0,SELL
+ADSK:US,1,0,1,-32500.0,1,AUTODESK Inc,Technology,0.0,SELL
+RELX:US,1,0,1,-32500.0,1,RELX PLC,Industrials,0.0,SELL
+LOW:US,3,1,2,-32500.0,2,Lowe's Cos Inc,Consumer Discretionary,0.3333333333333333,SELL
+NVDA:US,5,2,3,-32500.0,3,NVIDIA Corporation,Technology,0.4,SELL
+DGX:US,1,0,1,-32500.0,1,Quest Diagnostics Inc,Healthcare,0.0,SELL
+DIS:US,3,1,2,-32500.0,3,The Walt Disney Co,Communication Services,0.3333333333333333,SELL
+ICLR:US,1,0,1,-32500.0,1,Icon PLC,Healthcare,0.0,SELL
+USB:US,1,0,1,-32500.0,1,U.S. Bancorp,Financials,0.0,SELL
+MSTR:US,1,0,1,-32500.0,1,MicroStrategy Inc,Technology,0.0,SELL
+TLH:US,1,0,1,-32500.0,1,iShares 10-20 Year Treasury Bond ETF,Financials,0.0,SELL
+SONY:US,1,0,1,-32500.0,1,Sony Group Corporation,Technology,0.0,SELL
+TJX:US,1,0,1,-32500.0,1,The TJX Companies Inc,Consumer Discretionary,0.0,SELL
+VZ:US,1,0,1,-32500.0,1,Verizon Communications Inc,Communication Services,0.0,SELL
+GOOGL:US,10,7,3,-35000.0,6,Alphabet Inc,Communication Services,0.7,SELL
+ACI:US,2,0,2,-40500.0,1,Albertsons Cos Inc,Consumer Staples,0.0,SELL
+ADBE:US,4,1,3,-40500.0,3,Adobe Inc,Technology,0.25,SELL
+PINS:US,2,0,2,-40500.0,1,Pinterest Inc,Communication Services,0.0,SELL
+MCD:US,2,0,2,-40500.0,2,McDonald's Corp,Consumer Discretionary,0.0,SELL
+HONA:US,2,0,2,-40500.0,2,HONEYWELL AEROSPACE INC,Industrials,0.0,SELL
+MDT:US,2,0,2,-40500.0,2,Medtronic PLC,Healthcare,0.0,SELL
+BA:US,2,0,2,-40500.0,1,Boeing Co,Industrials,0.0,SELL
+MODG:US,6,0,6,-48000.0,1,Topgolf Callaway Brands Corp,Industrials,0.0,SELL
+BLK:US,5,1,4,-48500.0,3,Blackrock Inc,Financials,0.2,SELL
+ABT:US,3,0,3,-48500.0,3,Abbott Laboratories,Healthcare,0.0,SELL
+ACN:US,4,0,4,-56500.0,2,Accenture PLC,Technology,0.0,SELL
+MSFT:US,7,3,4,-57000.0,5,Microsoft Corp,Technology,0.42857142857142855,SELL
+TENB:US,8,0,8,-64000.0,1,TENABLE HOLDINGS INC,Technology,0.0,SELL
+ZBH:US,5,0,5,-64500.0,1,Zimmer Biomet Holdings Inc,Healthcare,0.0,SELL
+CRM:US,4,1,3,-65000.0,3,salesforce.com Inc,Technology,0.25,SELL
+PG:US,5,2,3,-75000.0,4,The Procter & Gamble Co,Consumer Staples,0.4,SELL
+MCHP:US,3,1,2,-75000.0,1,Microchip Technology Inc,Technology,0.3333333333333333,SELL
+PEP:US,4,0,4,-81000.0,3,PepsiCo Inc,Consumer Staples,0.0,SELL
+HD:US,4,1,3,-83000.0,4,The Home Depot Inc,Consumer Discretionary,0.25,SELL
+COST:US,2,0,2,-83000.0,2,Costco Wholesale Corp,Consumer Staples,0.0,SELL
+T:US,3,1,2,-99500.0,2,AT&T Inc,Communication Services,0.3333333333333333,SELL
+AAPL:US,7,3,4,-175000.0,6,Apple Inc,Technology,0.42857142857142855,SELL
+TKNO:US,92,1,91,-965000.0,1,ALPHA TEKNOVA INC,Healthcare,0.010869565217391304,SELL
+TIC:US,4,0,4,-1332500.0,1,TIC SOLUTIONS INC,Industrials,0.0,SELL

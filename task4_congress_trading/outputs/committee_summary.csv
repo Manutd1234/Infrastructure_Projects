@@ -1,0 +1,16 @@
+committee,n_trades,n_buy,n_sell,n_politicians,total_size_low_usd
+Armed Services,112,46,66,5,1134000.0
+"Health, Education, Labor, and Pensions",96,1,95,2,236000.0
+Oversight and Accountability,69,37,32,2,216000.0
+Finance,16,16,0,1,1850000.0
+Ways and Means,15,0,15,3,134000.0
+Foreign Affairs,6,1,5,2,6000.0
+Homeland Security,5,2,3,2,5000.0
+"Agriculture, Nutrition, and Forestry",4,2,2,2,4000.0
+"Commerce, Science, and Transportation",4,0,4,1,865000.0
+Judiciary,3,0,3,1,17000.0
+Energy and Commerce,2,1,1,1,2000.0
+Veterans' Affairs,2,1,1,1,2000.0
+Agriculture,1,1,0,1,1000.0
+Environment and Public Works,1,0,1,1,1000.0
+Financial Services,1,0,1,1,1000.0
