@@ -90,6 +90,7 @@ export interface TradeQuery {
   politician_id?: string; ticker?: string; party?: string;
   trade_type?: string; aligned?: boolean;
   start_date?: string; end_date?: string; limit?: number; offset?: number;
+  [key: string]: unknown;
 }
 export interface Trade {
   trade_id: string; politician_id: string; politician: string; party: string;
