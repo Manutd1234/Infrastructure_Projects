@@ -1,0 +1,17 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+
+# Data caches (regenerable)
+task1_crypto_bull_cycle/cache/
+*.csv.bak
+
+# OS
+.DS_Store
+
+# IDE
+.vscode/
+.idea/
