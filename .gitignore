@@ -52,3 +52,4 @@ Thumbs.db
 # Build / generated
 docs/architecture/latency-bench.generated.json
 docs/whitepaper/*.pdf
+!docs/whitepaper/NUSSIF_Infrastructure_Projects_Whitepaper.pdf

@@ -127,11 +127,11 @@ export default function Crypto() {
   }, [simMetrics, simStopLoss]);
 
   const tabs: TabItem[] = [
-    { id: "breakouts", label: "+3σ Breakout Forward Study", icon: <TrendingUp className="text-amber-600" /> },
-    { id: "simulator", label: "Quant Strategy Simulator", icon: <Sliders className="text-blue-600" /> },
-    { id: "cycles", label: "Bull / Bear Cycle Episodes", icon: <Layers className="text-purple-600" />, badge: cycles?.length },
-    { id: "drawdowns", label: "Drawdown Severity & Recovery", icon: <TrendingDown className="text-rose-600" /> },
-    { id: "performance", label: "Strategy Backtest vs B&H", icon: <BarChart3 className="text-emerald-600" /> },
+    { id: "breakouts", label: "+3σ Breakout Study", icon: <TrendingUp className="text-amber-600" /> },
+    { id: "simulator", label: "Strategy Simulator", icon: <Sliders className="text-blue-600" /> },
+    { id: "cycles", label: "Cycle Episodes", icon: <Layers className="text-purple-600" />, badge: cycles?.length },
+    { id: "drawdowns", label: "Drawdown & Recovery", icon: <TrendingDown className="text-rose-600" /> },
+    { id: "performance", label: "Backtest vs B&H", icon: <BarChart3 className="text-emerald-600" /> },
   ];
 
   return (
@@ -189,10 +189,10 @@ export default function Crypto() {
         />
       </section>
 
-      {/* Subtab Navigation Ribbon */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-[var(--border)] pb-2.5">
+      {/* Subtab Navigation Ribbon - All 5 tabs visible in one line without clipping */}
+      <div className="flex flex-col xl:flex-row xl:items-center justify-between gap-3 border-b border-[var(--border)] pb-2.5">
         <Tabs tabs={tabs} activeTab={activeTab} onChange={setActiveTab} />
-        <div className="text-xs font-mono text-[var(--ink-muted)] hidden sm:flex items-center gap-2">
+        <div className="text-xs font-mono text-[var(--ink-muted)] hidden 2xl:flex items-center gap-2">
           <span>Breakouts: <strong className="text-amber-600 font-bold">{(breakouts ?? [])[0]?.n_breakouts ?? 38}</strong></span>
           <span>·</span>
           <span>Regimes: <strong className="text-purple-600 font-bold">{cycles?.length ?? 14}</strong></span>

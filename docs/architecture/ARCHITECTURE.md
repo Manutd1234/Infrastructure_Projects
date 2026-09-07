@@ -96,15 +96,18 @@ See `database/schema.sql` for DDL.
 ### 2.4 Frontend (`frontend/`)
 
 React + TypeScript + Vite + Tailwind. The dashboard is organised around the
-five operational surfaces a Trading Desk Operations Engineer needs:
+six operational surfaces an institutional desk engineer operates:
 
-1. **Overview** — pipeline health, last-run times, row counts, errors.
-2. **Crypto** — cycle chart, breakout table, drawdown chart, BTC vs SPY.
-3. **Filings** — sector rotation, fund heatmap, latest-quarter table.
-4. **Congress** — trade feed, consensus table, committee alignment.
-5. **Database** — raw table browser with filters.
+1. **Overview** — pipeline health telemetry, L1 market prices, row counts, and real-time audit logs.
+2. **Crypto Cycles** — 5 subtabs (`+3σ Breakout Study`, `Strategy Simulator`, `Cycle Episodes (48)`, `Drawdown & Recovery`, `Backtest vs B&H`).
+3. **13F Filings** — 3 subtabs (`Sector Allocation`, `Factor Replication`, `Top Holdings`) tracking 8 premier hedge funds.
+4. **Congress Trading** — 3 subtabs (`Macro Flows & Conflicts`, `CAR Event Strategy`, `Trade Feed`) evaluating STOCK Act alpha.
+5. **Scenario Stress Test (IBKR)** — 3 subtabs (`Scenarios`, `Tail Risk & Liquidity`, `Asset Decomposition`) modeling non-linear macro factor shocks.
+6. **Database Console** — 3 subtabs (`Console`, `Schema`, `Storage Engine`) with AST read-only sandboxing and harmonized Schema Explorer.
 
-See `product/PRODUCT_GUIDE.md` for the user-facing guide.
+### 2.5 Institutional Whitepaper (`docs/whitepaper/`)
+
+A 14-page publication-grade institutional research monograph (`NUSSIF_Infrastructure_Projects_Whitepaper.pdf`) compiled via native Typst, providing mathematical formalisms, Markov regime switching equations, Fama-French CAR event study proofs, and non-linear Taylor expansion models.
 
 ### 2.5 Notebooks (`notebooks/`)
 

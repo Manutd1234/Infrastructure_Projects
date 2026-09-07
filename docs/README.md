@@ -64,5 +64,5 @@ The institutional whitepaper is typeset with [Typst](https://typst.app):
 
 ```bash
 cd docs/whitepaper
-typst compile main.typ AlphaEngine_Institutional_Whitepaper.pdf
+typst compile main.typ NUSSIF_Infrastructure_Projects_Whitepaper.pdf
 ```

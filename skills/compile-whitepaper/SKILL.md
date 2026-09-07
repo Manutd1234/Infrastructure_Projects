@@ -19,7 +19,7 @@ Compile the Typst whitepaper in `docs/whitepaper/` to PDF.
 2. Compile:
    ```bash
    cd docs/whitepaper
-   typst compile main.typ AlphaEngine_Institutional_Whitepaper.pdf
+   typst compile main.typ NUSSIF_Infrastructure_Projects_Whitepaper.pdf
    ```
 
 3. Report the output path and file size. If compilation fails, show the

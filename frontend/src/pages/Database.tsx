@@ -283,7 +283,7 @@ export default function Database() {
                   <span className="pill pill-green text-[10px] font-mono font-bold">Snapshot Isolation</span>
                 </div>
                 <div className="p-2.5 rounded-lg bg-[var(--panel)] border border-[var(--border)] font-serif text-sm font-bold text-emerald-700 dark:text-emerald-400 text-center">
-                  R<sub>readers</sub> &parallel; W<sub>writer</sub> &implies; &empty; Contention
+                  R<sub>readers</sub> ∥ W<sub>writer</sub> ⟹ ∅ Contention
                 </div>
                 <p className="text-[11.5px] text-[var(--ink-secondary)] leading-relaxed">
                   WAL decouples reads from writers. Ingestion never blocks analytical queries.
@@ -296,7 +296,7 @@ export default function Database() {
                   <span className="pill pill-blue text-[10px] font-mono font-bold">Parser Guardrail</span>
                 </div>
                 <div className="p-2.5 rounded-lg bg-[var(--panel)] border border-[var(--border)] font-serif text-sm font-bold text-blue-700 dark:text-blue-400 text-center">
-                  Q<sub>valid</sub> = &#123; q &mid; Root(q) &isin; &#123;SELECT&#125; &#125;
+                  Q<sub>valid</sub> = &#123; q ∣ Root(q) ∈ &#123;SELECT&#125; &#125;
                 </div>
                 <p className="text-[11.5px] text-[var(--ink-secondary)] leading-relaxed">
                   Queries are validated via AST. Mutations (DROP, INSERT, UPDATE) are blocked.
@@ -309,7 +309,7 @@ export default function Database() {
                   <span className="pill pill-amber text-[10px] font-mono font-bold">O(log B)</span>
                 </div>
                 <div className="p-2.5 rounded-lg bg-[var(--panel)] border border-[var(--border)] font-serif text-sm font-bold text-amber-700 dark:text-amber-400 text-center">
-                  T<sub>query</sub> &le; O(log<sub>B</sub> N + k &middot; page_fetch)
+                  T<sub>query</sub> ≤ O(log<sub>B</sub> N + k · page_fetch)
                 </div>
                 <p className="text-[11.5px] text-[var(--ink-secondary)] leading-relaxed">
                   Clustered secondary indices ensure point and range scans finish under 3ms.
@@ -319,13 +319,13 @@ export default function Database() {
           </Card>
 
           {/* Main Grid: Schema Explorer on Left, Console on Right */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 w-full items-stretch">
-            {/* Left Column: Schema Tables Explorer (Col Span 4) - Stretches full height to eliminate empty space */}
-            <div className="lg:col-span-4 xl:col-span-4 flex flex-col h-full">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 w-full items-start">
+            {/* Left Column: Schema Tables Explorer (Col Span 4) - Harmonized bounded height */}
+            <div className="lg:col-span-4 xl:col-span-4 flex flex-col">
               <Card
                 title="Schema Explorer"
                 subtitle={`${filteredTables.length} / ${(tables ?? []).length} tables`}
-                className="flex-1 flex flex-col h-full"
+                className="flex flex-col shadow-xs"
               >
                 {/* Table Search Input */}
                 <div className="relative mb-3 shrink-0">
@@ -339,8 +339,8 @@ export default function Database() {
                   />
                 </div>
 
-                {/* Expanded Table List: Fills available vertical space down to the card bottom */}
-                <div className="flex-1 min-h-[360px] overflow-y-auto scrollbar-inst space-y-1.5 pr-1">
+                {/* Bounded Table List: Smooth scrollable container harmonized with right console height */}
+                <div className="max-h-[400px] overflow-y-auto scrollbar-inst space-y-1.5 pr-1">
                   {filteredTables.map((t) => (
                     <button
                       key={t.name}

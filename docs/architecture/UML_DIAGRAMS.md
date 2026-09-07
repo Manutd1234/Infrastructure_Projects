@@ -198,3 +198,65 @@ classDiagram
     Repository --> Settings
     Loader --> Settings
 ```
+
+## 7. Frontend Subtab Architecture & Component Tree
+
+```mermaid
+flowchart TD
+    App[App.tsx / Router] --> Layout[Dashboard Layout / Sidebar / Header]
+    Layout --> Views[6 Main Desk Views]
+    
+    subgraph Views
+        V1[Overview.tsx]
+        V2[Crypto.tsx]
+        V3[Filings.tsx]
+        V4[Congress.tsx]
+        V5[StressTest.tsx]
+        V6[Database.tsx]
+    end
+    
+    subgraph Subtabs["Unified Design System (Tabs.tsx)"]
+        Nav[".subtab-nav-bar (37.6px fixed height)"]
+        Btn[".subtab-btn (13px font-bold, uniform padding)"]
+        Active[".subtab-btn-active (elevated drop shadow, border #d0c4b2)"]
+        Badge[".subtab-badge (pill counts & metadata)"]
+    end
+    
+    V1 --> Subtabs
+    V2 --> Subtabs
+    V3 --> Subtabs
+    V4 --> Subtabs
+    V5 --> Subtabs
+    V6 --> Subtabs
+```
+
+## 8. Real-Time Telemetry & AST Guardrail Sequence
+
+```mermaid
+sequenceDiagram
+    participant Desk as Trading Desk Client
+    participant WS as WebSocket /ws/telemetry
+    participant API as FastAPI Router
+    participant AST as AST Syntax Parser
+    participant WAL as SQLite WAL Engine
+
+    par Live Tape Broadcast
+        loop Every 15 Seconds
+            API->>WS: Broadcast L1 Prices (BTC, SPY, QQQ, IWM)
+            WS-->>Desk: Render Cross-Asset Marquee
+        end
+    and Sandboxed Analytical Query
+        Desk->>API: POST /api/database/query { sql }
+        API->>AST: parse_query_tokens(sql)
+        alt Token is Mutation (DROP, INSERT, UPDATE)
+            AST-->>API: Reject Security Violation
+            API-->>Desk: 403 Forbidden ("Read-Only AST Enforcement")
+        else Token is Valid SELECT
+            AST-->>API: Query Approved
+            API->>WAL: Execute Query (Snapshot Isolation)
+            WAL-->>API: Row Tuples (<2.4ms)
+            API-->>Desk: JSON Result Rows + Latency Benchmark
+        end
+    end
+```
+
