@@ -1,6 +1,5 @@
 # Congress Trading Report
 
-**Owner:** Veon
 **Goal:** Assess whether structured trade data can be pulled from the House Clerk's disclosure site; if not, scrape Capitol Trades. Then build: a sector-rotation view, a consensus buy/sell signal, and a committee-relevance signal (e.g. Armed Services → defense, Energy → energy).
 
 ## Decision on data source

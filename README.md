@@ -1,76 +1,112 @@
 # NUSSIF Infrastructure Projects
 
-A collection of self-contained data-and-research pipelines maintained by the
-National University of Singapore Students' Investment Fund (NUSSIF). Each
-project lives in its own folder, has its own `README.md`, `requirements.txt`,
-and `main.py`, and can be run independently.
+A research-and-operations platform maintained by the National University
+of Singapore Students' Investment Fund (NUSSIF). It combines three
+quantitative data pipelines with a FastAPI backend, a SQLite database,
+and a React "Trading Desk Operations" dashboard.
 
-## Projects
+## What it does
 
-| Folder | Project | Owner | What it does |
-|---|---|---|---|
-| [`CryptoBullCycle/`](CryptoBullCycle) | Crypto Bull Cycle | Ting Xuan | BTC bull/bear cycle identification, +3σ weekly breakout drift study, drawdown analysis, SPY benchmark, and a generic backtesting engine. |
-| [`ThirteenFFilings/`](ThirteenFFilings) | 13F Filings | Siva | Dataroma scraper for 8 superinvestor funds, GICS sector classification, and sector-rotation charts across quarters. |
-| [`CongressTrading/`](CongressTrading) | Congress Trading | Veon | House disclosure feasibility report, Capitol Trades scraper, sector rotation, consensus buy/sell, and committee-relevance signals. |
+| Surface | What it gives you |
+|---|---|
+| **Data pipelines** (`data/pipelines/`) | BTC cycle + breakout study, 13F filings sector rotation, congress trading consensus + committee signals |
+| **Backend** (`backend/`) | FastAPI serving pipeline outputs as typed JSON |
+| **Database** (`database/`) | SQLite store mirroring the pipeline CSV contracts |
+| **Frontend** (`frontend/`) | React dashboard for a Trading Desk Operations Engineer |
+| **Notebooks** (`notebooks/`) | Exploratory analysis |
+| **Docs** (`docs/`) | Institutional documentation set |
+| **Skills** (`skills/`) | Cursor agent skills for common operations |
 
 ## Quickstart
 
-Each project is independent. From inside a project folder:
-
 ```bash
-pip install -r requirements.txt
-python main.py
+# 1. Python environment
+python -m venv .venv && source .venv/bin/activate
+pip install -r backend/requirements.txt
+pip install -r data/pipelines/*/requirements.txt
+
+# 2. Database
+python database/init_db.py
+
+# 3. Run pipelines and load their outputs into the DB
+python data/run_all.py
+python -m backend.loaders.ingest
+
+# 4. Backend (terminal 1)
+uvicorn backend.app.main:app --reload
+
+# 5. Frontend (terminal 2)
+cd frontend && npm install && npm run dev   # http://localhost:5173
 ```
 
-Outputs (CSV tables and PNG charts) are written to the project's `outputs/`
-subfolder. Raw HTML/price caches are written to `cache/` so re-runs are fast
-and polite to upstream data sources. Delete `cache/` to force a fresh pull.
+OpenAPI docs at `http://localhost:8000/docs`.
 
 ## Repository layout
 
 ```
 Infrastructure_Projects/
-├── CryptoBullCycle/        # BTC cycle + breakout backtest + SPY benchmark
-│   ├── backtest_engine.py
-│   ├── data_loader.py
-│   ├── cycle_analysis.py
-│   ├── drawdowns.py
-│   ├── breakout_backtest.py
-│   ├── spy_benchmark.py
-│   ├── main.py
-│   └── outputs/            # generated CSVs + charts
-├── ThirteenFFilings/       # Dataroma 13F scraper + sector rotation
-│   ├── funds.py
-│   ├── dataroma_scraper.py
-│   ├── sector_classifier.py
-│   ├── sector_rotation.py
-│   ├── main.py
-│   └── outputs/
-├── CongressTrading/        # Capitol Trades scraper + consensus + committees
-│   ├── house_disclosure_check.py
-│   ├── capitol_trades_scraper.py
-│   ├── sector_classifier.py
-│   ├── consensus.py
-│   ├── committee_signals.py
-│   ├── sector_rotation.py
-│   ├── main.py
-│   └── outputs/
-├── README.md              # this file
+├── data/
+│   ├── pipelines/
+│   │   ├── crypto_bull_cycle/      # BTC cycles, +3σ breakout study, drawdowns, backtest
+│   │   ├── thirteen_f_filings/     # Dataroma 13F scraper, GICS sectors, rotation charts
+│   │   └── congress_trading/      # Capitol Trades scraper, consensus, committee signals
+│   └── run_all.py
+├── backend/                        # FastAPI transport (no analytics)
+│   ├── app/
+│   ├── loaders/                    # CSV → SQLite
+│   └── requirements.txt
+├── frontend/                       # React + TS + Vite dashboard
+│   ├── src/
+│   └── package.json
+├── database/                       # SQLite schema + init
+│   ├── schema.sql
+│   └── init_db.py
+├── notebooks/                      # exploratory analysis
+├── docs/                           # institutional documentation
+│   ├── architecture/
+│   ├── engineering/
+│   ├── planning/
+│   ├── product/
+│   └── whitepaper/
+├── skills/                         # Cursor agent skills
+├── .env.example
+├── README.md
 ├── LICENSE
 └── .gitignore
 ```
 
+## Documentation
+
+Start in [`docs/`](docs/):
+
+- [`docs/README.md`](docs/README.md) — documentation map
+- [`docs/CURRENT_STATE.md`](docs/CURRENT_STATE.md) — live status
+- [`docs/architecture/ARCHITECTURE.md`](docs/architecture/ARCHITECTURE.md) — system design
+- [`docs/planning/PRD.md`](docs/planning/PRD.md) — product requirements
+- [`docs/product/PRODUCT_GUIDE.md`](docs/product/PRODUCT_GUIDE.md) — operator's manual
+
 ## Shared conventions
 
-- **Data sources** are pulled live on first run and cached locally; subsequent
-  runs read from cache. Delete the project's `cache/` folder to refresh.
-- **Sectors** use GICS sector names throughout (Technology, Financials,
-  Healthcare, Consumer Discretionary, Consumer Staples, Communication
-  Services, Industrials, Energy, Materials, Real Estate, Utilities).
-- **Backtesting** uses the generic engine in `CryptoBullCycle/backtest_engine.py`
-  (CAGR, Sharpe, Sortino, Calmar, max drawdown, win rate) — reusable for any
-  price-series strategy.
-- **Python 3.10+** with `pandas`, `numpy`, `matplotlib`, `requests`,
-  `beautifulsoup4`, `yfinance`, `scipy`.
+- **Pipelines are the source of truth.** All analytics live in
+  `data/pipelines/`; the backend and frontend are transport and
+  presentation only.
+- **Idempotent and cacheable.** Every pipeline can be re-run safely.
+  Network fetches are cached to `cache/` (gitignored); deleting the cache
+  forces a fresh pull.
+- **GICS sectors** throughout (Technology, Financials, Healthcare,
+  Consumer Discretionary, Consumer Staples, Communication Services,
+  Industrials, Energy, Materials, Real Estate, Utilities).
+- **SQLite first, Postgres-ready.** The schema is portable; swapping
+  only requires the connection string and a few column types.
+- **Python 3.10+** for pipelines and backend; **Node 18+** for frontend.
+- **No author attributions** in code or docs; history is in `git log`.
 
-See each project's `README.md` for methodology, results, and interpretation.
+## The three pipelines
+
+| Pipeline | Source | Question |
+|---|---|---|
+| `crypto_bull_cycle` | yfinance (BTC-USD, SPY) | Does BTC drift up after +3σ weekly breakouts? How long do cycles last and what are the drawdowns? |
+| `thirteen_f_filings` | Dataroma (8 funds) | How do superinvestors rotate sectors across quarters, and where are they concentrated today? |
+| `congress_trading` | Capitol Trades | Do politicians trade sectors their committees oversee? What is the per-ticker consensus? |
+
+See each pipeline's `README.md` for methodology and headline results.

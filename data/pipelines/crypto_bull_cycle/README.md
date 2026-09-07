@@ -1,6 +1,5 @@
 # Crypto Bull Cycle (BTC)
 
-**Owner:** Ting Xuan
 **Question:** Does Bitcoin exhibit positive post-breakout drift after a >+3σ weekly return, where σ is the preceding 60-day realised volatility scaled to a weekly horizon? Also: how long do bull and bear cycles last, and what are the drawdowns?
 
 ## What this folder does

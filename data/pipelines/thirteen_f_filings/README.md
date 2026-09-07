@@ -1,6 +1,5 @@
 # 13F Filings — Sector Rotation across Superinvestors
 
-**Owner:** Siva
 **Goal:** Scrape Dataroma for the 13F holdings of 8 hedge funds, classify each holding into a GICS sector, and plot sector rotation across quarters (Y-axis = sector weight, X-axis = quarter).
 
 ## Hedge funds covered

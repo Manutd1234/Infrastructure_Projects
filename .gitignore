@@ -2,18 +2,54 @@
 __pycache__/
 *.pyc
 *.pyo
+*.pyd
 .venv/
 venv/
+env/
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
 
-# Data caches (regenerable)
-CryptoBullCycle/cache/
-ThirteenFFilings/cache/
-CongressTrading/cache/
+# Data caches (regenerable — pipelines re-fetch on demand)
+data/pipelines/crypto_bull_cycle/cache/
+data/pipelines/thirteen_f_filings/cache/
+data/pipelines/congress_trading/congress_trades/cache/
+data/pipelines/congress_trading/cache/
+**/cache/
 *.csv.bak
+
+# Database (regenerable from pipeline outputs)
+database/nussif.db
+database/*.db-journal
+database/*.db-wal
+database/*.db-shm
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Frontend
+node_modules/
+frontend/dist/
+frontend/.vite/
+*.log
+npm-debug.log*
+
+# Notebooks
+.ipynb_checkpoints/
 
 # OS
 .DS_Store
+Thumbs.db
 
 # IDE
 .vscode/
 .idea/
+*.swp
+*.swo
+
+# Build / generated
+docs/architecture/latency-bench.generated.json
+docs/whitepaper/*.pdf
