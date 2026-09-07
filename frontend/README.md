@@ -55,11 +55,12 @@ See `docs/product/PRODUCT_GUIDE.md` for the operator's manual and
 
 ## Theme
 
-Dark by default (`dark` class on `<html>`). Tailwind tokens under the
-`desk-` prefix (`desk-bg`, `desk-panel`, `desk-border`, `desk-accent`,
-`desk-ok`, `desk-warn`, `desk-err`, `desk-muted`). The look is a
-Bloomberg-style terminal: dense tables, mono numbers, traffic-light
-status chips.
+Dark by default (`dark` class on `<html>`). A Bloomberg-terminal-meets-modern-SaaS
+aesthetic: glassmorphic panels over a subtle blue/violet radial-gradient
+backdrop, gradient-text headings, traffic-light status chips with glowing
+dots, gradient primary buttons, and a `⌘K` command palette for fast
+navigation. Tailwind tokens under the `desk-` prefix are retained for
+back-compat; the new look lives in `src/index.css`.
 
 ## State
 

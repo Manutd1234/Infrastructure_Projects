@@ -6,38 +6,117 @@
   color-scheme: dark;
 }
 
+html, body, #root {
+  height: 100%;
+}
+
 body {
-  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  font-family: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI",
+    Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  background:
+    radial-gradient(1200px 600px at 80% -10%, rgba(59, 130, 246, 0.12), transparent 60%),
+    radial-gradient(1000px 500px at 0% 100%, rgba(168, 85, 247, 0.10), transparent 55%),
+    #070a12;
+  background-attachment: fixed;
 }
 
+/* ---- Surfaces ---- */
 .panel {
-  @apply bg-desk-panel border border-desk-border rounded-lg p-4;
+  @apply bg-[#0f1422]/80 backdrop-blur-xl border border-white/[0.06] rounded-2xl
+         shadow-[0_1px_0_0_rgba(255,255,255,0.04)_inset,0_20px_40px_-20px_rgba(0,0,0,0.6)];
+}
+.panel-hover {
+  @apply panel transition-all duration-200 hover:border-white/[0.12] hover:shadow-[0_1px_0_0_rgba(255,255,255,0.06)_inset,0_30px_60px_-20px_rgba(0,0,0,0.7)];
 }
 
+/* ---- Chips ---- */
 .chip {
-  @apply inline-flex items-center gap-1.5 px-2 py-0.5 rounded text-xs font-medium;
+  @apply inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-[11px] font-semibold tracking-wide;
 }
-.chip-ok   { @apply chip bg-emerald-500/10 text-emerald-400; }
-.chip-warn { @apply chip bg-yellow-500/10 text-yellow-400; }
-.chip-err  { @apply chip bg-red-500/10 text-red-400; }
+.chip-ok   { @apply chip bg-emerald-500/15 text-emerald-300 ring-1 ring-emerald-500/20; }
+.chip-warn { @apply chip bg-amber-500/15 text-amber-300 ring-1 ring-amber-500/20; }
+.chip-err  { @apply chip bg-rose-500/15 text-rose-300 ring-1 ring-rose-500/20; }
+.chip-info { @apply chip bg-sky-500/15 text-sky-300 ring-1 ring-sky-500/20; }
+.chip-mute { @apply chip bg-white/5 text-slate-400 ring-1 ring-white/10; }
 
+.dot {
+  @apply inline-block w-1.5 h-1.5 rounded-full;
+}
+.dot-ok   { @apply dot bg-emerald-400 shadow-[0_0_8px] shadow-emerald-400/60; }
+.dot-warn { @apply dot bg-amber-400  shadow-[0_0_8px] shadow-amber-400/60; }
+.dot-err  { @apply dot bg-rose-400   shadow-[0_0_8px] shadow-rose-400/60; }
+
+/* ---- Buttons ---- */
+.btn {
+  @apply inline-flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm font-medium
+         border border-white/10 bg-white/[0.03] text-slate-200
+         hover:bg-white/[0.08] hover:border-white/20 transition-all duration-150
+         disabled:opacity-40 disabled:cursor-not-allowed;
+}
+.btn-primary {
+  @apply inline-flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm font-semibold
+         text-white border border-transparent
+         bg-gradient-to-b from-blue-500 to-blue-600
+         hover:from-blue-400 hover:to-blue-500
+         shadow-[0_8px_20px_-8px_rgba(59,130,246,0.6)] transition-all duration-150
+         disabled:opacity-40 disabled:cursor-not-allowed;
+}
+.btn-ghost {
+  @apply inline-flex items-center gap-2 px-2.5 py-1.5 rounded-lg text-sm font-medium
+         text-slate-400 hover:text-slate-100 hover:bg-white/5 transition-colors;
+}
+
+/* ---- Tables ---- */
 table.data {
   @apply w-full text-sm;
 }
 table.data th {
-  @apply text-left text-desk-muted font-medium px-3 py-2 border-b border-desk-border;
+  @apply text-left text-[11px] uppercase tracking-wider text-slate-500
+         font-semibold px-3 py-2.5 border-b border-white/5;
 }
 table.data td {
-  @apply px-3 py-2 border-b border-desk-border;
+  @apply px-3 py-2.5 border-b border-white/5 text-slate-300;
 }
-table.data tr:hover td {
-  @apply bg-white/5;
+table.data tbody tr {
+  @apply transition-colors;
+}
+table.data tbody tr:hover td {
+  @apply bg-white/[0.03];
 }
 
-.btn {
-  @apply px-3 py-1.5 rounded text-sm font-medium border border-desk-border
-         bg-desk-panel hover:bg-white/5 transition-colors disabled:opacity-50;
+/* ---- Inputs ---- */
+.input {
+  @apply px-3 py-1.5 rounded-lg text-sm bg-white/[0.03] border border-white/10
+         text-slate-100 placeholder:text-slate-500
+         focus:outline-none focus:border-blue-500/60 focus:ring-2 focus:ring-blue-500/20
+         transition-all;
 }
-.btn-primary {
-  @apply btn bg-desk-accent text-white border-desk-accent hover:bg-blue-600;
+
+/* ---- Misc ---- */
+.kbd {
+  @apply inline-flex items-center justify-center min-w-[1.4rem] h-5 px-1.5
+         rounded border border-white/10 bg-white/5 text-[10px] font-mono text-slate-400;
 }
+.gradient-text {
+  background: linear-gradient(120deg, #60a5fa, #a78bfa 50%, #f472b6);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.scrollbar-thin::-webkit-scrollbar { width: 8px; height: 8px; }
+.scrollbar-thin::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.08); border-radius: 8px; }
+.scrollbar-thin::-webkit-scrollbar-track { background: transparent; }
+
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-in { animation: fade-in 0.25s ease-out both; }
+
+@keyframes pulse-soft {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+.animate-pulse-soft { animation: pulse-soft 1.6s ease-in-out infinite; }
