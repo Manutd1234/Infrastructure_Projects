@@ -1,0 +1,10 @@
+{
+  "n_bear_markets": 23,
+  "n_bull_markets": 25,
+  "avg_bear_duration_days": 61.30434782608695,
+  "avg_bull_duration_days": 109.12,
+  "avg_bear_return": -0.37879839368729185,
+  "avg_bull_return": 1.605953959209445,
+  "max_bear_drawdown": -0.6596305306727088,
+  "max_bull_return": 11.775329773341792
+}
