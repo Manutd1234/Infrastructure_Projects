@@ -7,6 +7,7 @@ import {
 import { api, PipelineRun } from "../lib/api";
 import { Card } from "../components/Card";
 import { StatCard } from "../components/StatCard";
+import { Tabs, TabItem } from "../components/Tabs";
 import { TableSkeleton, EmptyState } from "../components/Skeleton";
 import { Drawer } from "../components/Drawer";
 import { useToast } from "../components/Toast";
@@ -227,21 +228,27 @@ export default function Overview() {
     },
   ];
 
+  const subtabs: TabItem[] = [
+    { id: "overview", label: "Overview", icon: <Activity className="text-blue-600 dark:text-blue-400" /> },
+    { id: "pipelines", label: "Pipelines", icon: <Cpu className="text-purple-600 dark:text-purple-400" />, badge: 3 },
+    { id: "audit", label: "Audit Logs", icon: <Database className="text-amber-600 dark:text-amber-400" />, badge: (runs ?? []).length },
+  ];
+
   return (
     <div className="space-y-6 w-full pb-8">
-      <header className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4 pb-4 border-b border-[var(--border)]">
+      <header className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 pb-4 border-b border-[var(--border)]">
         <div>
           <div className="flex items-center gap-2 mb-1.5">
-            <span className="pill pill-blue text-xs font-mono font-bold py-0.5 px-2">
-              <Activity className="w-3.5 h-3.5 mr-1" />
+            <span className="pill pill-blue text-[11.5px] font-mono font-bold py-0.5 px-2.5">
+              <Activity className="w-3.5 h-3.5 mr-1.5" />
               DESK V1.0 · ETL DISPATCHER
             </span>
             <span className="text-xs text-[var(--ink-muted)] font-semibold">Microstructure &amp; Analytics</span>
           </div>
-          <h1 className="text-2xl sm:text-3xl font-black tracking-tight text-[var(--ink)]">
+          <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-[var(--ink)]">
             Trading Desk Overview
           </h1>
-          <p className="text-xs sm:text-sm text-[var(--ink-secondary)] mt-1 max-w-2xl leading-relaxed">
+          <p className="text-xs sm:text-sm text-[var(--ink-secondary)] mt-1 max-w-3xl leading-relaxed">
             Real-time microstructure telemetry, pipeline controls, and cross-asset factor analytics.
           </p>
         </div>
@@ -287,46 +294,16 @@ export default function Overview() {
       </header>
 
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-[var(--border)] pb-2.5">
-        <div className="flex flex-wrap items-center gap-2 p-1 rounded-xl bg-[var(--bg-subtle)] border border-[var(--border)]">
-          <button
-            onClick={() => setActiveSubtab("overview")}
-            className={`px-3.5 py-1.5 text-xs sm:text-sm font-bold rounded-lg transition-all flex items-center gap-2 ${
-              activeSubtab === "overview"
-                ? "bg-white dark:bg-stone-800 text-[var(--ink)] shadow-xs border border-[var(--border)]"
-                : "text-[var(--ink-secondary)] hover:text-[var(--ink)]"
-            }`}
-          >
-            <Activity className="w-4 h-4 text-blue-600 dark:text-blue-400" />
-            <span>Overview</span>
-          </button>
-          <button
-            onClick={() => setActiveSubtab("pipelines")}
-            className={`px-3.5 py-1.5 text-xs sm:text-sm font-bold rounded-lg transition-all flex items-center gap-2 ${
-              activeSubtab === "pipelines"
-                ? "bg-white dark:bg-stone-800 text-[var(--ink)] shadow-xs border border-[var(--border)]"
-                : "text-[var(--ink-secondary)] hover:text-[var(--ink)]"
-            }`}
-          >
-            <Cpu className="w-4 h-4 text-purple-600 dark:text-purple-400" />
-            <span>Pipelines</span>
-            <span className="pill pill-neutral text-xs font-mono py-0 px-1.5">3</span>
-          </button>
-          <button
-            onClick={() => setActiveSubtab("audit")}
-            className={`px-3.5 py-1.5 text-xs sm:text-sm font-bold rounded-lg transition-all flex items-center gap-2 ${
-              activeSubtab === "audit"
-                ? "bg-white dark:bg-stone-800 text-[var(--ink)] shadow-xs border border-[var(--border)]"
-                : "text-[var(--ink-secondary)] hover:text-[var(--ink)]"
-            }`}
-          >
-            <Database className="w-4 h-4 text-amber-600 dark:text-amber-400" />
-            <span>Audit Logs</span>
-            <span className="pill pill-neutral text-xs font-mono py-0 px-1.5">{(runs ?? []).length}</span>
-          </button>
-        </div>
+        <Tabs
+          tabs={subtabs}
+          activeTab={activeSubtab}
+          onChange={(id) => setActiveSubtab(id as "overview" | "pipelines" | "audit")}
+        />
 
-        <div className="text-xs text-[var(--ink-muted)] font-mono hidden md:block">
-          Latency: <span className="text-emerald-600 font-bold">&lt; 2.4ms</span>
+        <div className="text-xs text-[var(--ink-muted)] font-mono hidden sm:flex items-center gap-2">
+          <span>Latency: <strong className="text-emerald-600 font-bold">&lt; 2.4ms</strong></span>
+          <span>·</span>
+          <span>Telemetry: <strong className="text-[var(--ink)] font-bold">Synchronized</strong></span>
         </div>
       </div>
 
@@ -494,11 +471,11 @@ export default function Overview() {
           <div className="space-y-3">
             <div className="flex items-center justify-between">
               <div>
-                <h2 className="text-xs font-bold uppercase tracking-wider text-[var(--ink-muted)] flex items-center gap-1.5">
-                  <Cpu className="w-3.5 h-3.5 text-blue-600" />
+                <h2 className="text-base sm:text-lg font-bold text-[var(--ink)] tracking-tight flex items-center gap-2">
+                  <Cpu className="w-4 h-4 text-blue-600" />
                   <span>Quantitative Strategy Matrix</span>
                 </h2>
-                <p className="text-xs text-[var(--ink-secondary)] mt-0.5">
+                <p className="text-xs sm:text-sm text-[var(--ink-secondary)] mt-0.5">
                   Systematic factors, Sharpe ratios, win rates, and live allocations.
                 </p>
               </div>
@@ -810,15 +787,15 @@ export default function Overview() {
                   />
                 </div>
 
-                <div className="flex items-center gap-1.5 p-1 rounded-xl bg-[var(--bg-subtle)] border border-[var(--border)] text-xs">
+                <div className="filter-segmented-bar text-xs">
                   {["ALL", "SUCCEEDED", "FAILED"].map((st) => (
                     <button
                       key={st}
                       onClick={() => setStatusFilter(st)}
-                      className={`px-3 py-1 rounded-lg text-xs font-bold transition-all ${
+                      className={`filter-segmented-btn uppercase tracking-wider ${
                         statusFilter === st
-                          ? "bg-white dark:bg-stone-800 text-[var(--ink)] shadow-xs border border-[var(--border)]"
-                          : "text-[var(--ink-muted)] hover:text-[var(--ink)]"
+                          ? "filter-segmented-btn-active"
+                          : "filter-segmented-btn-inactive"
                       }`}
                     >
                       {st}
