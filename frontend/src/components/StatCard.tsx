@@ -1,39 +1,82 @@
 import { ReactNode } from "react";
+import { TrendingUp, TrendingDown, Minus } from "lucide-react";
 
 export function StatCard({
-  label, value, sub, trend, icon, accent = "blue", className = "",
+  label,
+  value,
+  sub,
+  trend,
+  trendValue,
+  icon,
+  accent = "blue",
+  badge,
+  className = "",
 }: {
   label: string;
   value: ReactNode;
   sub?: ReactNode;
   trend?: "up" | "down" | "flat";
+  trendValue?: string;
   icon?: ReactNode;
   accent?: "blue" | "emerald" | "amber" | "rose" | "violet";
+  badge?: ReactNode;
   className?: string;
 }) {
-  const ring: Record<string, string> = {
-    blue: "from-sky-400/45 to-sky-400/0 text-sky-200",
-    emerald: "from-emerald-400/45 to-emerald-400/0 text-emerald-200",
-    amber: "from-amber-300/50 to-amber-300/0 text-amber-100",
-    rose: "from-rose-400/45 to-rose-400/0 text-rose-200",
-    violet: "from-fuchsia-400/45 to-fuchsia-400/0 text-fuchsia-200",
+  const accentBorder: Record<string, string> = {
+    blue: "border-l-[4px] border-l-blue-600 dark:border-l-blue-400",
+    emerald: "border-l-[4px] border-l-emerald-600 dark:border-l-emerald-400",
+    amber: "border-l-[4px] border-l-amber-500 dark:border-l-amber-400",
+    rose: "border-l-[4px] border-l-rose-500 dark:border-l-rose-400",
+    violet: "border-l-[4px] border-l-purple-600 dark:border-l-purple-400",
   };
-  const trendColor =
-    trend === "up" ? "text-emerald-300" : trend === "down" ? "text-rose-300" : "text-slate-300";
-  const trendArrow = trend === "up" ? "▲" : trend === "down" ? "▼" : "■";
 
   return (
-    <div className={`panel-hover p-5 relative overflow-hidden ${className}`}>
-      <div className={`absolute -top-10 -right-6 w-36 h-36 rounded-full bg-gradient-to-b ${ring[accent]} blur-2xl pointer-events-none`} />
-      <div className="flex items-center justify-between relative">
-        <span className="text-[11px] uppercase tracking-wider text-sky-100/80 font-semibold">{label}</span>
-        {icon && <span className={`text-lg ${ring[accent].split(" ").pop()}`}>{icon}</span>}
+    <div
+      className={`panel-card-hover p-4 sm:p-5 flex flex-col justify-between ${accentBorder[accent] || ""} ${className}`}
+    >
+      <div>
+        <div className="flex items-center justify-between gap-2 mb-2.5">
+          <span className="text-xs lg:text-[13px] uppercase tracking-wider text-[var(--ink-muted)] font-extrabold">
+            {label}
+          </span>
+          <div className="flex items-center gap-2 shrink-0">
+            {badge}
+            {icon && (
+              <div className="w-7 h-7 rounded-lg bg-[var(--bg-subtle)] border border-[var(--border)] flex items-center justify-center text-[var(--ink-secondary)]">
+                {icon}
+              </div>
+            )}
+          </div>
+        </div>
+
+        <div className="flex items-baseline justify-between gap-2">
+          <div className="text-2xl sm:text-3xl font-black text-[var(--ink)] tracking-tight font-sans tabular-nums">
+            {value}
+          </div>
+          {trendValue && (
+            <span
+              className={`pill text-xs font-extrabold ${
+                trend === "up"
+                  ? "pill-green"
+                  : trend === "down"
+                  ? "pill-rose"
+                  : "pill-neutral"
+              }`}
+            >
+              {trend === "up" && <TrendingUp className="w-3.5 h-3.5 mr-0.5" />}
+              {trend === "down" && <TrendingDown className="w-3.5 h-3.5 mr-0.5" />}
+              {trend === "flat" && <Minus className="w-3.5 h-3.5 mr-0.5" />}
+              {trendValue}
+            </span>
+          )}
+        </div>
       </div>
-      <div className="mt-3 text-3xl font-bold text-white tabular-nums tracking-tight">{value}</div>
-      <div className="mt-1.5 flex items-center gap-2 text-xs">
-        {trend && <span className={trendColor}>{trendArrow}</span>}
-        {sub && <span className="text-slate-200">{sub}</span>}
-      </div>
+
+      {sub && (
+        <div className="mt-3 pt-2.5 border-t border-[var(--border-subtle)] text-xs sm:text-[13px] text-[var(--ink-secondary)] font-semibold flex items-center justify-between">
+          <span>{sub}</span>
+        </div>
+      )}
     </div>
   );
 }
