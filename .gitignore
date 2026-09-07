@@ -6,9 +6,9 @@ __pycache__/
 venv/
 
 # Data caches (regenerable)
-task1_crypto_bull_cycle/cache/
-task3_13f_filings/cache/
-task4_congress_trading/cache/
+CryptoBullCycle/cache/
+ThirteenFFilings/cache/
+CongressTrading/cache/
 *.csv.bak
 
 # OS

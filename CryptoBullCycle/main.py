@@ -1,4 +1,4 @@
-"""Main runner for Task 1: Crypto Bull Cycle.
+"""Main runner for the Crypto Bull Cycle project.
 
 Produces:
   outputs/cycles.csv             - bull/bear cycle table

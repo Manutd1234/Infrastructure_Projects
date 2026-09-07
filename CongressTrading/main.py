@@ -1,4 +1,4 @@
-"""Main runner for Task 4: Congress Trading Report.
+"""Main runner for the Congress Trading project.
 
 Pipeline:
   1. Assess feasibility of disclosures-clerk.house.gov (writes markdown report).

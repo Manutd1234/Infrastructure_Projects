@@ -1,4 +1,4 @@
-"""Main runner for Task 3: 13F Filings sector rotation.
+"""Main runner for the 13F Filings sector-rotation project.
 
 Pipeline:
   1. Scrape Dataroma portfolio history for the 8 target hedge funds

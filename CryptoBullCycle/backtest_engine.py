@@ -1,10 +1,10 @@
 """Generic backtesting engine for price-series strategies.
 
-This module is task-agnostic: feed it a price series and a signal/position
+This module is strategy-agnostic: feed it a price series and a signal/position
 generator, and it produces an equity curve plus a full performance report
 (CAGR, Sharpe, Sortino, Calmar, max drawdown, drawdown duration, win rate).
 
-It is reused by the crypto breakout study (Task 1) and can be reused for
+It is reused by the crypto breakout study and can be reused for
 any of the other infrastructure projects.
 """
 

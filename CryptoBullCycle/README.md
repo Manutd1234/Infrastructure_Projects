@@ -1,4 +1,4 @@
-# Task 1 — Crypto Bull Cycle (BTC)
+# Crypto Bull Cycle (BTC)
 
 **Owner:** Ting Xuan
 **Question:** Does Bitcoin exhibit positive post-breakout drift after a >+3σ weekly return, where σ is the preceding 60-day realised volatility scaled to a weekly horizon? Also: how long do bull and bear cycles last, and what are the drawdowns?
@@ -12,7 +12,7 @@
 | `drawdowns.py` | Drawdown series, top-N deepest drawdowns with peak/trough/recovery dates and durations. |
 | `breakout_backtest.py` | The core study: computes 60-day realised vol scaled to a weekly horizon, finds >+3σ weekly breakouts, measures forward 30/60/120/365-day returns, runs a t-test vs. the unconditional baseline, and backtests a "hold 30 days after breakout" strategy. |
 | `spy_benchmark.py` | SPY comparison: correlation, rolling 90-day correlation, CAGR, max drawdown. |
-| `backtest_engine.py` | Generic long-only backtester (CAGR, Sharpe, Sortino, Calmar, max DD, win rate). Reused across tasks. |
+| `backtest_engine.py` | Generic long-only backtester (CAGR, Sharpe, Sortino, Calmar, max DD, win rate). Reusable across projects. |
 | `main.py` | Runs everything and writes CSVs + charts to `outputs/`. |
 
 ## How to run

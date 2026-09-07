@@ -2,7 +2,8 @@
 
 Provides the drawdown series, max drawdown, drawdown duration, and a list of
 the deepest drawdowns (useful for the stress-test style "list the drawdowns"
-view requested in Task 1 / Task 2).
+view requested for the crypto cycle / stress-test style "list the drawdowns"
+analysis).
 """
 
 from __future__ import annotations

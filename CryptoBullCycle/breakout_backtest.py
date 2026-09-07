@@ -1,4 +1,4 @@
-"""3-sigma weekly breakout drift study (Task 1 core).
+"""3-sigma weekly breakout drift study (the core of the Crypto Bull Cycle project).
 
 Hypothesis
 ----------
