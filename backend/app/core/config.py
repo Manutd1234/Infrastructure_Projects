@@ -17,7 +17,7 @@ class Settings(BaseSettings):
 
     database_url: str = f"sqlite:///{REPO_ROOT / 'database' / 'nussif.db'}"
     pipelines_dir: Path = REPO_ROOT
-    enable_run_endpoint: bool = False
+    enable_run_endpoint: bool = True
     run_timeout_seconds: int = 600
     cors_origins: str = "http://localhost:5173,http://127.0.0.1:5173"
     log_level: str = "INFO"

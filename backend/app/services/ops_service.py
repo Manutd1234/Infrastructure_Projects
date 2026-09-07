@@ -6,6 +6,7 @@ Triggers pipelines as subprocesses and records runs in pipeline_runs.
 from __future__ import annotations
 
 import subprocess
+import sys
 import threading
 import time
 from pathlib import Path
@@ -35,9 +36,16 @@ def get_latest(pipeline: str) -> dict | None:
 def _run_pipeline(pipeline: str, run_id: int) -> None:
     """Execute the pipeline subprocess and update the run row. Runs in a thread."""
     pipeline_dir = settings.pipelines_dir / pipeline
+    table_map = {
+        "CryptoCycle": "crypto_cycles",
+        "HedgeFund13F": "sector_weights",
+        "CongressTrades": "congress_trades",
+    }
+    target_table = table_map.get(pipeline, "pipeline_runs")
+
     try:
         proc = subprocess.run(
-            ["python", "main.py"],
+            [sys.executable, "main.py"],
             cwd=str(pipeline_dir),
             capture_output=True,
             text=True,
@@ -45,9 +53,9 @@ def _run_pipeline(pipeline: str, run_id: int) -> None:
         )
         if proc.returncode == 0:
             execute(
-                "UPDATE pipeline_runs SET status='SUCCEEDED', ended_at=?, "
-                "rows_produced=(SELECT COUNT(*) FROM congress_trades) "
-                "WHERE id=?",
+                f"UPDATE pipeline_runs SET status='SUCCEEDED', ended_at=?, "
+                f"rows_produced=(SELECT COUNT(*) FROM {target_table}) "
+                f"WHERE id=?",
                 [time.strftime("%Y-%m-%dT%H:%M:%S"), run_id],
             )
         else:
