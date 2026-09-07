@@ -19,18 +19,12 @@ class Settings(BaseSettings):
     pipelines_dir: Path = REPO_ROOT
     enable_run_endpoint: bool = False
     run_timeout_seconds: int = 600
-    cors_origins: list[str] = ["http://localhost:5173", "http://127.0.0.1:5173"]
+    cors_origins: str = "http://localhost:5173,http://127.0.0.1:5173"
     log_level: str = "INFO"
 
-    @field_validator("cors_origins", mode="before")
-    @classmethod
-    def split_origins(cls, v):
-        if isinstance(v, str):
-            v = v.strip()
-            if v.startswith("["):
-                return v
-            return [part.strip() for part in v.split(",") if part.strip()]
-        return v
+    @property
+    def cors_origin_list(self) -> list[str]:
+        return [part.strip() for part in self.cors_origins.split(",") if part.strip()]
 
     @field_validator("pipelines_dir", mode="before")
     @classmethod

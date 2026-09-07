@@ -13,8 +13,9 @@ dashboard.
 | [`HedgeFund13F/`](HedgeFund13F) | How do superinvestors rotate GICS sectors? | Dataroma 13F history | **None** |
 | [`CongressTrades/`](CongressTrades) | Do politicians trade sectors their committees oversee? | Capitol Trades | **None** |
 
-No paid market-data or LLM keys are required. Copy `.env.example` to
-`.env` if you want to change ports or enable dashboard-triggered runs.
+Massive is optional but recommended. Set `MASSIVE_API` (or `MASSIVE_API_KEY`)
+in `.env` to pull BTC/SPY bars and SIC sectors from Massive; yfinance is
+the fallback when the key is missing. Never commit the key.
 
 ## Quickstart
 

@@ -7,9 +7,9 @@ import { TableSkeleton, EmptyState } from "../components/Skeleton";
 const PIPELINES = ["CryptoCycle", "HedgeFund13F", "CongressTrades"];
 
 const PIPELINE_META: Record<string, { label: string; source: string; accent: "blue" | "emerald" | "amber" | "rose" | "violet" }> = {
-  CryptoCycle:     { label: "Crypto Cycle",     source: "yfinance · BTC, SPY", accent: "amber" },
-  HedgeFund13F:    { label: "Hedge Fund 13F",   source: "Dataroma · 8 funds",  accent: "blue" },
-  CongressTrades:  { label: "Congress Trades",  source: "Capitol Trades",      accent: "violet" },
+  CryptoCycle:     { label: "Crypto Cycle",     source: "Massive · BTC, SPY",     accent: "amber" },
+  HedgeFund13F:    { label: "Hedge Fund 13F",   source: "Dataroma + Massive SIC", accent: "blue" },
+  CongressTrades:  { label: "Congress Trades",  source: "Capitol Trades + Massive", accent: "violet" },
 };
 
 function statusChip(status: string) {
@@ -40,6 +40,17 @@ export default function Overview() {
     refetchInterval: 5_000,
   });
 
+  const { data: massive } = useQuery({
+    queryKey: ["massive"],
+    queryFn: api.marketStatus,
+    refetchInterval: 30_000,
+  });
+  const { data: quotes } = useQuery({
+    queryKey: ["quotes"],
+    queryFn: api.quotes,
+    refetchInterval: 30_000,
+  });
+
   const latest = latestPerPipeline(runs ?? []);
   const succeeded = (runs ?? []).filter((r) => r.status === "SUCCEEDED").length;
   const failed = (runs ?? []).filter((r) => r.status === "FAILED").length;
@@ -53,7 +64,7 @@ export default function Overview() {
             <span className="gradient-text">Trading Desk</span> Overview
           </h1>
           <p className="text-slate-500 text-sm mt-1">
-            Pipeline health, freshness, and recent activity. Status chips refresh every 5s.
+            Pipeline health, Massive market tape, and recent activity. Status chips refresh every 5s.
           </p>
         </div>
         <div className="text-right text-xs text-slate-500">
@@ -62,6 +73,30 @@ export default function Overview() {
         </div>
       </header>
 
+      <section className="panel p-4 flex items-center justify-between gap-4">
+        <div className="flex items-center gap-3">
+          <span className="text-[11px] uppercase tracking-wider text-slate-500 font-semibold">Massive</span>
+          {massive?.ok ? (
+            <span className="chip-ok"><span className="dot-ok" />Connected</span>
+          ) : massive?.configured ? (
+            <span className="chip-warn"><span className="dot-warn" />Key set · request failed</span>
+          ) : (
+            <span className="chip-err"><span className="dot-err" />Not configured</span>
+          )}
+          <span className="text-xs text-slate-500">{massive?.detail ?? "checking…"}</span>
+        </div>
+        <div className="flex items-center gap-4 overflow-x-auto">
+          {(quotes ?? []).map((q) => (
+            <div key={q.ticker} className="text-right min-w-[5.5rem]">
+              <div className="text-[10px] uppercase tracking-wider text-slate-500">{q.ticker.replace("X:", "")}</div>
+              <div className="font-mono text-sm text-slate-100 tabular-nums">
+                {q.close != null ? q.close.toLocaleString(undefined, { maximumFractionDigits: 2 }) : "—"}
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
       {/* KPI strip */}
       <section className="grid grid-cols-4 gap-4">
         <StatCard label="Active modules" value={PIPELINES.length} sub="of 3 tracked" accent="blue" />
@@ -69,9 +104,9 @@ export default function Overview() {
         <StatCard label="Rows produced" value={totalRows.toLocaleString()} sub="across all runs" trend="up" accent="violet" />
         <StatCard
           label="Data freshness"
-          value={PIPELINES.every((p) => freshness(latest.get(p)?.status ?? "FAILED", latest.get(p)?.started_at ?? "1970") === "ok") ? "Fresh" : "Stale")}
+          value={PIPELINES.every((p) => freshness(latest.get(p)?.status ?? "FAILED", latest.get(p)?.started_at ?? "1970") === "ok") ? "Fresh" : "Stale"}
           sub="last 24h"
-          accent={PIPELINES.every((p) => freshness(latest.get(p)?.status ?? "FAILED", latest.get(p)?.started_at ?? "1970") === "ok") ? "emerald" : "amber")}
+          accent={PIPELINES.every((p) => freshness(latest.get(p)?.status ?? "FAILED", latest.get(p)?.started_at ?? "1970") === "ok") ? "emerald" : "amber"}
         />
       </section>
 

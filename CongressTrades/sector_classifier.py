@@ -7,11 +7,18 @@ curated fallback + yfinance. Results are cached to `cache/sectors.csv`.
 
 from __future__ import annotations
 
+import sys
 import time
 from pathlib import Path
 
 import pandas as pd
 import yfinance as yf
+
+REPO_ROOT = Path(__file__).resolve().parents[1]
+if str(REPO_ROOT) not in sys.path:
+    sys.path.insert(0, str(REPO_ROOT))
+
+from shared.massive import configured as massive_configured, massive_sector
 
 CACHE_DIR = Path(__file__).parent / "cache"
 CACHE_DIR.mkdir(exist_ok=True)
@@ -155,14 +162,15 @@ def classify(tickers: list[str], use_yfinance: bool = True, sleep: float = 0.15)
             out[t] = cached
         else:
             to_fetch.append((t, base))
-    if use_yfinance and to_fetch:
-        print(f"  fetching sectors from yfinance for {len(to_fetch)} unknown tickers ...")
+    if to_fetch and (use_yfinance or massive_configured()):
+        print(f"  fetching sectors (Massive then yfinance) for {len(to_fetch)} unknown tickers ...")
         new_rows = []
         for t, base in to_fetch:
-            sec = _yfinance_sector(base)
-            time.sleep(sleep)
-            if not sec:
-                sec = "Unknown"
+            sec = massive_sector(base) if massive_configured() else None
+            if (not sec or sec == "Unknown") and use_yfinance:
+                sec = _yfinance_sector(base)
+                time.sleep(sleep)
+            sec = sec or "Unknown"
             out[t] = sec
             known[base] = sec
             new_rows.append({"ticker": base, "sector": sec})

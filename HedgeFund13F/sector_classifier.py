@@ -1,8 +1,7 @@
 """Sector classifier for stock tickers.
 
-Primary source: yfinance `Ticker.info['sector']` (GICS sector).
-Fallback: a hand-curated mapping for the most common superinvestor holdings
-so we don't depend on the network for well-known names.
+Primary source: Massive ticker overview (SIC → GICS) when MASSIVE_API is set.
+Then yfinance `Ticker.info['sector']`. Then the curated fallback.
 
 Results are cached to `cache/sectors.csv` so re-runs are instant and we only
 hit yfinance for tickers we have never seen before.
@@ -10,11 +9,18 @@ hit yfinance for tickers we have never seen before.
 
 from __future__ import annotations
 
+import sys
 import time
 from pathlib import Path
 
 import pandas as pd
 import yfinance as yf
+
+REPO_ROOT = Path(__file__).resolve().parents[1]
+if str(REPO_ROOT) not in sys.path:
+    sys.path.insert(0, str(REPO_ROOT))
+
+from shared.massive import configured as massive_configured, massive_sector
 
 CACHE_DIR = Path(__file__).parent / "cache"
 CACHE_DIR.mkdir(exist_ok=True)
@@ -242,15 +248,16 @@ def classify(tickers: list[str], use_yfinance: bool = True, sleep: float = 0.2) 
                 out[t] = known[base]
             else:
                 to_fetch.append(t)
-    if use_yfinance and to_fetch:
-        print(f"  fetching sectors from yfinance for {len(to_fetch)} unknown tickers ...")
+    if to_fetch and (use_yfinance or massive_configured()):
+        print(f"  fetching sectors (Massive then yfinance) for {len(to_fetch)} unknown tickers ...")
         for t in to_fetch:
-            sec = _yfinance_sector(t)
-            time.sleep(sleep)
-            if sec:
-                out[t] = sec
-            else:
-                out[t] = "Unknown"
+            sec = None
+            if massive_configured():
+                sec = massive_sector(t.replace("-OLD", ""))
+            if (not sec or sec == "Unknown") and use_yfinance:
+                sec = _yfinance_sector(t)
+                time.sleep(sleep)
+            out[t] = sec or "Unknown"
             known[t] = out[t]
         _save_cache(pd.DataFrame(
             [{"ticker": k, "sector": v} for k, v in known.items() if isinstance(v, str)]

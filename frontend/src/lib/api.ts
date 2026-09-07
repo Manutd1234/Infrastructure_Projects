@@ -45,6 +45,10 @@ export const api = {
   // db
   tables:       () => get<TableInfo[]>("/db/tables"),
   query:        (sql: string) => get<Record<string, unknown>[]>(`/db/query?sql=${encodeURIComponent(sql)}`),
+
+  // market (Massive)
+  marketStatus: () => get<MassiveStatus>("/market/status"),
+  quotes:       () => get<Quote[]>("/market/quotes"),
 };
 
 function params(o: Record<string, unknown | undefined>): string {
@@ -113,3 +117,11 @@ export interface PipelineRun {
   error?: string; triggered_by?: string;
 }
 export interface TableInfo { name: string; rows: number; }
+export interface MassiveStatus {
+  configured: boolean; ok: boolean; provider: string;
+  base_url?: string; spy_prev_close?: number; detail: string;
+}
+export interface Quote {
+  ticker: string; close?: number; open?: number; high?: number;
+  low?: number; volume?: number; vwap?: number;
+}

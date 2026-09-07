@@ -12,7 +12,7 @@ import uuid
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 
-from backend.app.api import congress, crypto, db, filings, ops
+from backend.app.api import congress, crypto, db, filings, market, ops
 from backend.app.core.config import settings
 from backend.app.core.logging import configure_logging
 
@@ -26,7 +26,7 @@ app = FastAPI(
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=settings.cors_origins,
+    allow_origins=settings.cors_origin_list,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -53,8 +53,14 @@ def health():
 def health_ready():
     try:
         from backend.app.repositories.db import list_tables
+        from shared.massive import ping
         tables = list_tables()
-        return {"status": "ready", "tables": len(tables)}
+        massive = ping()
+        return {
+            "status": "ready",
+            "tables": len(tables),
+            "massive": massive,
+        }
     except Exception as e:
         from fastapi import HTTPException
         raise HTTPException(503, f"not ready: {e}")
@@ -66,6 +72,7 @@ app.include_router(filings.router)
 app.include_router(congress.router)
 app.include_router(ops.router)
 app.include_router(db.router)
+app.include_router(market.router)
 
 
 @app.get("/", tags=["root"])
