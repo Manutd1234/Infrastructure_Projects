@@ -1,0 +1,43 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+body {
+  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+.panel {
+  @apply bg-desk-panel border border-desk-border rounded-lg p-4;
+}
+
+.chip {
+  @apply inline-flex items-center gap-1.5 px-2 py-0.5 rounded text-xs font-medium;
+}
+.chip-ok   { @apply chip bg-emerald-500/10 text-emerald-400; }
+.chip-warn { @apply chip bg-yellow-500/10 text-yellow-400; }
+.chip-err  { @apply chip bg-red-500/10 text-red-400; }
+
+table.data {
+  @apply w-full text-sm;
+}
+table.data th {
+  @apply text-left text-desk-muted font-medium px-3 py-2 border-b border-desk-border;
+}
+table.data td {
+  @apply px-3 py-2 border-b border-desk-border;
+}
+table.data tr:hover td {
+  @apply bg-white/5;
+}
+
+.btn {
+  @apply px-3 py-1.5 rounded text-sm font-medium border border-desk-border
+         bg-desk-panel hover:bg-white/5 transition-colors disabled:opacity-50;
+}
+.btn-primary {
+  @apply btn bg-desk-accent text-white border-desk-accent hover:bg-blue-600;
+}
