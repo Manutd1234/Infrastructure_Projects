@@ -21,7 +21,7 @@ function Clock() {
     return () => clearInterval(t);
   }, []);
   return (
-    <span className="font-mono text-xs text-slate-400 tabular-nums">
+    <span className="font-mono text-xs text-sky-200 tabular-nums">
       {now.toLocaleTimeString("en-SG", { hour12: false })}
     </span>
   );
@@ -78,14 +78,14 @@ export default function App() {
 
   return (
     <div className="min-h-screen flex">
-      <aside className="w-60 shrink-0 border-r border-white/5 bg-[#0a0e18]/60 backdrop-blur-xl p-4 flex flex-col gap-1">
+      <aside className="w-60 shrink-0 border-r border-slate-600/80 bg-[#0b1220] p-4 flex flex-col gap-1">
         <div className="px-2 py-4 mb-2 flex items-center gap-3">
-          <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-blue-500 to-violet-500 flex items-center justify-center text-white font-bold shadow-lg shadow-blue-500/30">
+          <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-blue-400 to-violet-500 flex items-center justify-center text-white font-bold shadow-lg shadow-blue-500/40 ring-1 ring-white/20">
             N
           </div>
           <div>
-            <div className="text-[10px] text-slate-500 uppercase tracking-widest">NUSSIF</div>
-            <div className="text-sm font-semibold text-slate-100 leading-tight">Trading Desk</div>
+            <div className="text-[10px] text-slate-300 uppercase tracking-widest font-semibold">NUSSIF</div>
+            <div className="text-sm font-semibold text-white leading-tight">Trading Desk</div>
           </div>
         </div>
         {NAV.map((n) => (
@@ -94,41 +94,41 @@ export default function App() {
             to={n.to}
             end={n.end}
             className={({ isActive }) =>
-              `flex items-center gap-3 px-3 py-2 rounded-lg text-sm transition-all ${
+              `flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium transition-all ${
                 isActive
-                  ? "bg-gradient-to-r from-blue-500/15 to-transparent text-white ring-1 ring-blue-500/20"
-                  : "text-slate-400 hover:text-slate-100 hover:bg-white/5"
+                  ? "bg-blue-500/25 text-white ring-1 ring-blue-400/50 shadow-[inset_0_0_0_1px_rgba(96,165,250,0.25)]"
+                  : "text-slate-200 hover:text-white hover:bg-white/10"
               }`
             }
           >
-            <span className="w-5 text-center text-base opacity-80">{n.icon}</span>
+            <span className="w-5 text-center text-base">{n.icon}</span>
             {n.label}
           </NavLink>
         ))}
-        <div className="mt-auto px-2 pt-4 border-t border-white/5 text-[11px] text-slate-600 space-y-1">
+        <div className="mt-auto px-2 pt-4 border-t border-slate-600/80 text-[11px] text-slate-300 space-y-1.5">
           <div className="flex items-center justify-between">
             <span>Status</span>
-            <span className="flex items-center gap-1.5 text-emerald-400">
+            <span className="flex items-center gap-1.5 text-emerald-300 font-medium">
               <span className="dot-ok" /> Live
             </span>
           </div>
           <div className="flex items-center justify-between">
             <span>Build</span>
-            <span className="font-mono">v0.2.0</span>
+            <span className="font-mono text-slate-200">v0.2.0</span>
           </div>
           <div className="flex items-center justify-between">
             <span>Shortcuts</span>
-            <span className="kbd">⌘K</span>
+            <span className="kbd !text-slate-200 !border-slate-500 !bg-white/10">⌘K</span>
           </div>
         </div>
       </aside>
 
       <div className="flex-1 flex flex-col min-w-0">
-        <header className="h-14 shrink-0 border-b border-white/5 bg-[#0a0e18]/40 backdrop-blur-xl px-6 flex items-center justify-between">
+        <header className="h-14 shrink-0 border-b border-sky-400/20 bg-[#0d1528]/80 backdrop-blur-xl px-6 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <span className="text-slate-600 text-sm">Operations Engineer</span>
-            <span className="text-slate-700">/</span>
-            <span className="text-slate-300 text-sm font-medium">Trading Desk</span>
+            <span className="text-sky-200 text-sm">Operations Engineer</span>
+            <span className="text-sky-300/70">/</span>
+            <span className="text-white text-sm font-medium">Trading Desk</span>
           </div>
           <div className="flex items-center gap-4">
             <button
@@ -144,12 +144,12 @@ export default function App() {
               <div className="w-7 h-7 rounded-full bg-gradient-to-br from-emerald-400 to-blue-500 text-[11px] font-bold flex items-center justify-center text-white">
                 TD
               </div>
-              <span className="text-xs text-slate-400">desk.ops</span>
+              <span className="text-xs text-slate-200">desk.ops</span>
             </div>
           </div>
         </header>
 
-        <main className="flex-1 p-6 overflow-x-auto scrollbar-thin">
+        <main className="flex-1 p-7 overflow-x-auto scrollbar-thin">
           <Routes>
             <Route path="/"         element={<Overview />} />
             <Route path="/crypto"    element={<Crypto />} />

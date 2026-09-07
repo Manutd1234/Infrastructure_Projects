@@ -14,8 +14,8 @@ export function Card({
       {(title || actions) && (
         <header className="flex items-start justify-between mb-4">
           <div>
-            {title && <h2 className="text-sm font-semibold text-slate-100">{title}</h2>}
-            {subtitle && <p className="text-xs text-slate-500 mt-0.5">{subtitle}</p>}
+            {title && <h2 className="text-sm font-semibold text-white">{title}</h2>}
+            {subtitle && <p className="text-xs text-slate-300 mt-0.5">{subtitle}</p>}
           </div>
           {actions && <div className="flex items-center gap-2">{actions}</div>}
         </header>

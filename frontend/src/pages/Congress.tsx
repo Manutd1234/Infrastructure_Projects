@@ -52,7 +52,7 @@ export default function Congress() {
         <h1 className="text-3xl font-bold tracking-tight">
           <span className="gradient-text">Congress</span> Trading
         </h1>
-        <p className="text-slate-500 text-sm mt-1">
+        <p className="text-slate-200 text-sm mt-1">
           Trades scraped from Capitol Trades. Per-ticker consensus by net signed USD; committee alignment flags trades in sectors a politician's committee oversees.
         </p>
       </header>

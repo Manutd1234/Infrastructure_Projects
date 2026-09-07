@@ -54,7 +54,7 @@ export default function Crypto() {
         <h1 className="text-3xl font-bold tracking-tight">
           <span className="gradient-text">Crypto</span> Bull Cycle
         </h1>
-        <p className="text-slate-500 text-sm mt-1">
+        <p className="text-slate-200 text-sm mt-1">
           BTC cycle identification, +3σ weekly breakout drift study, drawdowns, and a 30-day-hold backtest vs buy &amp; hold.
         </p>
       </header>

@@ -43,7 +43,7 @@ export default function Database() {
         <h1 className="text-3xl font-bold tracking-tight">
           <span className="gradient-text">Database</span> Browser
         </h1>
-        <p className="text-slate-500 text-sm mt-1">
+        <p className="text-slate-200 text-sm mt-1">
           Read-only SQL console. SELECT only; results capped at 1000 rows.
         </p>
       </header>

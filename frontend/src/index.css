@@ -16,30 +16,33 @@ body {
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
   background:
-    radial-gradient(1200px 600px at 80% -10%, rgba(59, 130, 246, 0.12), transparent 60%),
-    radial-gradient(1000px 500px at 0% 100%, rgba(168, 85, 247, 0.10), transparent 55%),
-    #070a12;
+    radial-gradient(1100px 560px at 88% -8%, rgba(56, 189, 248, 0.42), transparent 58%),
+    radial-gradient(900px 500px at -5% 105%, rgba(192, 132, 252, 0.32), transparent 55%),
+    radial-gradient(720px 380px at 42% 28%, rgba(52, 211, 153, 0.14), transparent 50%),
+    #08101c;
   background-attachment: fixed;
 }
 
 /* ---- Surfaces ---- */
 .panel {
-  @apply bg-[#0f1422]/80 backdrop-blur-xl border border-white/[0.06] rounded-2xl
-         shadow-[0_1px_0_0_rgba(255,255,255,0.04)_inset,0_20px_40px_-20px_rgba(0,0,0,0.6)];
+  @apply backdrop-blur-xl border border-sky-300/25 rounded-2xl
+         shadow-[0_1px_0_0_rgba(186,230,253,0.18)_inset,0_18px_40px_-18px_rgba(56,189,248,0.45)];
+  background: rgba(24, 35, 60, 0.92);
 }
 .panel-hover {
-  @apply panel transition-all duration-200 hover:border-white/[0.12] hover:shadow-[0_1px_0_0_rgba(255,255,255,0.06)_inset,0_30px_60px_-20px_rgba(0,0,0,0.7)];
+  @apply panel transition-all duration-200 hover:-translate-y-0.5 hover:border-sky-300/40
+         hover:shadow-[0_1px_0_0_rgba(165,243,252,0.2)_inset,0_24px_48px_-16px_rgba(56,189,248,0.45)];
 }
 
 /* ---- Chips ---- */
 .chip {
   @apply inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-[11px] font-semibold tracking-wide;
 }
-.chip-ok   { @apply chip bg-emerald-500/15 text-emerald-300 ring-1 ring-emerald-500/20; }
-.chip-warn { @apply chip bg-amber-500/15 text-amber-300 ring-1 ring-amber-500/20; }
-.chip-err  { @apply chip bg-rose-500/15 text-rose-300 ring-1 ring-rose-500/20; }
-.chip-info { @apply chip bg-sky-500/15 text-sky-300 ring-1 ring-sky-500/20; }
-.chip-mute { @apply chip bg-white/5 text-slate-400 ring-1 ring-white/10; }
+.chip-ok   { @apply chip bg-emerald-400/20 text-emerald-200 ring-1 ring-emerald-300/40; }
+.chip-warn { @apply chip bg-amber-400/20 text-amber-100 ring-1 ring-amber-300/40; }
+.chip-err  { @apply chip bg-rose-400/20 text-rose-100 ring-1 ring-rose-300/40; }
+.chip-info { @apply chip bg-sky-400/20 text-sky-100 ring-1 ring-sky-300/40; }
+.chip-mute { @apply chip bg-white/10 text-slate-200 ring-1 ring-white/20; }
 
 .dot {
   @apply inline-block w-1.5 h-1.5 rounded-full;
@@ -57,15 +60,15 @@ body {
 }
 .btn-primary {
   @apply inline-flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm font-semibold
-         text-white border border-transparent
-         bg-gradient-to-b from-blue-500 to-blue-600
-         hover:from-blue-400 hover:to-blue-500
-         shadow-[0_8px_20px_-8px_rgba(59,130,246,0.6)] transition-all duration-150
+         text-white border border-sky-300/30
+         bg-gradient-to-b from-sky-400 to-blue-500
+         hover:from-sky-300 hover:to-blue-400
+         shadow-[0_10px_24px_-6px_rgba(56,189,248,0.75)] transition-all duration-150
          disabled:opacity-40 disabled:cursor-not-allowed;
 }
 .btn-ghost {
   @apply inline-flex items-center gap-2 px-2.5 py-1.5 rounded-lg text-sm font-medium
-         text-slate-400 hover:text-slate-100 hover:bg-white/5 transition-colors;
+         text-slate-200 hover:text-white hover:bg-white/10 transition-colors;
 }
 
 /* ---- Tables ---- */
@@ -73,11 +76,11 @@ table.data {
   @apply w-full text-sm;
 }
 table.data th {
-  @apply text-left text-[11px] uppercase tracking-wider text-slate-500
-         font-semibold px-3 py-2.5 border-b border-white/5;
+  @apply text-left text-[11px] uppercase tracking-wider text-sky-200/80
+         font-semibold px-3 py-2.5 border-b border-sky-400/15;
 }
 table.data td {
-  @apply px-3 py-2.5 border-b border-white/5 text-slate-300;
+  @apply px-3 py-2.5 border-b border-white/10 text-slate-100;
 }
 table.data tbody tr {
   @apply transition-colors;
@@ -100,7 +103,7 @@ table.data tbody tr:hover td {
          rounded border border-white/10 bg-white/5 text-[10px] font-mono text-slate-400;
 }
 .gradient-text {
-  background: linear-gradient(120deg, #60a5fa, #a78bfa 50%, #f472b6);
+  background: linear-gradient(120deg, #7dd3fc, #c4b5fd 45%, #f9a8d4);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -113,7 +116,11 @@ table.data tbody tr:hover td {
   from { opacity: 0; transform: translateY(4px); }
   to   { opacity: 1; transform: translateY(0); }
 }
-.animate-fade-in { animation: fade-in 0.25s ease-out both; }
+.animate-fade-in { animation: fade-in 0.35s ease-out both; }
+.delay-1 { animation-delay: 60ms; }
+.delay-2 { animation-delay: 120ms; }
+.delay-3 { animation-delay: 180ms; }
+.delay-4 { animation-delay: 240ms; }
 
 @keyframes pulse-soft {
   0%, 100% { opacity: 1; }

@@ -24,8 +24,8 @@ export function EmptyState({ title, hint }: { title: string; hint?: string }) {
       <div className="w-12 h-12 rounded-full bg-white/[0.04] flex items-center justify-center text-slate-600 text-xl mb-3">
         ∅
       </div>
-      <p className="text-sm text-slate-400">{title}</p>
-      {hint && <p className="text-xs text-slate-600 mt-1">{hint}</p>}
+      <p className="text-sm text-slate-200">{title}</p>
+      {hint && <p className="text-xs text-slate-300 mt-1">{hint}</p>}
     </div>
   );
 }

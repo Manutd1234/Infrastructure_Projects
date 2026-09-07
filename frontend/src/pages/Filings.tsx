@@ -65,7 +65,7 @@ export default function Filings() {
           <h1 className="text-3xl font-bold tracking-tight">
             <span className="gradient-text">13F Filings</span> — Sector Rotation
           </h1>
-          <p className="text-slate-500 text-sm mt-1">
+          <p className="text-slate-200 text-sm mt-1">
             Top-20 holdings per quarter for 8 superinvestor funds, classified into GICS sectors.
           </p>
         </div>
