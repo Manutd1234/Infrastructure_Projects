@@ -6,7 +6,12 @@ from backend.app.repositories.db import query
 
 
 def funds() -> list[dict]:
-    return query("SELECT code, name FROM funds ORDER BY code")
+    rows = query("SELECT code, name FROM funds ORDER BY code")
+    if rows:
+        return rows
+    return query(
+        "SELECT DISTINCT fund AS code, fund AS name FROM sector_weights ORDER BY fund"
+    )
 
 
 def holdings(fund: str | None = None, quarter: str | None = None) -> list[dict]:

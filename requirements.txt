@@ -1,0 +1,6 @@
+# Combined install for backend + all three analysis modules.
+# No API-key SDKs. yfinance / requests / BeautifulSoup cover every source.
+-r backend/requirements.txt
+-r CryptoCycle/requirements.txt
+-r HedgeFund13F/requirements.txt
+-r CongressTrades/requirements.txt

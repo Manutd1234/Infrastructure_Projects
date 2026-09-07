@@ -14,9 +14,9 @@ flowchart LR
     end
 
     subgraph Data["analysis modules"]
-        CBC[CryptoBullCycle]
-        TFF[ThirteenFFilings]
-        CTR[CongressTrading]
+        CBC[CryptoCycle]
+        TFF[HedgeFund13F]
+        CTR[CongressTrades]
     end
 
     subgraph Backend["backend (FastAPI)"]

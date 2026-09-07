@@ -39,7 +39,7 @@ Three self-contained Python packages at the repo root, each with the
 same shape:
 
 ```
-<Module>/                 # CryptoBullCycle | ThirteenFFilings | CongressTrading
+<Module>/                 # CryptoCycle | HedgeFund13F | CongressTrades
 ├── README.md          # methodology + results
 ├── requirements.txt
 ├── main.py            # entry point
@@ -50,9 +50,9 @@ same shape:
 
 | Module | Source | Output |
 |---|---|---|
-| `CryptoBullCycle` | yfinance (BTC-USD, SPY) | cycles, bear_markets, drawdowns, breakout_study, performance, equity_curve, correlation |
-| `ThirteenFFilings` | Dataroma (8 funds) | holdings, sector_weights, rotation charts, heatmap |
-| `CongressTrading` | Capitol Trades | trades, ticker_consensus, monthly_consensus, committee_summary, rotation charts |
+| `CryptoCycle` | yfinance (BTC-USD, SPY) | cycles, bear_markets, drawdowns, breakout_study, performance, equity_curve, correlation |
+| `HedgeFund13F` | Dataroma (8 funds) | holdings, sector_weights, rotation charts, heatmap |
+| `CongressTrades` | Capitol Trades | trades, ticker_consensus, monthly_consensus, committee_summary, rotation charts |
 
 Each module is **idempotent**: re-running with the cache present only
 re-processes; deleting `cache/` forces a fresh pull. Modules write

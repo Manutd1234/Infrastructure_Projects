@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import {
-  Bar, BarChart, CartesianGrid, Cell, Legend, ReferenceLine,
+  Bar, BarChart, CartesianGrid, Legend, ReferenceLine,
   ResponsiveContainer, Tooltip, XAxis, YAxis,
 } from "recharts";
 import { api } from "../lib/api";
@@ -10,6 +10,15 @@ import { TableSkeleton } from "../components/Skeleton";
 
 const axis = { stroke: "#475569", fontSize: 11, tickLine: false, axisLine: false };
 const grid = { stroke: "rgba(255,255,255,0.05)", strokeDasharray: "3 3" };
+
+function pct(v: number | null | undefined, digits = 2): string {
+  if (v == null || Number.isNaN(Number(v))) return "—";
+  return `${(Number(v) * 100).toFixed(digits)}%`;
+}
+function num(v: number | null | undefined, digits = 2): string {
+  if (v == null || Number.isNaN(Number(v))) return "—";
+  return Number(v).toFixed(digits);
+}
 
 function ChartTooltip({ active, payload, label }: any) {
   if (!active || !payload?.length) return null;
@@ -53,7 +62,7 @@ export default function Crypto() {
       <section className="grid grid-cols-4 gap-4">
         <StatCard label="Bull cycles" value={bulls.length} sub={`avg ${Math.round(bulls.reduce((s, c) => s + c.duration_days, 0) / Math.max(bulls.length, 1))}d`} accent="emerald" />
         <StatCard label="Bear cycles" value={bears.length} sub={`avg ${Math.round(bears.reduce((s, c) => s + c.duration_days, 0) / Math.max(bears.length, 1))}d`} accent="rose" />
-        <StatCard label="Deepest DD" value={deepest ? `${(deepest.max_drawdown * 100).toFixed(1)}%` : "—"} sub={deepest?.trough_date} accent="amber" />
+        <StatCard label="Deepest DD" value={deepest ? pct(deepest.max_drawdown, 1) : "—"} sub={deepest?.trough_date} accent="amber" />
         <StatCard label="+3σ breakouts" value={(breakouts ?? [])[0]?.n_breakouts ?? "—"} sub="signal events" accent="violet" />
       </section>
 
@@ -82,13 +91,13 @@ export default function Crypto() {
                   <tr key={b.horizon}>
                     <td className="font-medium">{b.horizon}d</td>
                     <td className="tabular-nums">{b.n_breakouts}</td>
-                    <td className="tabular-nums">{(b.mean_breakout * 100).toFixed(2)}%</td>
-                    <td className="tabular-nums">{(b.pct_positive * 100).toFixed(0)}%</td>
-                    <td className="tabular-nums">{(b.mean_all * 100).toFixed(2)}%</td>
-                    <td className="tabular-nums">{b.t_stat.toFixed(2)}</td>
-                    <td className="tabular-nums">{b.p_value.toFixed(3)}</td>
-                    <td className={`tabular-nums font-medium ${b.excess_vs_all >= 0 ? "text-emerald-400" : "text-rose-400"}`}>
-                      {(b.excess_vs_all * 100).toFixed(2)}%
+                    <td className="tabular-nums">{pct(b.mean_breakout)}</td>
+                    <td className="tabular-nums">{pct(b.pct_positive, 0)}</td>
+                    <td className="tabular-nums">{pct(b.mean_all)}</td>
+                    <td className="tabular-nums">{num(b.t_stat)}</td>
+                    <td className="tabular-nums">{num(b.p_value, 3)}</td>
+                    <td className={`tabular-nums font-medium ${(b.excess_vs_all ?? 0) >= 0 ? "text-emerald-400" : "text-rose-400"}`}>
+                      {pct(b.excess_vs_all)}
                     </td>
                   </tr>
                 ))}
@@ -113,8 +122,8 @@ export default function Crypto() {
                     </td>
                     <td className="font-mono text-xs">{c.start_date}</td>
                     <td className="font-mono text-xs">{c.end_date}</td>
-                    <td className={`tabular-nums font-medium ${c.return * 100 >= 0 ? "text-emerald-400" : "text-rose-400"}`}>
-                      {(c.return * 100).toFixed(1)}%
+                    <td className={`tabular-nums font-medium ${(c.return ?? 0) >= 0 ? "text-emerald-400" : "text-rose-400"}`}>
+                      {pct(c.return, 1)}
                     </td>
                     <td className="tabular-nums">{c.duration_days}</td>
                   </tr>
@@ -155,12 +164,12 @@ export default function Crypto() {
               {(perf ?? []).map((p) => (
                 <tr key={p.strategy}>
                   <td className="font-medium text-slate-100">{p.strategy}</td>
-                  <td className="tabular-nums text-emerald-400">{(p.cagr * 100).toFixed(1)}%</td>
-                  <td className="tabular-nums">{(p.volatility_ann * 100).toFixed(1)}%</td>
-                  <td className="tabular-nums">{p.sharpe.toFixed(2)}</td>
-                  <td className="tabular-nums">{p.sortino.toFixed(2)}</td>
-                  <td className="tabular-nums text-rose-400">{(p.max_drawdown * 100).toFixed(1)}%</td>
-                  <td className="tabular-nums">{(p.win_rate_invested * 100).toFixed(0)}%</td>
+                  <td className="tabular-nums text-emerald-400">{pct(p.cagr, 1)}</td>
+                  <td className="tabular-nums">{pct(p.volatility_ann, 1)}</td>
+                  <td className="tabular-nums">{num(p.sharpe)}</td>
+                  <td className="tabular-nums">{num(p.sortino)}</td>
+                  <td className="tabular-nums text-rose-400">{pct(p.max_drawdown, 1)}</td>
+                  <td className="tabular-nums">{pct(p.win_rate_invested, 0)}</td>
                   <td className="tabular-nums">{p.num_trades}</td>
                 </tr>
               ))}

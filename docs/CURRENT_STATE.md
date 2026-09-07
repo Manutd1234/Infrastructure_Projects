@@ -6,9 +6,9 @@
 
 | Component | Status | Notes |
 |---|---|---|
-| `CryptoBullCycle` | **Working** | Pulls BTC + SPY from yfinance, identifies cycles, runs +3σ breakout study, computes drawdowns, backtests. Outputs CSV + PNG. |
-| `ThirteenFFilings` | **Working** | Scrapes Dataroma for 8 funds (2006Q4 → 2026Q2), classifies GICS sectors, plots rotation. ~95% sector coverage. |
-| `CongressTrading` | **Working** | Scrapes Capitol Trades (720 trades, 39 politicians), consensus + committee signals. House.gov feasibility report written. |
+| `CryptoCycle` | **Working** | Pulls BTC + SPY from yfinance, identifies cycles, runs +3σ breakout study, computes drawdowns, backtests. Outputs CSV + PNG. |
+| `HedgeFund13F` | **Working** | Scrapes Dataroma for 8 funds (2006Q4 → 2026Q2), classifies GICS sectors, plots rotation. ~95% sector coverage. |
+| `CongressTrades` | **Working** | Scrapes Capitol Trades (720 trades, 39 politicians), consensus + committee signals. House.gov feasibility report written. |
 | `backend/` | **Scaffold** | FastAPI app with endpoints mirroring pipeline outputs. Runs against SQLite. Not yet wired to a scheduler. |
 | `frontend/` | **Scaffold** | React + TypeScript + Vite dashboard. Reads from backend API. Charts stubbed. |
 | `database/` | **Scaffold** | SQLite schema for trades, holdings, sectors, signals, pipeline_runs. Init script works. |
@@ -20,9 +20,9 @@
 
 1. Run any pipeline standalone:
    ```bash
-   cd CryptoBullCycle && python main.py
-   cd ThirteenFFilings && python main.py
-   cd CongressTrading && python main.py
+   cd CryptoCycle && python main.py
+   cd HedgeFund13F && python main.py
+   cd CongressTrades && python main.py
    ```
    Each writes CSV tables and PNG charts to its own `outputs/` folder.
 
@@ -59,8 +59,8 @@
 ## Recent changes
 
 - **2026-09-07:** Reorganized the three analysis modules to the repo root
-  as PascalCase folders (`CryptoBullCycle/`, `ThirteenFFilings/`,
-  `CongressTrading/`), peers of the shared infrastructure. `data/` now
+  as PascalCase folders (`CryptoCycle/`, `HedgeFund13F/`,
+  `CongressTrades/`), peers of the shared infrastructure. `data/` now
   holds only shared cross-task data. Added
   `ADR_2026-09-07_MODULES_AT_ROOT.md`; the earlier
   `ADR_2026-09-07_PROJECT_RESTRUCTURE.md` is superseded.

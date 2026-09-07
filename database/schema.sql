@@ -10,14 +10,14 @@ CREATE TABLE IF NOT EXISTS schema_version (
     version     INTEGER NOT NULL,
     applied_at  TEXT    NOT NULL DEFAULT (datetime('now'))
 );
-INSERT INTO schema_version (version) VALUES (1);
+INSERT INTO schema_version (version) VALUES (2);
 
 -- ----------------------------------------------------------------------------
 -- Ops: pipeline run history (freshness / monitoring)
 -- ----------------------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS pipeline_runs (
     id              INTEGER PRIMARY KEY AUTOINCREMENT,
-    pipeline         TEXT NOT NULL,            -- crypto_bull_cycle | thirteen_f_filings | congress_trading
+    pipeline         TEXT NOT NULL,            -- CryptoCycle | HedgeFund13F | CongressTrades
     status           TEXT NOT NULL,             -- RUNNING | SUCCEEDED | FAILED | CANCELLED
     started_at       TEXT NOT NULL,
     ended_at         TEXT,
@@ -50,8 +50,7 @@ CREATE INDEX IF NOT EXISTS idx_crypto_cycles_type_start ON crypto_cycles (type, 
 -- ----------------------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS crypto_breakouts (
     id              INTEGER PRIMARY KEY AUTOINCREMENT,
-    signal_date     TEXT NOT NULL,
-    horizon_days    INTEGER NOT NULL,
+    horizon         INTEGER NOT NULL,
     n_breakouts      INTEGER,
     mean_breakout   REAL,
     median_breakout REAL,
@@ -62,7 +61,7 @@ CREATE TABLE IF NOT EXISTS crypto_breakouts (
     excess_vs_all   REAL,
     run_id          INTEGER REFERENCES pipeline_runs(id)
 );
-CREATE INDEX IF NOT EXISTS idx_crypto_breakouts_date ON crypto_breakouts (signal_date);
+CREATE INDEX IF NOT EXISTS idx_crypto_breakouts_horizon ON crypto_breakouts (horizon);
 
 CREATE TABLE IF NOT EXISTS crypto_breakout_dates (
     id              INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -114,6 +113,7 @@ CREATE TABLE IF NOT EXISTS fund_holdings (
     id              INTEGER PRIMARY KEY AUTOINCREMENT,
     fund            TEXT NOT NULL,
     quarter         TEXT NOT NULL,             -- e.g. 2026Q2
+    quarter_label   TEXT,
     portfolio_value TEXT,
     rank            INTEGER,
     ticker          TEXT NOT NULL,

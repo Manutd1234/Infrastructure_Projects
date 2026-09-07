@@ -2,7 +2,7 @@
 
 The backend is the **transport layer** for the platform. It serves
 pipeline outputs (loaded into SQLite) as typed JSON to the dashboard. It
-contains **no analytics** — all computation lives in `data/pipelines/`.
+contains **no analytics** — all computation lives in the three root modules.
 
 See `docs/architecture/DATA_OPS_BACKEND.md` for the full design.
 
@@ -71,7 +71,7 @@ All settings are environment-driven (see `.env.example`), read via
 | Env var | Default | Purpose |
 |---|---|---|
 | `NUSSIF_DATABASE_URL` | `sqlite:///database/nussif.db` | DB connection |
-| `NUSSIF_PIPELINES_DIR` | `data/pipelines` | where pipeline code lives |
+| `NUSSIF_PIPELINES_DIR` | repo root | where the three modules live |
 | `NUSSIF_ENABLE_RUN_ENDPOINT` | `false` | gate the `/ops/run/*` endpoints |
 | `NUSSIF_RUN_TIMEOUT_SECONDS` | `600` | subprocess timeout |
 | `NUSSIF_CORS_ORIGINS` | `http://localhost:5173` | allowed origins |

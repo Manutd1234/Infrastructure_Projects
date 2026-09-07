@@ -12,9 +12,9 @@ env/
 .ruff_cache/
 
 # Data caches (regenerable — modules re-fetch on demand)
-CryptoBullCycle/cache/
-ThirteenFFilings/cache/
-CongressTrading/cache/
+CryptoCycle/cache/
+HedgeFund13F/cache/
+CongressTrades/cache/
 **/cache/
 *.csv.bak
 

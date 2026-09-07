@@ -23,14 +23,14 @@ python database/init_db.py          # creates database/nussif.db
 | Table | Grain | Source CSV |
 |---|---|---|
 | `pipeline_runs` | one row per pipeline execution | written by the backend loader |
-| `crypto_cycles` | one row per bull/bear cycle | `data/pipelines/crypto_bull_cycle/outputs/cycles.csv` |
+| `crypto_cycles` | one row per bull/bear cycle | `CryptoCycle/outputs/cycles.csv` |
 | `crypto_breakout` | one row per (signal_date, horizon) | `breakout_study.csv` |
 | `crypto_breakout_dates` | one row per breakout date | `breakout_dates.csv` |
 | `crypto_drawdowns` | one row per drawdown episode | `drawdowns.csv` |
 | `crypto_performance` | one row per strategy | `performance.csv` |
 | `fund_holdings` | fund × quarter × ticker | `holdings_with_sectors.csv` |
 | `sector_weights` | fund × quarter × sector | `sector_weights.csv` |
-| `funds` | one row per tracked fund | `data/pipelines/thirteen_f_filings/funds.py` |
+| `funds` | one row per tracked fund | `HedgeFund13F/funds.py` |
 | `congress_trades` | one row per trade | `trades_with_sectors.csv` |
 | `ticker_consensus` | one row per ticker | `ticker_consensus.csv` |
 | `monthly_consensus` | one row per month | `monthly_consensus.csv` |

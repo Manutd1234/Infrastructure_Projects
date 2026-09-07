@@ -144,7 +144,7 @@ def main():
     print("Running breakout drift study ...")
     study = breakout_drift_study(close)
     study["forward_returns_table"].to_csv(OUT / "breakout_study.csv", index=False)
-    pd.Series(study["breakout_dates"]).to_csv(OUT / "breakout_dates.csv", index=False, header=["date"])
+    pd.Series(study["breakout_dates"]).to_csv(OUT / "breakout_dates.csv", index=False, header=["signal_date"])
     print(study["forward_returns_table"].to_string(index=False))
     print(f"  Total breakouts: {study['n_breakouts_total']}")
 
@@ -158,12 +158,31 @@ def main():
     strat = study["strategy_result"]
     bh = study["buy_hold_result"]
     spy_bh = buy_and_hold(spy["Close"], periods_per_year=252)
-    pd.concat(
-        [strat.summary().rename(columns={"value": "Breakout Strategy"}),
-         bh.summary().rename(columns={"value": "BTC Buy&Hold"}),
-         spy_bh.summary().rename(columns={"value": "SPY Buy&Hold"})],
-        axis=1,
-    ).to_csv(OUT / "performance.csv")
+    metric_map = {
+        "Total Return": "total_return",
+        "CAGR": "cagr",
+        "Volatility (ann.)": "volatility_ann",
+        "Sharpe": "sharpe",
+        "Sortino": "sortino",
+        "Max Drawdown": "max_drawdown",
+        "Drawdown Trough": "drawdown_trough",
+        "Drawdown Recovery": "drawdown_recovery",
+        "Win Rate": "win_rate",
+        "Win Rate (invested)": "win_rate_invested",
+        "Num Trades": "num_trades",
+        "Final Equity": "final_equity",
+    }
+    perf_rows = []
+    for name, result in (
+        ("Breakout Strategy", strat),
+        ("BTC Buy&Hold", bh),
+        ("SPY Buy&Hold", spy_bh),
+    ):
+        row = {"strategy": name}
+        for label, col in metric_map.items():
+            row[col] = result.metrics.get(label)
+        perf_rows.append(row)
+    pd.DataFrame(perf_rows).to_csv(OUT / "performance.csv", index=False)
     print("  Strategy:", strat.metrics)
     print("  BTC B&H :", bh.metrics)
 

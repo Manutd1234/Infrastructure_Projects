@@ -106,10 +106,10 @@ cd frontend && npm test                   # frontend
 npm run test:e2e                           # playwright (nightly)
 
 # with coverage
-pytest --cov=backend --cov=CryptoBullCycle --cov=ThirteenFFilings --cov=CongressTrading --cov-report=html
+pytest --cov=backend --cov=CryptoCycle --cov=HedgeFund13F --cov=CongressTrades --cov-report=html
 
 # smoke a single pipeline offline
-cd CryptoBullCycle && python main.py --smoke
+cd CryptoCycle && python main.py --smoke
 ```
 
 ## 8. Reviewing tests

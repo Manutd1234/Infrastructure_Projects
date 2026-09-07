@@ -12,7 +12,7 @@
 
 ### Phase 1 — Repository restructure (done)
 - [x] Move the three analysis modules to the repo root as PascalCase
-      folders (`CryptoBullCycle/`, `ThirteenFFilings/`, `CongressTrading/`).
+      folders (`CryptoCycle/`, `HedgeFund13F/`, `CongressTrades/`).
 - [x] Add `backend/`, `frontend/`, `database/`, `notebooks/`, `docs/`,
       `skills/` folders.
 - [x] Institutional documentation set in `docs/`.

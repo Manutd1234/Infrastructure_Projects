@@ -22,7 +22,7 @@
 - The congress committee mapping is curated for 39 politicians; the
   alignment rate would change if the universe were expanded. The
   committee → sector mapping is a judgement call and is documented in
-  `CongressTrading/committee_signals.py`.
+  `CongressTrades/committee_signals.py`.
 
 ## Operational risk
 

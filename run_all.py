@@ -1,7 +1,4 @@
-"""Run all three task modules in sequence.
-
-The three analysis modules live at the repo root as PascalCase folders:
-CryptoBullCycle, ThirteenFFilings, CongressTrading.
+"""Run all three analysis modules in sequence.
 
 Usage:
     python run_all.py
@@ -13,7 +10,7 @@ import subprocess
 import sys
 from pathlib import Path
 
-PIPELINES = ["CryptoBullCycle", "ThirteenFFilings", "CongressTrading"]
+PIPELINES = ["CryptoCycle", "HedgeFund13F", "CongressTrades"]
 
 
 def run_pipeline(name: str) -> int:

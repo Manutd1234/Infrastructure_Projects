@@ -9,7 +9,7 @@ by the backend.
 - Run `nbstripout --install` once so outputs are stripped on commit.
 - Name notebooks `NN_topic.ipynb` (zero-padded) so they sort in reading order.
 - Notebooks are exploratory. Production logic belongs in a pipeline.
-- Notebooks **may** import from `data/pipelines/` (they share the venv).
+- Notebooks **may** import from the three root modules (they share the venv).
 
 ## Notebooks
 
@@ -26,5 +26,5 @@ pip install jupyter pandas matplotlib
 jupyter notebook
 ```
 
-The notebooks use relative paths (`../data/pipelines/...`) so they must be
-run from this folder.
+The notebooks use relative paths (`../CryptoCycle/outputs`, etc.) so they
+must be run from this folder.

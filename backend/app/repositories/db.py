@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import sqlite3
-from pathlib import Path
 from typing import Any, Iterable
 
 from backend.app.core.config import settings
@@ -53,12 +52,13 @@ def list_tables() -> list[dict]:
 def table_row_count(table: str) -> int:
     # table is from our own schema, but validate it's a known name
     allowed = {
-        "pipeline_runs", "crypto_cycles", "crypto_breakout", "crypto_breakout_dates",
+        "pipeline_runs", "crypto_cycles", "crypto_breakouts", "crypto_breakout_dates",
         "crypto_drawdowns", "crypto_performance", "fund_holdings", "sector_weights",
         "funds", "congress_trades", "ticker_consensus", "monthly_consensus",
         "committee_signals", "committee_sectors", "politician_committees",
+        "schema_version",
     }
     if table not in allowed:
-        raise ValueError(f"unknown table: {table}")
+        return 0
     row = query_one(f"SELECT COUNT(*) AS n FROM {table}")
     return int(row["n"]) if row else 0

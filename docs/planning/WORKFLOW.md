@@ -63,7 +63,7 @@ CI must be green to merge. `main` is deployable at every commit.
 # one-time
 python -m venv .venv && source .venv/bin/activate
 pip install -r backend/requirements.txt
-pip install -r CryptoBullCycle/requirements.txt -r ThirteenFFilings/requirements.txt -r CongressTrading/requirements.txt
+pip install -r CryptoCycle/requirements.txt -r HedgeFund13F/requirements.txt -r CongressTrades/requirements.txt
 cd frontend && npm install && cd ..
 
 # database
@@ -76,7 +76,7 @@ uvicorn backend.app.main:app --reload
 cd frontend && npm run dev
 
 # run a pipeline (terminal 3)
-cd CryptoBullCycle && python main.py
+cd CryptoCycle && python main.py
 ```
 
 `.env` is loaded by the backend via `pydantic-settings`; copy

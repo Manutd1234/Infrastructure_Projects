@@ -4,12 +4,12 @@ import { Card } from "../components/Card";
 import { StatCard } from "../components/StatCard";
 import { TableSkeleton, EmptyState } from "../components/Skeleton";
 
-const PIPELINES = ["CryptoBullCycle", "ThirteenFFilings", "CongressTrading"];
+const PIPELINES = ["CryptoCycle", "HedgeFund13F", "CongressTrades"];
 
 const PIPELINE_META: Record<string, { label: string; source: string; accent: "blue" | "emerald" | "amber" | "rose" | "violet" }> = {
-  CryptoBullCycle:  { label: "Crypto Bull Cycle", source: "yfinance · BTC, SPY", accent: "amber" },
-  ThirteenFFilings: { label: "13F Filings",        source: "Dataroma · 8 funds", accent: "blue" },
-  CongressTrading:  { label: "Congress Trading",   source: "Capitol Trades",     accent: "violet" },
+  CryptoCycle:     { label: "Crypto Cycle",     source: "yfinance · BTC, SPY", accent: "amber" },
+  HedgeFund13F:    { label: "Hedge Fund 13F",   source: "Dataroma · 8 funds",  accent: "blue" },
+  CongressTrades:  { label: "Congress Trades",  source: "Capitol Trades",      accent: "violet" },
 };
 
 function statusChip(status: string) {

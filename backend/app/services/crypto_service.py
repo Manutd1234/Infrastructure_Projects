@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from backend.app.repositories.db import query, query_one
+from backend.app.repositories.db import query
 
 
 def cycles() -> list[dict]:
@@ -16,7 +16,7 @@ def bear_markets() -> list[dict]:
 
 
 def breakouts() -> list[dict]:
-    return query("SELECT * FROM crypto_breakout ORDER BY horizon_days")
+    return query("SELECT * FROM crypto_breakouts ORDER BY horizon")
 
 
 def breakout_dates() -> list[dict]:
