@@ -3,10 +3,11 @@
 This folder contains the institutional documentation for the NUSSIF
 Infrastructure Projects platform: a unified research-and-operations
 environment that combines three quantitative data pipelines (crypto cycle
-analysis, 13F filings, congress trading) with a FastAPI backend, a SQLite
-database, and a React "Trading Desk Operations" dashboard.
+analysis, 13F filings, congress trading) with a high-performance FastAPI backend,
+a SQLite WAL database, and a React "Trading Desk Operations" dashboard with
+real-time WebSocket telemetry.
 
-## Documentation map
+## Documentation Map
 
 ```
 docs/
@@ -15,12 +16,13 @@ docs/
 ├── architecture/                  # system design and data flow
 │   ├── ARCHITECTURE.md            # high-level system design
 │   ├── DATA_PROCESSING_FLOW.md   # how data moves through pipelines
-│   ├── DATA_OPS_BACKEND.md        # backend service design
-│   ├── LATENCY_BUDGET.md          # end-to-end latency targets and measurements
-│   ├── UML_DIAGRAMS.md            # component and sequence diagrams (Mermaid)
+│   ├── DATA_OPS_BACKEND.md        # backend transport service design
+│   ├── LATENCY_BUDGET.md          # end-to-end latency targets and benchmarks
+│   ├── latency-bench.generated.json # automated benchmark run outputs
+│   ├── UML_DIAGRAMS.md            # component, ER, and sequence diagrams (Mermaid)
 │   └── ADR_*.md                   # architectural decision records
 ├── engineering/                   # development standards
-│   ├── CODING_STANDARDS.md        # style, layout, review rules
+│   ├── CODING_STANDARDS.md        # style, layout, Pydantic schemas, review rules
 │   └── TLS_FLIP.md                # zero-downtime cert rotation runbook
 ├── planning/                      # product and project management
 │   ├── PRD.md                     # product requirements
@@ -28,23 +30,24 @@ docs/
 │   ├── TECH_STACK.md              # technology choices and rationale
 │   └── WORKFLOW.md                # git, CI, release workflow
 ├── product/                       # user-facing documentation
-│   ├── PRODUCT_GUIDE.md          # how to use the dashboard
-│   ├── FEATURE_TOUR.md            # walkthrough of each feature
-│   └── TESTING.md                  # test strategy and coverage
+│   ├── PRODUCT_GUIDE.md          # operator's manual for the 6 desk surfaces
+│   ├── FEATURE_TOUR.md            # walkthrough of each quantitative feature
+│   └── TESTING.md                 # test pyramid, pytest suite, and coverage
 └── whitepaper/                    # formal / institutional write-up
     ├── main.typ                   # Typst entry point
     ├── template.typ               # Typst template
+    ├── NUSSIF_Infrastructure_Projects_Whitepaper.pdf # compiled whitepaper
     └── sections/                  # modular whitepaper sections
 ```
 
-## How to read this documentation
+## How to Read This Documentation
 
 | Audience | Start here |
 |---|---|
 | New engineer onboarding | `planning/TECH_STACK.md` → `architecture/ARCHITECTURE.md` → `engineering/CODING_STANDARDS.md` |
 | Product / PM | `planning/PRD.md` → `product/PRODUCT_GUIDE.md` → `planning/PLAN.md` |
 | Operations / SRE | `architecture/LATENCY_BUDGET.md` → `engineering/TLS_FLIP.md` → `architecture/DATA_OPS_BACKEND.md` |
-| External / institutional reader | `whitepaper/` (compile with Typst) |
+| External / institutional reader | `whitepaper/` (compile with Typst or read PDF) |
 | Anyone wanting the current status | `CURRENT_STATE.md` |
 
 ## Conventions
@@ -58,7 +61,7 @@ docs/
 - **No author attributions:** Documents describe the system, not who wrote
   them. History lives in `git log`.
 
-## Compiling the whitepaper
+## Compiling the Whitepaper
 
 The institutional whitepaper is typeset with [Typst](https://typst.app):
 

@@ -73,17 +73,17 @@ sequenceDiagram
     participant DB as SQLite
     participant P as Pipeline (subprocess)
 
-    U->>F: clicks "Run crypto_bull_cycle"
-    F->>B: POST /ops/run/crypto_bull_cycle
+    U->>F: clicks "Run CryptoCycle"
+    F->>B: POST /ops/run/CryptoCycle
     B->>DB: INSERT pipeline_runs (status='RUNNING')
     B->>P: subprocess.run python main.py
     P-->>B: exit code 0
     B->>DB: UPDATE pipeline_runs (status='SUCCEEDED', rows=N)
     B-->>F: 202 { run_id }
-    F->>B: GET /ops/run/crypto_bull_cycle/status (poll)
+    F->>B: GET /ops/run/CryptoCycle/status (poll)
     B-->>F: { status: 'SUCCEEDED' }
     F->>B: GET /crypto/cycles (fresh data)
-    B->>DB: SELECT * FROM crypto_cycles
+    B->>DB: SELECT id, type, start_date, end_date... FROM crypto_cycles
     DB-->>B: rows
     B-->>F: JSON
     F-->>U: chart re-renders

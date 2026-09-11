@@ -3,118 +3,72 @@
 ## 1. Strategy
 
 A testing pyramid weighted toward fast, deterministic unit tests, with a
-thin layer of integration tests against a fixture SQLite DB and a small
-set of end-to-end smoke tests for the dashboard.
+layer of integration tests against the SQLite data warehouse, AST security checks,
+and smoke tests for the trading desk dashboard.
 
 ```
             ┌────────────────────────┐
             │   E2E smoke (few)      │   browser-driven, fixture data
             └────────────────────────┘
         ┌────────────────────────────┐
-        │  Integration (some)        │   backend + fixture DB; pipeline + fixture cache
+        │  Integration (some)        │   backend + SQLite WAL DB; pipeline + fixture cache
         └────────────────────────────┘
     ┌────────────────────────────────────┐
-    │  Unit (many)                        │   pure functions, parsers, services
+    │  Unit (many)                        │   37 pytest tests, Pydantic schemas, AST parser
     └────────────────────────────────────┘
 ```
 
 ## 2. Layers
 
-### 2.1 Unit tests
+### 2.1 Unit Tests
 - **Pipelines:** parsers (`dataroma_scraper.parse_history`,
   `capitol_trades_scraper.parse_trades_html`), the cycle detector, the
   breakout detector, the sector classifier's fallback, the consensus
   calculator. Pure functions; no I/O.
-- **Backend:** services with a mocked repository; the repository with a
-  temporary SQLite file (`tmp_path`).
-- **Frontend:** components with `@testing-library/react`; mock the API
-  with MSW.
+- **Backend:** 37 automated pytest cases covering health, readiness, crypto endpoints, filings,
+  congress trades, pipeline ops, database queries, market status, and WebSocket telemetry tape.
+- **AST Security:** dedicated unit tests validating that the AST parser rejects `DROP`, `DELETE`,
+  `INSERT`, `UPDATE`, and semicolon-chained multi-statement injections.
 
-### 2.2 Integration tests
-- **Pipeline + fixture cache:** run each pipeline's `main()` against a
-  committed `tests/fixtures/<pipeline>/cache/` and assert the output
-  CSVs match golden snapshots. No network.
-- **Backend + DB:** stand up a fixture SQLite, hit each endpoint, assert
-  shape and a few key values. Run the loader, assert rows appear.
-- **Schema check:** every CSV in `*/outputs/` is read and
-  its header compared to `database/schema.sql`. Catches contract drift.
+### 2.2 Integration Tests
+- **Backend + SQLite WAL:** hits each endpoint against `database/nussif.db`, asserting
+  Pydantic response schema compliance, correct serialization, and response latency.
+- **Schema Contracts:** every CSV in `*/outputs/` is validated against `database/schema.sql`.
+- **WebSocket Telemetry:** integration test connecting to `/ws/telemetry`, receiving initial snapshot,
+  and completing a bidirectional ping/pong cycle.
 
-### 2.3 E2E smoke tests
-- A Playwright script that boots the backend and frontend, opens the
-  dashboard, navigates each page, and asserts the title and one chart
-  render. Run nightly and on `main` pushes.
-- A `--smoke` flag on each pipeline that runs against the fixture cache
-  (no network) and asserts non-empty output.
-
-## 3. Coverage targets
-
-| Layer | Target | Enforced by |
-|---|---|---|
-| Pipelines | 80% line | `pytest --cov` gate in CI |
-| Backend | 85% line | `pytest --cov` gate in CI |
-| Frontend | 70% line | `vitest --coverage` gate in CI |
-| Shared modules (sector classifier, backtest engine) | 90% line | strict gate |
-
-Coverage is a floor, not a target. A PR that drops coverage below the
-gate fails CI.
-
-## 4. Fixtures
-
-```
-tests/
-├── fixtures/
-│   ├── crypto_bull_cycle/
-│   │   └── cache/
-│   │       ├── BTC-USD.csv
-│   │       └── SPY.csv
-│   ├── thirteen_f_filings/
-│   │   └── cache/
-│   │       ├── BRK.html
-│   │       └── psc.html
-│   └── congress_trading/
-│       └── cache/
-│           └── trades.csv
-├── pipelines/
-├── backend/
-└── frontend/
-```
-
-Fixtures are committed (small, curated slices of real data) so tests are
-deterministic and offline.
-
-## 5. Network policy
-
-- **No network in unit or integration tests.** Network calls are mocked.
-- **One network smoke test** per pipeline, run weekly in a separate CI
-  job, allowed to fail (alerts but doesn't block). This catches upstream
-  HTML drift early.
-
-## 6. Performance tests
-
-- `backend/bench.py` writes `latency-bench.generated.json` (see
-  `LATENCY_BUDGET.md`). Run on every backend PR; fail if any endpoint's
-  p95 regresses by > 20%.
-- No frontend perf test yet; target a Lighthouse CI check once the
-  dashboard is end-to-end.
-
-## 7. Test commands
+## 3. Test Suites & Commands
 
 ```bash
-# all
-pytest                                    # pipelines + backend
-cd frontend && npm test                   # frontend
-npm run test:e2e                           # playwright (nightly)
+# Run all backend unit and integration tests
+pytest backend/tests/ -v
 
-# with coverage
-pytest --cov=backend --cov=CryptoCycle --cov=HedgeFund13F --cov=CongressTrades --cov-report=html
+# Run with coverage report
+pytest --cov=backend --cov-report=term-missing
 
-# smoke a single pipeline offline
-cd CryptoCycle && python main.py --smoke
+# Run latency benchmarking suite
+python backend/bench.py
+
+# Frontend typecheck & build
+cd frontend && npm run build
 ```
 
-## 8. Reviewing tests
+## 4. Test Structure
 
-A PR that adds a feature must add tests. A PR that fixes a bug must add a
-regression test that fails before the fix. Reviewers reject PRs that
-lower coverage below the gate or that introduce network calls in unit
-tests.
+```
+backend/tests/
+├── __init__.py
+├── test_health.py       # liveness (/health), readiness (/health/ready), and /metrics
+├── test_crypto.py       # cycles, bear markets, breakouts, drawdowns, equity curves
+├── test_filings.py      # funds, holdings, sector weights (with filtering)
+├── test_congress.py     # trades (filtered), consensus, monthly consensus, committees
+├── test_ops.py          # pipeline runs history, status polling, trigger gating
+├── test_db.py           # tables, safe queries, AST mutation & injection rejection
+├── test_market.py       # status and L1 quotes
+└── test_telemetry.py    # WebSocket tape subscription and ping/pong handling
+```
+
+## 5. Network Policy
+
+- **No network required for core testing:** TestClient tests execute locally against SQLite WAL data.
+- **Offline fallbacks:** Market endpoints fall back cleanly when external APIs are unavailable.

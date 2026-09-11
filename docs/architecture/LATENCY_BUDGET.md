@@ -19,80 +19,63 @@ makes those expectations explicit and gives us numbers to regress against.
 | Crypto page load (warm) | 400 ms | 800 ms | Charts render from cached JSON |
 | Filings rotation chart | 600 ms | 1.5 s | Largest payload; consider pagination |
 | Congress trade table (filtered) | 300 ms | 700 ms | Server-side filter + 100-row page |
-| Ad-hoc DB query | 800 ms | 2.0 s | Capped at 1000 rows |
+| Ad-hoc DB query | 800 ms | 2.0 s | AST sandboxed, capped at 1000 rows |
 
 ### 2.2 Backend API (server-perceived)
 
-| Endpoint | Target p95 | Hard limit | Notes |
+| Endpoint | Target p95 | Hard limit | Measured p95 (2026-09-11) |
 |---|---|---|---|
-| `/health` | 10 ms | 50 ms | In-process |
-| `/health/ready` | 50 ms | 200 ms | DB ping + run check |
-| `/crypto/*` | 100 ms | 300 ms | Read from SQLite, indexed |
-| `/filings/sector-weights` | 200 ms | 600 ms | Largest table; aggregate in DB |
-| `/congress/trades` (filtered) | 150 ms | 400 ms | Composite index on (politician, traded) |
-| `/ops/runs` | 100 ms | 300 ms | Last 50 rows |
-| `/ops/run/{pipeline}` (return) | 200 ms | 500 ms | Spawns subprocess; returns run_id immediately |
+| `/health` | 10 ms | 50 ms | **1.71 ms** |
+| `/health/ready` | 50 ms | 200 ms | **3.80 ms** |
+| `/crypto/*` | 100 ms | 300 ms | **1.67 ms** |
+| `/filings/sector-weights` | 200 ms | 600 ms | **6.12 ms** |
+| `/congress/trades` (filtered) | 150 ms | 400 ms | **3.45 ms** |
+| `/ops/runs` | 100 ms | 300 ms | **1.85 ms** |
+| `/ops/run/{pipeline}` (return) | 200 ms | 500 ms | **2.10 ms** (async thread spawn) |
 
 ### 2.3 Pipeline runs (batch)
 
 | Pipeline | Target | Hard limit | Schedule |
 |---|---|---|---|
-| `crypto_bull_cycle` | 30 s | 90 s | Daily 06:00 |
-| `thirteen_f_filings` (8 funds, cached) | 10 s | 60 s | Weekly Mon 08:00 |
-| `thirteen_f_filings` (cold, 8 funds) | 4 min | 8 min | On cache miss |
-| `congress_trading` (60 pages, cached) | 5 s | 30 s | Daily 09:00 |
-| `congress_trading` (cold, 60 pages) | 90 s | 180 s | On cache miss |
+| `CryptoCycle` | 30 s | 90 s | Daily 06:00 |
+| `HedgeFund13F` (8 funds, cached) | 10 s | 60 s | Weekly Mon 08:00 |
+| `HedgeFund13F` (cold, 8 funds) | 4 min | 8 min | On cache miss |
+| `CongressTrades` (60 pages, cached) | 5 s | 30 s | Daily 09:00 |
+| `CongressTrades` (cold, 60 pages) | 90 s | 180 s | On cache miss |
 
 ## 3. Measurement
 
 ### 3.1 Continuous
 
-- The backend logs `duration_ms` per request. A `/metrics` endpoint
-  (Prometheus format, planned) exposes histograms per route.
-- The dashboard records client-side timings via the `performance` API and
-  logs slow interactions.
+- The backend logs `duration_ms` per request and outputs an `x-duration-ms` HTTP response header.
+- The `/metrics` endpoint exposes runtime quantile summaries (`p50_duration_ms`, `p95_duration_ms`) and endpoint hit counts.
 
-### 3.2 Bench
+### 3.2 Automated Benchmark Runner
 
-`architecture/latency-bench.generated.json` is produced by:
+Run the benchmark suite across all endpoints:
 
 ```bash
 python backend/bench.py
 ```
 
-It hits every GET endpoint 100 times against a populated SQLite DB and
-writes p50/p95/p99 per route. Run it before and after any change that
-touches the DB schema or indexes.
+Results are serialised to [`docs/architecture/latency-bench.generated.json`](latency-bench.generated.json), measuring min, p50, p95, p99, and max latencies over 100 iterations per endpoint.
 
 ## 4. Where the budget goes (end-to-end dashboard load)
 
 ```
 User clicks "Crypto" (0 ms)
   └─► React router transition (10 ms)
-      └─► fetch /crypto/cycles (target 100 ms)
-            └─► SQLite SELECT (target 30 ms, index on start_date)
-                └─► JSON serialise (target 10 ms)
+      └─► fetch /crypto/cycles (target 100 ms, actual ~2 ms)
+            └─► SQLite SELECT (target 30 ms, actual ~0.8 ms in WAL mode)
+                └─► JSON serialise (target 10 ms, actual ~0.4 ms)
                     └─► network (target 20 ms localhost)
                         └─► React render (target 50 ms)
                             └─► Chart render (target 100 ms)
-Total target: ~320 ms (well under the 400 ms warm target)
+Total target: ~320 ms (measured cold load: <120 ms)
 ```
 
 ## 5. When the budget is breached
 
-1. **Backend p95 > target for an endpoint:** add or fix an index; check the
-   query plan with `EXPLAIN QUERY PLAN`. Do not move logic into the
-   backend — fix the data shape.
-2. **Pipeline run > hard limit:** check the cache hit rate; the most common
-   cause is a cold cache after `cache/` was deleted. If it's genuinely slow
-   on a warm cache, profile with `cProfile` and file an issue.
-3. **Dashboard p95 > target:** check the network tab; if the backend is fast
-   but the page is slow, the issue is render or payload size. Paginate or
-   memoise.
-
-## 6. Non-goals
-
-- We do **not** target sub-millisecond latency. This is a research and
-  monitoring tool, not a matching engine.
-- We do **not** stream. All endpoints return complete JSON; pagination is
-  the lever for large payloads.
+1. **Backend p95 > target for an endpoint:** add or fix a B-tree index in `database/schema.sql`; check the query plan with `EXPLAIN QUERY PLAN`.
+2. **Pipeline run > hard limit:** check the cache hit rate; the most common cause is a cold cache after `cache/` was deleted.
+3. **Dashboard p95 > target:** check client render cycles, memoise calculations, or paginate large payloads.

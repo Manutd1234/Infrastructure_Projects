@@ -8,18 +8,22 @@ Operations Engineer. This is the operator's manual.
 ```bash
 # 1. Make sure the database exists and has data
 python database/init_db.py
-python backend/loaders/ingest.py          # loads all pipeline outputs/*.csv
+python -m backend.loaders.ingest          # loads all pipeline outputs/*.csv
 
-# 2. Start the API
-uvicorn backend.app.main:app --reload      # http://localhost:8000
+# 2. Run automated tests and latency benchmarks
+pytest backend/tests/
+python backend/bench.py
 
-# 3. Start the dashboard
+# 3. Start the API & telemetry tape
+uvicorn backend.app.main:app --reload      # http://localhost:8000/docs
+
+# 4. Start the dashboard
 cd frontend && npm install && npm run dev  # http://localhost:5173
 ```
 
 Open `http://localhost:5173`. You should land on the **Overview** page.
 
-## 2. The five surfaces
+## 2. The Six Operational Surfaces
 
 ### 2.1 Overview
 
@@ -27,79 +31,69 @@ The landing page. Shows one card per pipeline:
 
 | Field | Meaning |
 |---|---|
-| Pipeline name | `crypto_bull_cycle`, `thirteen_f_filings`, `congress_trading` |
+| Pipeline name | `CryptoCycle`, `HedgeFund13F`, `CongressTrades` |
 | Status chip | 🟢 fresh (last run < refresh policy), 🟡 stale (older), 🔴 failed |
 | Last run | timestamp of the last `pipeline_runs` row |
 | Rows | row count produced by the last run |
 | Next scheduled | when cron will next run it |
 
-Below the cards: a recent-runs table (last 20 across all pipelines) with
+Below the cards: real-time L1 market tape (BTC, SPY, QQQ, IWM) streamed via `/ws/telemetry` and a recent-runs audit table (last 20 across all pipelines) with
 status, duration, and error message if any.
 
-**Action:** if any chip is 🟡 or 🔴, click **Run** to trigger a refresh
-(only available if `enable_run_endpoint=true` in `.env`).
+**Action:** if any chip is 🟡 or 🔴, click **Run** to trigger an asynchronous refresh
+(only available if `NUSSIF_ENABLE_RUN_ENDPOINT=true` in `.env`).
 
-### 2.2 Crypto
+### 2.2 Crypto Cycles
 
-Four panels:
+Five specialized quantitative subtabs:
 
-1. **Cycle chart** — BTC price (log scale) with bull (green) / bear (red)
-   shading. Hover shows the cycle's start/end, return, and duration.
-2. **Breakout study** — bar chart of mean forward return after +3σ
+1. **+3σ Breakout Study** — bar chart of mean forward return after +3σ
    breakouts vs. baseline, for 30/60/120/365 days. Table below with
    t-stat, p-value, and excess.
-3. **Drawdowns** — BTC vs SPY drawdown overlay. Table of top-15 deepest
-   drawdowns with peak/trough/recovery dates.
-4. **Equity curve** — breakout strategy vs BTC buy & hold vs SPY buy &
-   hold (log scale). Performance metrics table (CAGR, Sharpe, Sortino,
+2. **Strategy Simulator** — interactive backtest simulator with configurable hold periods.
+3. **Cycle Episodes (48)** — BTC price (log scale) with bull (green) / bear (red)
+   shading. Hover shows cycle start/end, return, and duration.
+4. **Drawdown & Recovery** — BTC vs SPY drawdown overlay. Table of top-15 deepest
+   drawdowns with peak/trough/recovery dates and durations.
+5. **Backtest vs B&H** — breakout strategy vs BTC buy & hold vs SPY buy &
+   hold equity curves (log scale). Performance metrics table (CAGR, Sharpe, Sortino,
    max DD, win rate).
 
-**Filters:** date range, horizon selector for the breakout study.
+### 2.3 13F Filings
 
-### 2.3 Filings
+Three subtabs tracking 8 premier superinvestor hedge funds:
 
-Three panels:
-
-1. **Fund selector** — pick one or more of the 8 funds; charts update.
-2. **Sector rotation** — stacked bar of sector weights over time for the
+1. **Sector Allocation** — stacked bar of sector weights over time for the
    selected fund(s). X-axis is quarter, Y-axis is % of reported portfolio.
-3. **Latest-quarter heatmap** — fund × sector grid with weight in each
-   cell. Sortable by clicking a column.
+2. **Factor Replication** — active share ($AS \ge 0.80$) and factor decomposition.
+3. **Top Holdings** — latest holdings grid with company, ticker, weight, and GICS sector.
 
-**Filters:** fund, quarter range, sector toggle (hide sectors below a
-weight threshold).
+### 2.4 Congress Trading
 
-### 2.4 Congress
+Three subtabs evaluating STOCK Act congressional trading signals:
 
-Four panels:
-
-1. **Trade feed** — paginated table of recent trades, sortable and
+1. **Macro Flows & Conflicts** — committee-aligned vs non-aligned trades by sector; table of committee × n_trades × buy/sell.
+2. **CAR Event Strategy** — Fama-French Cumulative Abnormal Returns ($CAR$) surrounding disclosure dates.
+3. **Trade Feed** — paginated table of recent trades, sortable and
    filterable by politician, party, ticker, chamber, date range, trade
-   type, owner, and committee-aligned toggle.
-2. **Consensus table** — per-ticker net signed USD, with buy/sell counts
-   and a BUY/SELL/NEUTRAL flag. Sortable; click a row to see the
-   underlying trades.
-3. **Monthly consensus** — net signed USD by month bar chart.
-4. **Committee alignment** — bar chart of aligned vs non-aligned trades by
-   sector; table of committee × n_trades × buy/sell.
+   type, and committee alignment.
 
-**Filters:** politician, party, ticker, date range, committee, aligned-only
-toggle.
+### 2.5 Scenario Stress Test (IBKR)
 
-### 2.5 Database
+Interactive stress testing modeling non-linear macro factor shocks across positions:
+1. **Scenarios** — predefined macroeconomic shock vectors (rate hikes, stagflation, crypto deleveraging).
+2. **Tail Risk & Liquidity** — Value-at-Risk (VaR) and Expected Shortfall under stressed liquidity conditions.
+3. **Asset Decomposition** — contribution to risk by asset class.
 
-A read-only SQL browser for sanity checks:
+### 2.6 Database Console
 
-1. **Tables** — list of tables with row counts and last-modified time.
-2. **Query** — a text box for `SELECT` statements only. Results capped
-   at 1000 rows. The query is parsed before execution; anything that
-   isn't a `SELECT` is rejected.
-3. **Export** — download the current result as CSV.
+A read-only SQL browser and schema explorer:
 
-This surface is for the operator; it is not a general-purpose DB admin
-tool.
+1. **Console** — SQL query input guarded by an AST syntax sandbox (rejects mutations and multi-statement injection).
+2. **Schema Explorer** — schema tree showing 17 normalized tables, row counts, and column definitions.
+3. **Storage Engine** — SQLite WAL mode status, memory cache size, and latency telemetry.
 
-## 3. Keyboard shortcuts
+## 3. Keyboard Shortcuts
 
 | Shortcut | Action |
 |---|---|
@@ -112,45 +106,10 @@ tool.
 | `?` | show shortcuts |
 | `Esc` | close any open drawer / filter panel |
 
-## 4. Triggering a pipeline run
+## 4. Triggering a Pipeline Run
 
 1. Go to Overview.
 2. Click **Run** on the pipeline you want to refresh.
-3. A toast confirms the run was accepted; the card's status flips to
+3. A toast confirms the run was accepted (HTTP 202); the card's status flips to
    🟡 `RUNNING`.
-4. The card polls `/ops/run/<pipeline>/status` every 5 s. When it
-   succeeds, the card flips to 🟢 and the dashboard refetches the
-   affected pages.
-5. If it fails, the card flips to 🔴 with the error message; click the
-   card to see the full `pipeline_runs` row.
-
-Runs are async; you can navigate away while a run is in progress.
-
-## 5. Reading the data
-
-- **Every number on the dashboard is traceable to a CSV.** Right-click a
-  chart → "View source CSV" downloads the file that produced it.
-- **Stale data is labelled.** If a pipeline hasn't run in the last 24h,
-  a "stale" banner appears on the relevant page.
-- **Unknown sectors** are shown as `Unknown` rather than hidden — better
-  to see the gap than to silently misclassify.
-
-## 6. Troubleshooting
-
-| Symptom | Likely cause | Fix |
-|---|---|---|
-| Overview all 🔴 | Backend down or DB missing | `curl localhost:8000/health`; re-run `init_db.py` |
-| A pipeline is 🟡 forever | Cron not running or pipeline crashing | Click the card → see the error; run the pipeline manually |
-| Charts empty | Loader hasn't ingested the latest CSVs | `python backend/loaders/ingest.py` |
-| "Run" button disabled | `enable_run_endpoint=false` | Set it in `.env` and restart the backend |
-| `/db/query` rejects a SELECT | Parser is strict; check for trailing semicolon or comments | Remove `;` and `--` comments |
-
-## 7. Limits
-
-- The dashboard reflects the **last successful** pipeline run. There is
-  no live data; if a pipeline is stale, you see the stale data with a
-  banner.
-- The DB browser is read-only and row-capped. For anything heavier, use
-  the `sqlite3` CLI against `database/nussif.db`.
-- "Run" is rate-limited to one concurrent run per pipeline; a second
-  click is rejected with 409.
+4. The backend executes the pipeline in an isolated background thread and writes audit telemetry to `pipeline_runs`.

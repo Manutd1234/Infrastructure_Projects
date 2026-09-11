@@ -27,9 +27,9 @@ Pull raw data from the external source. Cache the raw response to
 
 | Pipeline | Source | Cache artifact | Refresh policy |
 |---|---|---|---|
-| `crypto_bull_cycle` | yfinance `BTC-USD`, `SPY` | `cache/BTC-USD.csv`, `cache/SPY.csv` | Refresh if older than 1 day |
-| `thirteen_f_filings` | Dataroma `/m/hist/p_hist.php?f=<code>` | `cache/<fund>.html` | Refresh if older than 12 hours |
-| `congress_trading` | Capitol Trades `/trades?page=<N>` | `cache/trades.csv` | Refresh if older than 6 hours |
+| `CryptoCycle` | yfinance `BTC-USD`, `SPY` | `cache/BTC-USD.csv`, `cache/SPY.csv` | Refresh if older than 1 day |
+| `HedgeFund13F` | Dataroma `/m/hist/p_hist.php?f=<code>` | `cache/<fund>.html` | Refresh if older than 12 hours |
+| `CongressTrades` | Capitol Trades `/trades?page=<N>` | `cache/trades.csv` | Refresh if older than 6 hours |
 
 **Politeness:** every fetch sleeps between requests (0.2–1.0 s). The
 scraper sends a desktop `User-Agent`. We never parallelise against a
@@ -65,40 +65,40 @@ Add derived columns that downstream stages need.
 
 ### Stage 4 — Analyse
 
-The pipeline-specific computation.
+The pipeline-specific quantitative computation.
 
 | Pipeline | Analysis | Key outputs |
 |---|---|---|
-| `crypto_bull_cycle` | Peak/trough cycle detection (≥20% decline = bear), 60-day realised vol scaled to weekly, +3σ breakout detection, forward-return study, drawdown extraction, backtest of "hold 30d after breakout" | `cycles.csv`, `bear_markets.csv`, `breakout_study.csv`, `drawdowns.csv`, `performance.csv` |
-| `thirteen_f_filings` | Sector weights per fund per quarter, stacked-bar rotation, aggregate rotation, latest-quarter heatmap | `sector_weights.csv`, `holdings_with_sectors.csv` |
-| `congress_trading` | Per-ticker and per-month consensus (signed USD), committee alignment (committee → sector → trade match) | `ticker_consensus.csv`, `monthly_consensus.csv`, `committee_summary.csv` |
+| `CryptoCycle` | Peak/trough cycle detection (≥20% decline = bear), 60-day realised vol scaled to weekly, +3σ breakout detection, forward-return study, drawdown extraction, backtest of "hold 30d after breakout" | `cycles.csv`, `bear_markets.csv`, `breakout_study.csv`, `drawdowns.csv`, `performance.csv` |
+| `HedgeFund13F` | Sector weights per fund per quarter, stacked-bar rotation, aggregate rotation, latest-quarter heatmap | `sector_weights.csv`, `holdings_with_sectors.csv` |
+| `CongressTrades` | Per-ticker and per-month consensus (signed USD), committee alignment (committee → sector → trade match) | `ticker_consensus.csv`, `monthly_consensus.csv`, `committee_summary.csv` |
 
 ### Stage 5 — Write
 
-Serialise to `outputs/` as CSV (machine-readable, consumed by backend) and
+Serialise to `outputs/` as CSV (machine-readable, consumed by backend loader) and
 PNG (human-readable, consumed by dashboard and whitepaper). Every run also
 writes a row to `pipeline_runs` (via the backend loader, not directly) with
 start time, end time, status, and row counts.
 
 ## 3. CSV schemas (contracts with the backend)
 
-### `crypto_bull_cycle/outputs/cycles.csv`
+### `CryptoCycle/outputs/cycles.csv`
 ```
 type, start_date, end_date, start_price, end_price, return, duration_days
 ```
 
-### `crypto_bull_cycle/outputs/breakout_study.csv`
+### `CryptoCycle/outputs/breakout_study.csv`
 ```
 horizon, n_breakouts, mean_breakout, median_breakout, pct_positive,
 mean_all, t_stat, p_value, excess_vs_all
 ```
 
-### `thirteen_f_filings/outputs/sector_weights.csv`
+### `HedgeFund13F/outputs/sector_weights.csv`
 ```
 fund, quarter, sector, weight
 ```
 
-### `congress_trading/outputs/trades_with_sectors.csv`
+### `CongressTrades/outputs/trades_with_sectors.csv`
 ```
 trade_id, politician_id, politician, party, chamber, state, issuer, ticker,
 published, traded, filed_after_days, owner, trade_type, size_raw,
@@ -106,7 +106,7 @@ size_low_usd, size_high_usd, price, sector, committee_aligned,
 matching_committees
 ```
 
-### `congress_trading/outputs/ticker_consensus.csv`
+### `CongressTrades/outputs/ticker_consensus.csv`
 ```
 ticker, issuer, sector, n_trades, n_buy, n_sell, net_signed_usd,
 n_politicians, buy_pct, consensus
@@ -125,19 +125,19 @@ ingests each CSV into a matching table).
 | Partial page (Capitol Trades returns fewer rows) | Row count < expected | We take what's available and log a warning; do not fail the run. |
 | Stale cache | Cache age check | If cache older than refresh policy, re-fetch; else use cache. |
 
-## 5. Scheduling (current and target)
+## 5. Scheduling
 
-**Current:** manual. The operator runs `python main.py` in each pipeline, or
-`python data/run_all.py` to run all three.
+**Manual Execution:** Run `python main.py` in each module, or `python run_all.py` at the repo root to run all three in sequence:
 
-**Target:** a single scheduler (cron for now, Prefect later) runs each
-pipeline on its refresh policy:
+```bash
+python run_all.py
+python -m backend.loaders.ingest
+```
+
+**Scheduled Execution (cron):**
 
 ```
 0 6 * * *   cd CryptoCycle && python main.py     # daily 06:00
-0 8 * * 1   cd HedgeFund13F && python main.py  # weekly Mon 08:00
-0 9 * * *   cd CongressTrades && python main.py     # daily 09:00
+0 8 * * 1   cd HedgeFund13F && python main.py    # weekly Mon 08:00
+0 9 * * *   cd CongressTrades && python main.py  # daily 09:00
 ```
-
-The scheduler writes `pipeline_runs` rows so the dashboard's Overview page
-can show freshness at a glance.
